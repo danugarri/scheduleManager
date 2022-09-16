@@ -10,9 +10,9 @@ export const Inputs = ({ setSchedule }) => {
     const isChecked = e.target.checked;
     const value = e.target.name;
     if (isChecked) {
-      setFreeDays((prev) => [prev, value]);
+      setFreeDays((prev) => (prev !== undefined ? prev.concat([value]) : [value]));
     } else {
-      setFreeDays((prev) => prev.pop(value));
+      setFreeDays(() => freeDays.find((day) => day !== value));
     }
     console.log(isChecked);
   };
@@ -23,6 +23,8 @@ export const Inputs = ({ setSchedule }) => {
     const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
     console.log(returnedSchedule);
     setSchedule(returnedSchedule);
+    setFreeDays([]);
+    setOrdinaryEmployeeHours(0);
   };
   return (
     <React.Fragment>
