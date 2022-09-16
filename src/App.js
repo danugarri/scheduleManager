@@ -91,15 +91,17 @@ return schedule
   // try 1
   const shchedule= scheduleManagement(mockOrdinaryEmployeeHours,mockFreeDays,mockWorkersPerTurn)
   // try 2
-  // scheduleManagement(20,mockFreeDays,mockWorkersPerTurn)
+  const shchedule2=scheduleManagement(20,mockFreeDays,mockWorkersPerTurn)
   return (
     <>
-    {
-      realWorkedHours === employeeHours && realWorkedHours
-
-}
+    <h3>Example with 37h</h3>
+    
 
 <h1>{Object.entries(shchedule).join(',')}</h1>
+<h3>Example with 20h</h3>
+   
+
+<h1>{Object.entries(shchedule2).join(',')}</h1>
 </>
   );
 }
