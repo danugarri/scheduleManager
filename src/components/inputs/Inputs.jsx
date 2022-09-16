@@ -39,7 +39,6 @@ export const Inputs = ({
       const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
-      setFreeDays([]);
     } else {
       setOpen(!open);
     }
