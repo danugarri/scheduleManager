@@ -4,15 +4,21 @@ import { scheduleManagement } from '../../../helpers/mangeSchedule';
 export const Inputs = ({ setSchedule }) => {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState(0);
+  function removeItemFromArr(arr, item) {
+    var i = arr.indexOf(item);
 
+    if (i !== -1) {
+      arr.splice(i, 1);
+    }
+  }
   const checkedDay = (e) => {
     console.log(e);
     const isChecked = e.target.checked;
     const value = e.target.name;
     if (isChecked) {
-      setFreeDays((prev) => (prev !== undefined ? prev.concat([value]) : [value]));
+      setFreeDays((prev) => prev.concat([value]));
     } else {
-      setFreeDays(() => freeDays.find((day) => day !== value));
+      removeItemFromArr(freeDays, value);
     }
     console.log(isChecked);
   };
@@ -23,8 +29,6 @@ export const Inputs = ({ setSchedule }) => {
     const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
     console.log(returnedSchedule);
     setSchedule(returnedSchedule);
-    setFreeDays([]);
-    setOrdinaryEmployeeHours(0);
   };
   return (
     <React.Fragment>
