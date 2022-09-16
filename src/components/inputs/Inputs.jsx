@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { scheduleManagement } from '../../../helpers/mangeSchedule';
-import { removeItemFromArr } from '../../../helpers/removeDays';
+import { scheduleManagement } from '../../helpers/mangeSchedule';
+import { removeItemFromArr } from '../../helpers/removeDays';
 import BasicModal from '../modal/BasicModal';
 import './Inputs.css';
 

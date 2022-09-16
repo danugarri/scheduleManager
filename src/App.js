@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
-import { Inputs } from './components/employeeSchedule/inputs/Inputs';
-import BasicModal from './components/employeeSchedule/modal/BasicModal';
+import { Inputs } from './components/inputs/Inputs';
+import BasicModal from './components/modal/BasicModal';
 
 function App() {
   const [schedule, setSchedule] = useState({});
