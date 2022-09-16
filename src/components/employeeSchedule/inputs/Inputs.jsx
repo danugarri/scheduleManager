@@ -28,19 +28,21 @@ export const Inputs = ({ setSchedule }) => {
 
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
-    const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
-    console.log(returnedSchedule);
-    setSchedule(returnedSchedule);
-    setFreeDays([]);
-    setOrdinaryEmployeeHours(0);
+    if (ordinaryEmployeeHours !== 0) {
+      const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
+      console.log(returnedSchedule);
+      setSchedule(returnedSchedule);
+      setFreeDays([]);
+      setOrdinaryEmployeeHours(0);
 
-    mondayRef.current.checked = false;
-    tuesdayRef.current.checked = false;
-    wednesdayRef.current.checked = false;
-    thursdayRef.current.checked = false;
-    fridayRef.current.checked = false;
-    saturdayRef.current.checked = false;
-    sundayRef.current.checked = false;
+      mondayRef.current.checked = false;
+      tuesdayRef.current.checked = false;
+      wednesdayRef.current.checked = false;
+      thursdayRef.current.checked = false;
+      fridayRef.current.checked = false;
+      saturdayRef.current.checked = false;
+      sundayRef.current.checked = false;
+    }
   };
   return (
     <React.Fragment>
