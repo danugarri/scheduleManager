@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { scheduleManagement } from '../../../helpers/mangeSchedule';
 
-export const Inputs = () => {
+export const Inputs = ({ setSchedule }) => {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState(0);
 
@@ -16,9 +17,16 @@ export const Inputs = () => {
     console.log(isChecked);
   };
   console.log(freeDays);
+
+  const submitEmployeeSchedule = (e) => {
+    e.preventDefault();
+    const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
+    console.log(returnedSchedule);
+    setSchedule(returnedSchedule);
+  };
   return (
     <React.Fragment>
-      <form onSubmit={() => {}}>
+      <form onSubmit={submitEmployeeSchedule}>
         <label htmlFor='ordinaryEmployeeHours'>Horas del trabajador según contrato</label>
         <input
           type='number'
@@ -29,6 +37,7 @@ export const Inputs = () => {
           }}
         />
         {/* checkboxes */}
+
         <label>Días libres</label>
         <br />
         <label htmlFor='monday'>Lunes</label>
@@ -45,7 +54,7 @@ export const Inputs = () => {
         <input type='checkbox' name='saturday' onClick={checkedDay} />
         <label htmlFor='sunday'>Domingo</label>
         <input type='checkbox' name='sunday' onClick={checkedDay} />
-        <input type='submit' onClick={() => {}} />
+        <input type='submit' onClick={submitEmployeeSchedule} />
       </form>
     </React.Fragment>
   );
