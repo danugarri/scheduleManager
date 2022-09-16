@@ -4,7 +4,7 @@ import { removeItemFromArr } from '../../../helpers/removeDays';
 
 export const Inputs = ({ setSchedule }) => {
   const [freeDays, setFreeDays] = useState([]);
-  const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState(0);
+  const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
 
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -33,7 +33,7 @@ export const Inputs = ({ setSchedule }) => {
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
       setFreeDays([]);
-      setOrdinaryEmployeeHours(0);
+      setOrdinaryEmployeeHours('');
 
       mondayRef.current.checked = false;
       tuesdayRef.current.checked = false;
@@ -56,7 +56,10 @@ export const Inputs = ({ setSchedule }) => {
             console.log(e.target.value);
           }}
           value={ordinaryEmployeeHours}
+          autoFocus
+          //   onFocus={() => setOrdinaryEmployeeHours('')}
         />
+
         <br />
         <br />
         {/* checkboxes */}

@@ -26,7 +26,10 @@ export const scheduleManagement = (ordinaryEmployeeHours, freeDays, workersPerTu
     local: 70,
   };
   // Rules
-  const minHoursPerDay = 2;
+  /* the min hours will depend on the employee ordinary hours. If it is less than
+    20h it is better to set minHour to 1
+  */
+  const minHoursPerDay = 1;
   const maxOrdinaryHoursPerDay = 9;
   //  Generate number of hours per day acording to rules
   let eachDay = [];
