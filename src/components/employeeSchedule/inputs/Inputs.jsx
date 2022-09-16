@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { scheduleManagement } from '../../../helpers/mangeSchedule';
+import { removeItemFromArr } from '../../../helpers/removeDays';
 
 export const Inputs = ({ setSchedule }) => {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState(0);
-  function removeItemFromArr(arr, item) {
-    var i = arr.indexOf(item);
-
-    if (i !== -1) {
-      arr.splice(i, 1);
-    }
-  }
   const checkedDay = (e) => {
     console.log(e);
     const isChecked = e.target.checked;
