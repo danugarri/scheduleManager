@@ -2,10 +2,13 @@ import React, { useRef, useState } from 'react';
 import { scheduleManagement } from '../../../helpers/mangeSchedule';
 import { removeItemFromArr } from '../../../helpers/removeDays';
 
-export const Inputs = ({ setSchedule }) => {
-  const [freeDays, setFreeDays] = useState([]);
-  const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
-
+export const Inputs = ({
+  setSchedule,
+  setFreeDays,
+  freeDays,
+  ordinaryEmployeeHours,
+  setOrdinaryEmployeeHours,
+}) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
   const wednesdayRef = useRef();
@@ -28,7 +31,7 @@ export const Inputs = ({ setSchedule }) => {
 
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
-    if (ordinaryEmployeeHours !== 0) {
+    if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10) {
       const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
@@ -57,9 +60,7 @@ export const Inputs = ({ setSchedule }) => {
           }}
           value={ordinaryEmployeeHours}
           autoFocus
-          //   onFocus={() => setOrdinaryEmployeeHours('')}
         />
-
         <br />
         <br />
         {/* checkboxes */}
