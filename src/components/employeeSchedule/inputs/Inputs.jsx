@@ -98,7 +98,7 @@ export const Inputs = ({
         <br />
         <section className='buttons-section'>
           <input type='submit' onClick={submitEmployeeSchedule} className='buttons' />
-          <input type='button' value='Limpiar' onClick={clearSearch} />
+          <input type='button' value='Limpiar' onClick={clearSearch} className='buttons' />
         </section>
       </form>
       <BasicModal open={open} setOpen={setOpen} />
