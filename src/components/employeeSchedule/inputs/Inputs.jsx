@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { scheduleManagement } from '../../../helpers/mangeSchedule';
 import { removeItemFromArr } from '../../../helpers/removeDays';
 import BasicModal from '../modal/BasicModal';
+import './Inputs.css';
 
 export const Inputs = ({
   setSchedule,
@@ -60,7 +61,9 @@ export const Inputs = ({
   return (
     <React.Fragment>
       <form onSubmit={submitEmployeeSchedule}>
-        <label htmlFor='ordinaryEmployeeHours'>Horas del trabajador según contrato</label>
+        <label htmlFor='ordinaryEmployeeHours' className='employee-hours'>
+          Horas del trabajador según contrato
+        </label>
         <input
           type='number'
           name='ordinaryEmployeeHours'
@@ -91,9 +94,13 @@ export const Inputs = ({
         <input type='checkbox' name='saturday' onClick={checkedDay} ref={saturdayRef} />
         <label htmlFor='sunday'>Domingo</label>
         <input type='checkbox' name='sunday' onClick={checkedDay} ref={sundayRef} />
-        <input type='submit' onClick={submitEmployeeSchedule} />
+        <br />
+        <br />
+        <section className='buttons-section'>
+          <input type='submit' onClick={submitEmployeeSchedule} className='buttons' />
+          <input type='button' value='Limpiar' onClick={clearSearch} />
+        </section>
       </form>
-      <button onClick={clearSearch}>Limpiar</button>
       <BasicModal open={open} setOpen={setOpen} />
     </React.Fragment>
   );

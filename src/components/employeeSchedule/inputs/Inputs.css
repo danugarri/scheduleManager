@@ -1,0 +1,10 @@
+.employee-hours {
+  margin-right: 2rem;
+}
+.buttons-section {
+  display: flex;
+  flex-direction: row;
+}
+.buttons {
+  margin-right: 1rem;
+}
