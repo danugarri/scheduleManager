@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  let  realWorkedHours=0
+  let employeeHours=0
   const mockOrdinaryEmployeeHours= 37
   const mockFreeDays= ['thursday','sunday']
   const mockWorkersPerTurn= {
@@ -49,7 +51,7 @@ function App() {
   saturday:eachDay[5],
   sunday:eachDay[6]
  }
- let  realWorkedHours=0
+ 
  const manageDays= () =>{
    for (let day in schedule) {
   // Set 0 hours if is freeday
@@ -61,6 +63,7 @@ function App() {
  }}
  manageDays()
  console.log(realWorkedHours)
+//  Iterate until the workedHours match ordinaryEmployeeHours
 while(realWorkedHours !== ordinaryEmployeeHours){
 console.log('is doing different hours than their contracy says')
 // console.log(realWorkedHours)
@@ -80,10 +83,24 @@ schedule= {
 manageDays()
 console.log(realWorkedHours)
 }
+if(realWorkedHours === ordinaryEmployeeHours) {
+  employeeHours=realWorkedHours
+}
+return schedule
   }
-  scheduleManagement(mockOrdinaryEmployeeHours,mockFreeDays,mockWorkersPerTurn)
+  // try 1
+  const shchedule= scheduleManagement(mockOrdinaryEmployeeHours,mockFreeDays,mockWorkersPerTurn)
+  // try 2
+  // scheduleManagement(20,mockFreeDays,mockWorkersPerTurn)
   return (
-    <></>
+    <>
+    {
+      realWorkedHours === employeeHours && realWorkedHours
+
+}
+
+<h1>{Object.entries(shchedule).join(',')}</h1>
+</>
   );
 }
 
