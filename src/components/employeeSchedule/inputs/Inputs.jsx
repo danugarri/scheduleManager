@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { scheduleManagement } from '../../../helpers/mangeSchedule';
 import { removeItemFromArr } from '../../../helpers/removeDays';
 
 export const Inputs = ({ setSchedule }) => {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState(0);
+
+  const mondayRef = useRef();
+  const tuesdayRef = useRef();
+  const wednesdayRef = useRef();
+  const thursdayRef = useRef();
+  const fridayRef = useRef();
+  const saturdayRef = useRef();
+  const sundayRef = useRef();
   const checkedDay = (e) => {
     console.log(e);
     const isChecked = e.target.checked;
@@ -23,6 +31,16 @@ export const Inputs = ({ setSchedule }) => {
     const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
     console.log(returnedSchedule);
     setSchedule(returnedSchedule);
+    setFreeDays([]);
+    setOrdinaryEmployeeHours(0);
+
+    mondayRef.current.checked = false;
+    tuesdayRef.current.checked = false;
+    wednesdayRef.current.checked = false;
+    thursdayRef.current.checked = false;
+    fridayRef.current.checked = false;
+    saturdayRef.current.checked = false;
+    sundayRef.current.checked = false;
   };
   return (
     <React.Fragment>
@@ -35,25 +53,28 @@ export const Inputs = ({ setSchedule }) => {
             setOrdinaryEmployeeHours(e.target.value);
             console.log(e.target.value);
           }}
+          value={ordinaryEmployeeHours}
         />
+        <br />
+        <br />
         {/* checkboxes */}
 
         <label>Días libres</label>
         <br />
         <label htmlFor='monday'>Lunes</label>
-        <input type='checkbox' name='monday' onClick={checkedDay} />
+        <input type='checkbox' name='monday' onClick={checkedDay} ref={mondayRef} />
         <label htmlFor='tuesday'>Martes</label>
-        <input type='checkbox' name='tuesday' onClick={checkedDay} />
+        <input type='checkbox' name='tuesday' onClick={checkedDay} ref={tuesdayRef} />
         <label htmlFor='wednesday'>Miércoles</label>
-        <input type='checkbox' name='wednesday' onClick={checkedDay} />
+        <input type='checkbox' name='wednesday' onClick={checkedDay} ref={wednesdayRef} />
         <label htmlFor='thursday'>Jueves</label>
-        <input type='checkbox' name='thursday' onClick={checkedDay} />
+        <input type='checkbox' name='thursday' onClick={checkedDay} ref={thursdayRef} />
         <label htmlFor='friday'>Viernes</label>
-        <input type='checkbox' name='friday' onClick={checkedDay} />
+        <input type='checkbox' name='friday' onClick={checkedDay} ref={fridayRef} />
         <label htmlFor='saturday'>Sábado</label>
-        <input type='checkbox' name='saturday' onClick={checkedDay} />
+        <input type='checkbox' name='saturday' onClick={checkedDay} ref={saturdayRef} />
         <label htmlFor='sunday'>Domingo</label>
-        <input type='checkbox' name='sunday' onClick={checkedDay} />
+        <input type='checkbox' name='sunday' onClick={checkedDay} ref={sundayRef} />
         <input type='submit' onClick={submitEmployeeSchedule} />
       </form>
     </React.Fragment>
