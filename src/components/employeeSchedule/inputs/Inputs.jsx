@@ -36,15 +36,17 @@ export const Inputs = ({
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
       setFreeDays([]);
-      setOrdinaryEmployeeHours('');
+      //   This part can be optional
+      //   setOrdinaryEmployeeHours('');
 
-      mondayRef.current.checked = false;
-      tuesdayRef.current.checked = false;
-      wednesdayRef.current.checked = false;
-      thursdayRef.current.checked = false;
-      fridayRef.current.checked = false;
-      saturdayRef.current.checked = false;
-      sundayRef.current.checked = false;
+      //   mondayRef.current.checked = false;
+      //   tuesdayRef.current.checked = false;
+      //   wednesdayRef.current.checked = false;
+      //   thursdayRef.current.checked = false;
+      //   fridayRef.current.checked = false;
+      //   saturdayRef.current.checked = false;
+      //   sundayRef.current.checked = false;
+      //
     }
   };
   return (
