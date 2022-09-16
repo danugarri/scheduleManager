@@ -8,7 +8,7 @@ function App() {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
   return (
-    <React.Fragment>
+    <div className='app'>
       <Inputs
         setSchedule={setSchedule}
         freeDays={freeDays}
@@ -17,7 +17,7 @@ function App() {
         setOrdinaryEmployeeHours={setOrdinaryEmployeeHours}
       />
       <EmployeeSchedule schedule={schedule} />
-    </React.Fragment>
+    </div>
   );
 }
 
