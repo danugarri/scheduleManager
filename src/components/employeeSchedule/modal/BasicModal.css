@@ -1,0 +1,7 @@
+.close-button {
+  background-color: red;
+  position: absolute;
+  cursor: pointer;
+  right: 1rem;
+  top: 1rem;
+}

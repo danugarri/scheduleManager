@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { scheduleManagement } from '../../../helpers/mangeSchedule';
 import { removeItemFromArr } from '../../../helpers/removeDays';
+import BasicModal from '../modal/BasicModal';
 
 export const Inputs = ({
   setSchedule,
@@ -9,6 +10,8 @@ export const Inputs = ({
   ordinaryEmployeeHours,
   setOrdinaryEmployeeHours,
 }) => {
+  // Modal
+  const [open, setOpen] = React.useState(false);
   const mondayRef = useRef();
   const tuesdayRef = useRef();
   const wednesdayRef = useRef();
@@ -36,17 +39,8 @@ export const Inputs = ({
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
       setFreeDays([]);
-      //   This part can be optional
-      //   setOrdinaryEmployeeHours('');
-
-      //   mondayRef.current.checked = false;
-      //   tuesdayRef.current.checked = false;
-      //   wednesdayRef.current.checked = false;
-      //   thursdayRef.current.checked = false;
-      //   fridayRef.current.checked = false;
-      //   saturdayRef.current.checked = false;
-      //   sundayRef.current.checked = false;
-      //
+    } else {
+      setOpen(!open);
     }
   };
   const clearSearch = () => {
@@ -100,6 +94,7 @@ export const Inputs = ({
         <input type='submit' onClick={submitEmployeeSchedule} />
       </form>
       <button onClick={clearSearch}>Limpiar</button>
+      <BasicModal open={open} setOpen={setOpen} />
     </React.Fragment>
   );
 };
