@@ -10,9 +10,9 @@ export const Inputs = ({
   freeDays,
   ordinaryEmployeeHours,
   setOrdinaryEmployeeHours,
+  setOpen,
+  open,
 }) => {
-  // Modal
-  const [open, setOpen] = React.useState(false);
   const mondayRef = useRef();
   const tuesdayRef = useRef();
   const wednesdayRef = useRef();
@@ -101,7 +101,6 @@ export const Inputs = ({
           <input type='button' value='Limpiar' onClick={clearSearch} className='buttons' />
         </section>
       </form>
-      <BasicModal open={open} setOpen={setOpen} />
     </React.Fragment>
   );
 };
