@@ -1,15 +1,17 @@
 import React, { useRef, useState } from 'react';
 
 export const Inputs = () => {
-  const [freeDays, setFreeDays] = useState(['']);
+  const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState(0);
-  const mondayRef = useRef();
 
-  const checkedDay = () => {
-    const isChecked = mondayRef.current.checked;
-    const value = mondayRef.current.name;
+  const checkedDay = (e) => {
+    console.log(e);
+    const isChecked = e.target.checked;
+    const value = e.target.name;
     if (isChecked) {
-      setFreeDays((prev) => [...prev, value]);
+      setFreeDays((prev) => [prev, value]);
+    } else {
+      setFreeDays((prev) => prev.pop(value));
     }
     console.log(isChecked);
   };
@@ -30,19 +32,19 @@ export const Inputs = () => {
         <label>Días libres</label>
         <br />
         <label htmlFor='monday'>Lunes</label>
-        <input type='checkbox' name='monday' ref={mondayRef} onClick={checkedDay} />
+        <input type='checkbox' name='monday' onClick={checkedDay} />
         <label htmlFor='tuesday'>Martes</label>
-        <input type='checkbox' name='tuesday' />
+        <input type='checkbox' name='tuesday' onClick={checkedDay} />
         <label htmlFor='wednesday'>Miércoles</label>
-        <input type='checkbox' name='wednesday' />
+        <input type='checkbox' name='wednesday' onClick={checkedDay} />
         <label htmlFor='thursday'>Jueves</label>
-        <input type='checkbox' name='thursday' />
+        <input type='checkbox' name='thursday' onClick={checkedDay} />
         <label htmlFor='friday'>Viernes</label>
-        <input type='checkbox' name='friday' />
+        <input type='checkbox' name='friday' onClick={checkedDay} />
         <label htmlFor='saturday'>Sábado</label>
-        <input type='checkbox' name='saturday' />
+        <input type='checkbox' name='saturday' onClick={checkedDay} />
         <label htmlFor='sunday'>Domingo</label>
-        <input type='checkbox' name='sunday' />
+        <input type='checkbox' name='sunday' onClick={checkedDay} />
         <input type='submit' onClick={() => {}} />
       </form>
     </React.Fragment>
