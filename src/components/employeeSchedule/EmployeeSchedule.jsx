@@ -4,7 +4,6 @@ import './EmployeeSchedule.css';
 export const EmployeeSchedule = ({ schedule }) => {
   return (
     <>
-      <h1>{Object.entries(schedule).join(',')}</h1>
       <table className='schedule-table'>
         <thead>
           <tr>

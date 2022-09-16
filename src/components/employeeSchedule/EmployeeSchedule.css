@@ -1,5 +1,13 @@
-/* .schedule-table {
-  border: 1px solid grey;
-  padding: 1rem;
-
-} */
+.schedule-table {
+  margin: 1rem;
+}
+table thead {
+  font-weight: 900;
+  background-color: rgb(176, 213, 214);
+}
+table tbody tr td {
+  text-align: center;
+}
+td {
+  padding: 10px;
+}
