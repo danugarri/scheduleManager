@@ -49,6 +49,20 @@ export const Inputs = ({
       //
     }
   };
+  const clearSearch = () => {
+    //   This part can be optional
+    setOrdinaryEmployeeHours('');
+
+    mondayRef.current.checked = false;
+    tuesdayRef.current.checked = false;
+    wednesdayRef.current.checked = false;
+    thursdayRef.current.checked = false;
+    fridayRef.current.checked = false;
+    saturdayRef.current.checked = false;
+    sundayRef.current.checked = false;
+    setSchedule([]);
+    //
+  };
   return (
     <React.Fragment>
       <form onSubmit={submitEmployeeSchedule}>
@@ -85,6 +99,7 @@ export const Inputs = ({
         <input type='checkbox' name='sunday' onClick={checkedDay} ref={sundayRef} />
         <input type='submit' onClick={submitEmployeeSchedule} />
       </form>
+      <button onClick={clearSearch}>Limpiar</button>
     </React.Fragment>
   );
 };
