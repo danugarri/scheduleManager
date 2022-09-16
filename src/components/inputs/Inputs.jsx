@@ -80,19 +80,61 @@ export const Inputs = ({
         <label>Días libres</label>
         <br />
         <label htmlFor='monday'>Lunes</label>
-        <input type='checkbox' name='monday' onClick={checkedDay} ref={mondayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='monday'
+          onClick={checkedDay}
+          ref={mondayRef}
+        />
         <label htmlFor='tuesday'>Martes</label>
-        <input type='checkbox' name='tuesday' onClick={checkedDay} ref={tuesdayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='tuesday'
+          onClick={checkedDay}
+          ref={tuesdayRef}
+        />
         <label htmlFor='wednesday'>Miércoles</label>
-        <input type='checkbox' name='wednesday' onClick={checkedDay} ref={wednesdayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='wednesday'
+          onClick={checkedDay}
+          ref={wednesdayRef}
+        />
         <label htmlFor='thursday'>Jueves</label>
-        <input type='checkbox' name='thursday' onClick={checkedDay} ref={thursdayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='thursday'
+          onClick={checkedDay}
+          ref={thursdayRef}
+        />
         <label htmlFor='friday'>Viernes</label>
-        <input type='checkbox' name='friday' onClick={checkedDay} ref={fridayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='friday'
+          onClick={checkedDay}
+          ref={fridayRef}
+        />
         <label htmlFor='saturday'>Sábado</label>
-        <input type='checkbox' name='saturday' onClick={checkedDay} ref={saturdayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='saturday'
+          onClick={checkedDay}
+          ref={saturdayRef}
+        />
         <label htmlFor='sunday'>Domingo</label>
-        <input type='checkbox' name='sunday' onClick={checkedDay} ref={sundayRef} />
+        <input
+          className='checkbox'
+          type='checkbox'
+          name='sunday'
+          onClick={checkedDay}
+          ref={sundayRef}
+        />
         <br />
         <br />
         <section className='buttons-section'>
