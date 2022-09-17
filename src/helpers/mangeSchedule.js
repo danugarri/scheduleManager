@@ -1,4 +1,11 @@
-export const scheduleManagement = (ordinaryEmployeeHours, freeDays, workersPerTurn) => {
+import { nameFormatter } from './nameFormatter';
+
+export const scheduleManagement = (
+  ordinaryEmployeeHours,
+  freeDays,
+  workersPerTurn,
+  employeeName,
+) => {
   let realWorkedHours = 0;
   let employeeHours = 0;
   const mockOrdinaryEmployeeHours = 37;
@@ -43,6 +50,7 @@ export const scheduleManagement = (ordinaryEmployeeHours, freeDays, workersPerTu
   generateHours();
   console.log(eachDay);
   let schedule = {
+    employeeName,
     monday: eachDay[0],
     tuesday: eachDay[1],
     wednesday: eachDay[2],
@@ -84,5 +92,8 @@ export const scheduleManagement = (ordinaryEmployeeHours, freeDays, workersPerTu
     manageDays();
     console.log(realWorkedHours);
   }
+  // Adding the employeeName to the first position
+  const nameFormatted = nameFormatter(employeeName);
+  schedule = { Employee: nameFormatted, ...schedule };
   return schedule;
 };

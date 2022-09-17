@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import { AddEmployee } from './components/addEmployee/AddEmployee';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
 import BasicModal from './components/modal/BasicModal';
@@ -9,6 +10,7 @@ function App() {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
   const [employeeName, setEmployeeName] = useState('');
+
   // Modal
   const [open, setOpen] = useState(false);
   return (
@@ -24,8 +26,9 @@ function App() {
         employeeName={employeeName}
         setEmployeeName={setEmployeeName}
       />
-      <EmployeeSchedule schedule={schedule} employeeName={employeeName} />
+      <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
+      {/* <AddEmployee schedule={schedule} nameFormatted={nameFormatted} /> */}
     </div>
   );
 }

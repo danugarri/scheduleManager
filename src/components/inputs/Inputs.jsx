@@ -38,7 +38,7 @@ export const Inputs = ({
     e.preventDefault();
 
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10) {
-      const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
+      const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1, employeeName);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
     } else {
