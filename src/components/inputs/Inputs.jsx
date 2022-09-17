@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { scheduleManagement } from '../../helpers/mangeSchedule';
 import { removeItemFromArr } from '../../helpers/removeDays';
-import BasicModal from '../modal/BasicModal';
 import './Inputs.css';
 
 export const Inputs = ({
@@ -12,6 +11,8 @@ export const Inputs = ({
   setOrdinaryEmployeeHours,
   setOpen,
   open,
+  employeeName,
+  setEmployeeName,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -35,6 +36,7 @@ export const Inputs = ({
 
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
+
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10) {
       const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1);
       console.log(returnedSchedule);
@@ -46,7 +48,7 @@ export const Inputs = ({
   const clearSearch = () => {
     //   This part can be optional
     setOrdinaryEmployeeHours('');
-
+    setEmployeeName('');
     mondayRef.current.checked = false;
     tuesdayRef.current.checked = false;
     wednesdayRef.current.checked = false;
@@ -60,7 +62,7 @@ export const Inputs = ({
   return (
     <React.Fragment>
       <form onSubmit={submitEmployeeSchedule}>
-        <label htmlFor='ordinaryEmployeeHours' className='employee-hours'>
+        <label htmlFor='ordinaryEmployeeHours' className='employee-labels'>
           Horas del trabajador según contrato
         </label>
         <input
@@ -74,9 +76,22 @@ export const Inputs = ({
           autoFocus
         />
         <br />
+        <label htmlFor='employee-name' className='employee-labels'>
+          Empleado
+        </label>
+        <input
+          type='text'
+          name='employee-name'
+          onChange={(e) => {
+            const employee = e.target.value;
+            setEmployeeName(employee);
+            console.log(e.target.value);
+          }}
+          value={employeeName}
+        />
+        <br />
         <br />
         {/* checkboxes */}
-
         <label>Días libres</label>
         <br />
         <label htmlFor='monday'>Lunes</label>
@@ -135,6 +150,7 @@ export const Inputs = ({
           onClick={checkedDay}
           ref={sundayRef}
         />
+
         <br />
         <br />
         <section className='buttons-section'>
