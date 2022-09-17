@@ -1,0 +1,14 @@
+.scheduleTable {
+  margin: 3rem;
+}
+
+.scheduleThead {
+  font-weight: 900;
+  background-color: rgb(70, 227, 233);
+}
+.scheduleTBodyTd {
+  text-align: center;
+}
+.tdPadding {
+  padding: 10px;
+}

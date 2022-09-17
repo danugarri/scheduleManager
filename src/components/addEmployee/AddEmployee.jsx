@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import style from './ScheduleTable.module.css';
 
 export const AddEmployee = ({ schedule }) => {
   const [totalEmployees, setTotalEmployees] = useState([]);
@@ -9,12 +10,14 @@ export const AddEmployee = ({ schedule }) => {
   return (
     <>
       <button onClick={add}>Añadir</button>
-      <table className='schedule-table'>
+      <table className={style.scheduleTable}>
         {
-          <thead>
+          <thead className={style.scheduleThead}>
             <tr>
               {Object.entries(schedule).map((day, index) => (
-                <td key={index}>{day[0]}</td>
+                <td className={style.tdPadding} key={index}>
+                  {day[0]}
+                </td>
               ))}
             </tr>
           </thead>
@@ -25,7 +28,9 @@ export const AddEmployee = ({ schedule }) => {
             return (
               <tr key={employeeIndex}>
                 {employeeSchedule.map((day, index) => (
-                  <td key={index}>{day[1]}</td>
+                  <td className={`${style.scheduleTBodyTd} ${style.tdPadding}`} key={index}>
+                    {day[1]}
+                  </td>
                 ))}
               </tr>
             );
