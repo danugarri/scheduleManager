@@ -14,7 +14,7 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees, 
 
   return (
     <>
-      <button onClick={add}>Añadir</button>
+      <button onClick={add}>Añadir Empleado</button>
       <button onClick={emptyTable}>Vaciar Tabla</button>
       <table className={style.scheduleTable}>
         {
