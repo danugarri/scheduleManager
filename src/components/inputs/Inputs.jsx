@@ -70,7 +70,7 @@ export const Inputs = ({
           type='number'
           name='ordinaryEmployeeHours'
           onChange={(e) => {
-            const limittedNumber = numberLimiter();
+            const limittedNumber = numberLimiter(e.target.value);
             setOrdinaryEmployeeHours(limittedNumber);
             console.log(e.target.value);
           }}
