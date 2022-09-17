@@ -28,7 +28,7 @@ function App() {
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
-      {/* <AddEmployee schedule={schedule} nameFormatted={nameFormatted} /> */}
+      <AddEmployee schedule={schedule} />
     </div>
   );
 }
