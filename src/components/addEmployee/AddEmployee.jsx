@@ -35,7 +35,9 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }
                     {day[1]}
                   </td>
                 ))}
-                <td onClick={() => deleteEmployee(employee)}>X</td>
+                <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
+                  X
+                </button>
               </tr>
             );
           })}

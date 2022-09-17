@@ -13,3 +13,10 @@
 .tdPadding {
   padding: 0.625rem;
 }
+.deleteButton {
+  background-color: red;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 3rem;
+}
