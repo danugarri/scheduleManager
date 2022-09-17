@@ -44,6 +44,7 @@ function App() {
         add={add}
         totalEmployees={totalEmployees}
         setTotalEmployees={setTotalEmployees}
+        setId={setId}
       />
     </div>
   );

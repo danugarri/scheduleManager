@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import style from './ScheduleTable.module.css';
 
-export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }) => {
+export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees, setId }) => {
   console.log(totalEmployees);
-  const emptyTable = () => setTotalEmployees([]);
+  const emptyTable = () => {
+    setId(0);
+    setTotalEmployees([]);
+  };
   const deleteEmployee = (typedEmployee) => {
     const newTotal = totalEmployees.filter((employee) => employee.id !== typedEmployee.id);
     setTotalEmployees(newTotal);
