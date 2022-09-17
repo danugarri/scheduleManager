@@ -18,10 +18,14 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
     array.push(final);
   });
   console.log(array);
-  const allMonday = array
-    .map((employee) => employee.monday)
-    .reduce((prev, current) => prev + current);
-  console.log(allMonday);
+
+  const getTotalHoursPerDay = (dayName) => {
+    return array
+      .map((employee) => employee[dayName])
+      .reduce((prev, current) => Number(prev) + Number(current), []);
+  };
+  const allMonday = getTotalHoursPerDay('monday');
+  const allTuesday = getTotalHoursPerDay('tuesday');
 
   return (
     <>
@@ -61,8 +65,8 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
         <tfoot>
           <tr>
             <th scope='row'>Totals</th>
-            <td>21,000</td>
-            <td>21,000</td>
+            <td>{allMonday}</td>
+            <td>{allTuesday}</td>
             <td>21,000</td>
             <td>21,000</td>
             <td>21,000</td>
