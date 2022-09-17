@@ -20,3 +20,6 @@
   cursor: pointer;
   margin-left: 3rem;
 }
+.results {
+  background-color: darkgray;
+}

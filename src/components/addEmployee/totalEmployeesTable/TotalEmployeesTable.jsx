@@ -21,6 +21,11 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
 
   const allMonday = getTotalHoursPerDay(array, 'monday');
   const allTuesday = getTotalHoursPerDay(array, 'tuesday');
+  const allWednesday = getTotalHoursPerDay(array, 'wednesday');
+  const allThursday = getTotalHoursPerDay(array, 'thursday');
+  const allFriday = getTotalHoursPerDay(array, 'friday');
+  const allSaturday = getTotalHoursPerDay(array, 'saturday');
+  const allSunday = getTotalHoursPerDay(array, 'sunday');
 
   return (
     <>
@@ -58,15 +63,15 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
           })}
         </tbody>
         <tfoot>
-          <tr>
+          <tr className={style.results}>
             <th scope='row'>Totals</th>
             <td>{allMonday}</td>
             <td>{allTuesday}</td>
-            <td>21,000</td>
-            <td>21,000</td>
-            <td>21,000</td>
-            <td>21,000</td>
-            <td>21,000</td>
+            <td>{allWednesday}</td>
+            <td>{allThursday}</td>
+            <td>{allFriday}</td>
+            <td>{allSaturday}</td>
+            <td>{allSunday}</td>
           </tr>
         </tfoot>
       </table>
