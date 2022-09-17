@@ -23,3 +23,10 @@
 .results {
   background-color: darkgray;
 }
+.tfooter {
+  border-top: 3px dotted black;
+  background-color: black;
+  height: 1px;
+  width: 65vw;
+  position: absolute;
+}

@@ -63,15 +63,16 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
           })}
         </tbody>
         <tfoot>
+          <div className={style.tfooter}></div>
           <tr className={style.results}>
             <th scope='row'>Totals</th>
-            <td>{allMonday}</td>
-            <td>{allTuesday}</td>
-            <td>{allWednesday}</td>
-            <td>{allThursday}</td>
-            <td>{allFriday}</td>
-            <td>{allSaturday}</td>
-            <td>{allSunday}</td>
+            <td className={style.scheduleTBodyTd}>{allMonday}</td>
+            <td className={style.scheduleTBodyTd}>{allTuesday}</td>
+            <td className={style.scheduleTBodyTd}>{allWednesday}</td>
+            <td className={style.scheduleTBodyTd}>{allThursday}</td>
+            <td className={style.scheduleTBodyTd}>{allFriday}</td>
+            <td className={style.scheduleTBodyTd}>{allSaturday}</td>
+            <td className={style.scheduleTBodyTd}>{allSunday}</td>
           </tr>
         </tfoot>
       </table>
