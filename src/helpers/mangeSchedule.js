@@ -94,6 +94,7 @@ export const scheduleManagement = (
   }
   // Adding the employeeName to the first position
   const nameFormatted = nameFormatter(employeeName);
-  schedule = { Employee: nameFormatted, ...schedule };
+  schedule = { Employee: nameFormatted, ...schedule, id: new Date().getMilliseconds() };
+
   return schedule;
 };

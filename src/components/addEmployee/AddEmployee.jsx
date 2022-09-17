@@ -5,7 +5,7 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }
   console.log(totalEmployees);
   const emptyTable = () => setTotalEmployees([]);
   const deleteEmployee = (typedEmployee) => {
-    const newTotal = totalEmployees.filter((employee) => employee !== typedEmployee);
+    const newTotal = totalEmployees.filter((employee) => employee.id !== typedEmployee.id);
     setTotalEmployees(newTotal);
   };
 
@@ -35,9 +35,11 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }
                     {day[1]}
                   </td>
                 ))}
-                <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
-                  X
-                </button>
+                <td>
+                  <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
+                    X
+                  </button>
+                </td>
               </tr>
             );
           })}

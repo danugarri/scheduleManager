@@ -11,8 +11,14 @@ function App() {
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
   const [employeeName, setEmployeeName] = useState('');
   const [totalEmployees, setTotalEmployees] = useState([]);
+  const [id, setId] = useState(0);
   const add = () => {
-    setTotalEmployees((prev) => prev.concat(schedule));
+    const newSchedule = { ...schedule };
+    setId((prev) => prev + 1);
+    newSchedule.id = id;
+    // Added an id to differenciate from others employee with the same values
+
+    setTotalEmployees((prev) => prev.concat(newSchedule));
   };
 
   // Modal
