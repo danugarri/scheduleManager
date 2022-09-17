@@ -4,6 +4,10 @@ import style from './ScheduleTable.module.css';
 export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }) => {
   console.log(totalEmployees);
   const emptyTable = () => setTotalEmployees([]);
+  const deleteEmployee = (typedEmployee) => {
+    const newTotal = totalEmployees.filter((employee) => employee !== typedEmployee);
+    setTotalEmployees(newTotal);
+  };
 
   return (
     <>
@@ -31,6 +35,7 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }
                     {day[1]}
                   </td>
                 ))}
+                <td onClick={() => deleteEmployee(employee)}>X</td>
               </tr>
             );
           })}
