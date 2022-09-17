@@ -1,5 +1,6 @@
 .employeeTable {
   margin: 1rem;
+  font-size: 0.625rem;
 }
 .employeeThead {
   font-weight: 900;
@@ -9,5 +10,5 @@
   text-align: center;
 }
 .tdPadding {
-  padding: 10px;
+  padding: 0.625rem;
 }
