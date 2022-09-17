@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.css';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
@@ -9,7 +9,7 @@ function App() {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
   // Modal
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <div className='app'>
       <Inputs
