@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import style from './ScheduleTable.module.css';
 
-export const AddEmployee = ({ schedule }) => {
-  const [totalEmployees, setTotalEmployees] = useState([]);
-  const add = () => {
-    setTotalEmployees((prev) => prev.concat(schedule));
-  };
+export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees }) => {
   console.log(totalEmployees);
+  const emptyTable = () => setTotalEmployees([]);
+
   return (
     <>
       <button onClick={add}>Añadir</button>
+      <button onClick={emptyTable}>Vaciar Tabla</button>
       <table className={style.scheduleTable}>
         {
           <thead className={style.scheduleThead}>

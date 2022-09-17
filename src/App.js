@@ -10,6 +10,10 @@ function App() {
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
   const [employeeName, setEmployeeName] = useState('');
+  const [totalEmployees, setTotalEmployees] = useState([]);
+  const add = () => {
+    setTotalEmployees((prev) => prev.concat(schedule));
+  };
 
   // Modal
   const [open, setOpen] = useState(false);
@@ -25,10 +29,16 @@ function App() {
         setOpen={setOpen}
         employeeName={employeeName}
         setEmployeeName={setEmployeeName}
+        setTotalEmployees={setTotalEmployees}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
-      <AddEmployee schedule={schedule} />
+      <AddEmployee
+        schedule={schedule}
+        add={add}
+        totalEmployees={totalEmployees}
+        setTotalEmployees={setTotalEmployees}
+      />
     </div>
   );
 }
