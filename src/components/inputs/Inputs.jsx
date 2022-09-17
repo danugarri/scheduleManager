@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { scheduleManagement } from '../../helpers/mangeSchedule';
+import { numberLimiter } from '../../helpers/numberLimiter';
 import { removeItemFromArr } from '../../helpers/removeDays';
 import './Inputs.css';
 
@@ -69,7 +70,8 @@ export const Inputs = ({
           type='number'
           name='ordinaryEmployeeHours'
           onChange={(e) => {
-            setOrdinaryEmployeeHours(e.target.value);
+            const limittedNumber = numberLimiter();
+            setOrdinaryEmployeeHours(limittedNumber);
             console.log(e.target.value);
           }}
           value={ordinaryEmployeeHours}
