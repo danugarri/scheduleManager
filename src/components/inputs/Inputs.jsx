@@ -154,7 +154,12 @@ export const Inputs = ({
         <br />
         <br />
         <section className='buttons-section'>
-          <input type='submit' onClick={submitEmployeeSchedule} className='buttons' />
+          <input
+            type='submit'
+            value='Calcular'
+            onClick={submitEmployeeSchedule}
+            className='buttons'
+          />
           <input type='button' value='Limpiar' onClick={clearSearch} className='buttons' />
         </section>
       </form>
