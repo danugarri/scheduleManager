@@ -47,8 +47,6 @@ export const scheduleManagement = (
       );
     }
   };
-  generateHours();
-  console.log(eachDay);
   let schedule = {
     employeeName,
     monday: eachDay[0],
@@ -59,7 +57,6 @@ export const scheduleManagement = (
     saturday: eachDay[5],
     sunday: eachDay[6],
   };
-
   const manageDays = () => {
     for (let day in schedule) {
       // Set 0 hours if is freeday
@@ -70,7 +67,11 @@ export const scheduleManagement = (
       realWorkedHours += schedule[day];
     }
   };
+
   manageDays();
+  generateHours();
+  console.log(eachDay);
+
   console.log(realWorkedHours);
   //  Iterate until the workedHours match ordinaryEmployeeHours
   while (realWorkedHours !== Number(ordinaryEmployeeHours)) {
