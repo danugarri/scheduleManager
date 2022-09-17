@@ -1,13 +1,13 @@
-.employee-table {
+.employeeTable {
   margin: 1rem;
 }
-table thead {
+.employeeThead {
   font-weight: 900;
   background-color: rgb(176, 213, 214);
 }
-table tbody tr td {
+.employeeTBodyTd {
   text-align: center;
 }
-td {
+.tdPadding {
   padding: 10px;
 }
