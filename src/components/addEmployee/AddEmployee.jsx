@@ -15,7 +15,7 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees, 
 
   return (
     <>
-      {schedule.hasOwnProperty('monday') > 0 && (
+      {schedule.hasOwnProperty('monday') && (
         <>
           <button onClick={add}>Añadir Empleado</button>
           <button onClick={emptyTable}>Vaciar Tabla</button>
