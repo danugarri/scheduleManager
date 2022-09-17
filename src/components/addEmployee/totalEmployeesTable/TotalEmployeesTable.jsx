@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { getTotalHoursPerDay } from '../../../helpers/getTotalHoursPerDay';
 import style from './ScheduleTable.module.css';
 
 export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }) => {
   console.log(totalEmployees);
-  let totalResult = {};
   let final = {};
   const array = [];
   totalEmployees.forEach(function (employee) {
@@ -19,13 +19,8 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
   });
   console.log(array);
 
-  const getTotalHoursPerDay = (dayName) => {
-    return array
-      .map((employee) => employee[dayName])
-      .reduce((prev, current) => Number(prev) + Number(current), []);
-  };
-  const allMonday = getTotalHoursPerDay('monday');
-  const allTuesday = getTotalHoursPerDay('tuesday');
+  const allMonday = getTotalHoursPerDay(array, 'monday');
+  const allTuesday = getTotalHoursPerDay(array, 'tuesday');
 
   return (
     <>
