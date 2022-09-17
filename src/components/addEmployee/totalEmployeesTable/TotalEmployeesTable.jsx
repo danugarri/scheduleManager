@@ -20,21 +20,35 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
           {totalEmployees.map((employee, employeeIndex) => {
             const employeeSchedule = Object.entries(employee);
             return (
-              <tr key={employeeIndex}>
-                {employeeSchedule.map((day, index) => (
-                  <td className={`${style.scheduleTBodyTd} ${style.tdPadding}`} key={index}>
-                    {day[1]}
+              <>
+                <tr key={employeeIndex}>
+                  {employeeSchedule.map((day, index) => (
+                    <td className={`${style.scheduleTBodyTd} ${style.tdPadding}`} key={index}>
+                      {day[1]}
+                    </td>
+                  ))}
+                  <td>
+                    <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
+                      X
+                    </button>
                   </td>
-                ))}
-                <td>
-                  <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
-                    X
-                  </button>
-                </td>
-              </tr>
+                </tr>
+              </>
             );
           })}
         </tbody>
+        <tfoot>
+          <tr>
+            <th scope='row'>Totals</th>
+            <td>21,000</td>
+            <td>21,000</td>
+            <td>21,000</td>
+            <td>21,000</td>
+            <td>21,000</td>
+            <td>21,000</td>
+            <td>21,000</td>
+          </tr>
+        </tfoot>
       </table>
     </>
   );
