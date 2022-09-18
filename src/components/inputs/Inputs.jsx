@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { scheduleManagement } from '../../helpers/mangeSchedule';
+import { useManegeSchedule } from '../../hooks/useManegeSchedule';
 import { numberLimiter } from '../../helpers/numberLimiter';
 import { removeItemFromArr } from '../../helpers/removeDays';
 import './Inputs.css';
@@ -34,7 +35,7 @@ export const Inputs = ({
     console.log(isChecked);
   };
   console.log(freeDays);
-
+  const scheduleManagement = useManegeSchedule();
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
 
