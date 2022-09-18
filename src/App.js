@@ -3,7 +3,8 @@ import './App.css';
 import { AddEmployee } from './components/addEmployee/AddEmployee';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
-import BasicModal from './components/modal/BasicModal';
+import BasicModal from './components/modals/BasicModal';
+import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 
 function App() {
   const [schedule, setSchedule] = useState({});
@@ -21,8 +22,9 @@ function App() {
     setTotalEmployees((prev) => prev.concat(newSchedule));
   };
 
-  // Modal
+  // Modals
   const [open, setOpen] = useState(false);
+  const [openFreeDaysModal, setOpenFreeDaysModal] = useState(false);
   return (
     <div className='app'>
       <Inputs
@@ -33,12 +35,18 @@ function App() {
         setOrdinaryEmployeeHours={setOrdinaryEmployeeHours}
         open={open}
         setOpen={setOpen}
+        openFreeDaysModal={openFreeDaysModal}
+        setOpenFreeDaysModal={setOpenFreeDaysModal}
         employeeName={employeeName}
         setEmployeeName={setEmployeeName}
         setTotalEmployees={setTotalEmployees}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
+      <MaxFreeDaysModal
+        openFreeDaysModal={openFreeDaysModal}
+        setOpenFreeDaysModal={setOpenFreeDaysModal}
+      />
       <AddEmployee
         schedule={schedule}
         add={add}

@@ -16,6 +16,8 @@ export const Inputs = ({
   open,
   employeeName,
   setEmployeeName,
+  openFreeDaysModal,
+  setOpenFreeDaysModal,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -46,8 +48,12 @@ export const Inputs = ({
       const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1, employeeName);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
-    } else {
+    }
+    if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {
       setOpen(!open);
+    }
+    if (!correctFreedays) {
+      setOpenFreeDaysModal(!openFreeDaysModal);
     }
   };
   const clearSearch = () => {
