@@ -3,6 +3,7 @@ import { scheduleManagement } from '../../helpers/mangeSchedule';
 import { useManegeSchedule } from '../../hooks/useManegeSchedule';
 import { numberLimiter } from '../../helpers/numberLimiter';
 import { removeItemFromArr } from '../../helpers/removeDays';
+import { getWorkingDays, isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
 import './Inputs.css';
 
 export const Inputs = ({
@@ -23,6 +24,7 @@ export const Inputs = ({
   const fridayRef = useRef();
   const saturdayRef = useRef();
   const sundayRef = useRef();
+
   const checkedDay = (e) => {
     console.log(e);
     const isChecked = e.target.checked;
@@ -38,8 +40,9 @@ export const Inputs = ({
   const scheduleManagement = useManegeSchedule();
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
-
-    if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10) {
+    // Checking if it is possible have the entered number of freedays
+    const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
+    if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
       const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1, employeeName);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
