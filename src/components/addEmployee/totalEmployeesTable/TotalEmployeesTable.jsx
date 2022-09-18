@@ -44,6 +44,7 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
                     ))}
                     <td>
                       <button
+                        key='button'
                         className={style.deleteButton}
                         onClick={() => deleteEmployee(employee)}
                       >
