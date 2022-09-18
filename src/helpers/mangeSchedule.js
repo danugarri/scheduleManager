@@ -43,7 +43,7 @@ export const scheduleManagement = (
   const generateHours = () => {
     for (let i = 0; i < 7; i++) {
       eachDay = eachDay.concat(
-        Math.floor(Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay) + minHoursPerDay),
+        Math.floor(Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay),
       );
     }
   };
