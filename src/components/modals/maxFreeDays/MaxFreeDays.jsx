@@ -30,6 +30,7 @@ export default function MaxFreeDaysModal({ openFreeDaysModal, setOpenFreeDaysMod
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             <p>Has seleccionado demasiados DÍAS LIBRES para las HORAS A TRABAJAR</p>
+            <p>Elimina 1 día libre</p>
             <button onClick={handleClose} className='close-button '>
               X
             </button>
