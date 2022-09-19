@@ -14,31 +14,24 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
     console.log(allDays[totalPerDay]);
   }
   useEffect(() => {
-    let newSchedule = {};
+    let newSchedule = { ...schedule };
     const recalculateHours = () => {
       for (let totalPerDay in allDays) {
         console.log(allDays[totalPerDay]);
         if (allDays[totalPerDay] > 11) {
-          // for (let day in schedule) {
-          // console.log(schedule[day]);
-          // if (day !== 'Employee' && day !== 'id') {
           newSchedule = {
             ...newSchedule,
             [totalPerDay]: schedule[totalPerDay] - (allDays[totalPerDay] - 11),
           };
-          // }
         }
-        // }
+
         console.log('entraaaaaaaaaaaaaa');
         // setSchedule(schedule);
       }
       console.log(newSchedule);
     };
-    // for (let totalPerDay in allDays) {
-    // if (allDays[totalPerDay] > 11) {
+
     recalculateHours();
-    // }
-    // }
   }, [allDays, schedule]);
 
   return (
