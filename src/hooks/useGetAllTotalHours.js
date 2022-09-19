@@ -9,13 +9,13 @@ export const useGetAllTotalHours = (array) => {
   const allSaturday = getTotalHoursPerDay(array, 'saturday');
   const allSunday = getTotalHoursPerDay(array, 'sunday');
   const allDays = {
-    allMonday,
-    allTuesday,
-    allWednesday,
-    allThursday,
-    allFriday,
-    allSaturday,
-    allSunday,
+    monday: allMonday,
+    tuesday: allTuesday,
+    wednesday: allWednesday,
+    thursday: allThursday,
+    friday: allFriday,
+    saturday: allSaturday,
+    sunday: allSunday,
   };
   return allDays;
 };
