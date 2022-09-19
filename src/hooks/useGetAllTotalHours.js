@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { getTotalHoursPerDay } from '../helpers/getTotalHoursPerDay';
 
 export const useGetAllTotalHours = (array) => {
@@ -9,7 +8,7 @@ export const useGetAllTotalHours = (array) => {
   const allFriday = getTotalHoursPerDay(array, 'friday');
   const allSaturday = getTotalHoursPerDay(array, 'saturday');
   const allSunday = getTotalHoursPerDay(array, 'sunday');
-  const [allDays, setAllDays] = useState({
+  const allDays = {
     allMonday,
     allTuesday,
     allWednesday,
@@ -17,6 +16,6 @@ export const useGetAllTotalHours = (array) => {
     allFriday,
     allSaturday,
     allSunday,
-  });
-  return [allDays, setAllDays];
+  };
+  return allDays;
 };

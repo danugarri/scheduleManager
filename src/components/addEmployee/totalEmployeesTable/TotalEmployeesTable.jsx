@@ -9,7 +9,7 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
 
-  const [allDays] = useGetAllTotalHours(workedHoursPerDays);
+  const allDays = useGetAllTotalHours(workedHoursPerDays);
 
   return (
     <>
