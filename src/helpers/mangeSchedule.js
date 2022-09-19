@@ -1,37 +1,32 @@
 import { nameFormatter } from './nameFormatter';
 
-export const scheduleManagement = (
-  ordinaryEmployeeHours,
-  freeDays,
-  workersPerTurn,
-  employeeName,
-) => {
+export const scheduleManagement = (ordinaryEmployeeHours, freeDays, employeeName) => {
   let realWorkedHours = 0;
-  let employeeHours = 0;
-  const mockOrdinaryEmployeeHours = 37;
-  const mockFreeDays = ['thursday', 'sunday'];
-  const mockWorkersPerTurn = {
-    cook: 1,
-    local: 1,
-  };
-  const mockSchedule = {
-    monday: 8,
-    tuesday: 7,
-    wednesday: 8,
-    thursday: 0,
-    friday: 7,
-    saturday: 7,
-    sunday: 0,
-  };
+  // let employeeHours = 0;
+  // const mockOrdinaryEmployeeHours = 37;
+  // const mockFreeDays = ['thursday', 'sunday'];
+  // const mockWorkersPerTurn = {
+  //   cook: 1,
+  //   local: 1,
+  // };
+  // const mockSchedule = {
+  //   monday: 8,
+  //   tuesday: 7,
+  //   wednesday: 8,
+  //   thursday: 0,
+  //   friday: 7,
+  //   saturday: 7,
+  //   sunday: 0,
+  // };
 
-  const workingHoursPerDay = {
-    cook: 11.5,
-    local: 10,
-  };
-  const totalWorkingHours = {
-    cook: 80.5,
-    local: 70,
-  };
+  // const workingHoursPerDay = {
+  //   cook: 11.5,
+  //   local: 10,
+  // };
+  // const totalWorkingHours = {
+  //   cook: 80.5,
+  //   local: 70,
+  // };
   // Rules
   /* the min hours will depend on the employee ordinary hours. If it is less than
     20h it is better to set minHour to 1

@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
-import { scheduleManagement } from '../../helpers/mangeSchedule';
 import { useManegeSchedule } from '../../hooks/useManegeSchedule';
 import { numberLimiter } from '../../helpers/numberLimiter';
 import { removeItemFromArr } from '../../helpers/removeDays';
-import { getWorkingDays, isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
+import { isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
 import './Inputs.css';
 
 export const Inputs = ({
