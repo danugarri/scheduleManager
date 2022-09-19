@@ -6,9 +6,10 @@ import style from './ScheduleTable.module.css';
 export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }) => {
   console.log(totalEmployees);
 
-  const array = extractOnlyDays(totalEmployees);
+  // Array with an object with the worked hours per day
+  const workedHoursPerDays = extractOnlyDays(totalEmployees);
 
-  const allDays = useGetAllTotalHours(array);
+  const allDays = useGetAllTotalHours(workedHoursPerDays);
   return (
     <>
       {schedule.hasOwnProperty('monday') && (
