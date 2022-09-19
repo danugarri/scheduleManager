@@ -1,6 +1,6 @@
 import React from 'react';
 import { extractOnlyDays } from '../../../helpers/extractOnlyDays';
-import { getTotalHoursPerDay } from '../../../helpers/getTotalHoursPerDay';
+import { useGetAllTotalHours } from '../../../hooks/useGetAllTotalHours';
 import style from './ScheduleTable.module.css';
 
 export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }) => {
@@ -8,14 +8,7 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
 
   const array = extractOnlyDays(totalEmployees);
 
-  const allMonday = getTotalHoursPerDay(array, 'monday');
-  const allTuesday = getTotalHoursPerDay(array, 'tuesday');
-  const allWednesday = getTotalHoursPerDay(array, 'wednesday');
-  const allThursday = getTotalHoursPerDay(array, 'thursday');
-  const allFriday = getTotalHoursPerDay(array, 'friday');
-  const allSaturday = getTotalHoursPerDay(array, 'saturday');
-  const allSunday = getTotalHoursPerDay(array, 'sunday');
-
+  const allDays = useGetAllTotalHours(array);
   return (
     <>
       {schedule.hasOwnProperty('monday') && (
@@ -60,13 +53,13 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
           <tfoot>
             <tr className={style.results}>
               <th scope='row'>Totals</th>
-              <td className={style.scheduleTBodyTd}>{allMonday}</td>
-              <td className={style.scheduleTBodyTd}>{allTuesday}</td>
-              <td className={style.scheduleTBodyTd}>{allWednesday}</td>
-              <td className={style.scheduleTBodyTd}>{allThursday}</td>
-              <td className={style.scheduleTBodyTd}>{allFriday}</td>
-              <td className={style.scheduleTBodyTd}>{allSaturday}</td>
-              <td className={style.scheduleTBodyTd}>{allSunday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allMonday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allTuesday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allWednesday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allThursday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allFriday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allSaturday}</td>
+              <td className={style.scheduleTBodyTd}>{allDays.allSunday}</td>
             </tr>
           </tfoot>
         </table>
