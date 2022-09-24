@@ -1,4 +1,6 @@
 import React from 'react';
+import { CSV } from '../CSV/CSV';
+import './AddEmployee.css';
 
 import { TotalEmployeesTable } from './totalEmployeesTable/TotalEmployeesTable';
 
@@ -16,10 +18,15 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees, 
   return (
     <>
       {schedule.hasOwnProperty('monday') && (
-        <>
-          <button onClick={add}>Añadir Empleado</button>
-          <button onClick={emptyTable}>Vaciar Tabla</button>
-        </>
+        <div className='total-buttons'>
+          <button onClick={add} className='space'>
+            Añadir Empleado
+          </button>
+          <button onClick={emptyTable} className='space'>
+            Vaciar Tabla
+          </button>
+          <CSV csvData={totalEmployees} />
+        </div>
       )}
       <TotalEmployeesTable
         schedule={schedule}
