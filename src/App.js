@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './App.css';
 import { AddEmployee } from './components/addEmployee/AddEmployee';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
 import BasicModal from './components/modals/BasicModal';
+import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 
 function App() {
@@ -25,6 +25,10 @@ function App() {
   // Modals
   const [open, setOpen] = useState(false);
   const [openFreeDaysModal, setOpenFreeDaysModal] = useState(false);
+  const [openEmployeeModal, setOpenEmployeeModal] = useState(false);
+  const employeeConfirmation = () => {
+    setOpenEmployeeModal(true);
+  };
   return (
     <div className='app'>
       <Inputs
@@ -40,12 +44,18 @@ function App() {
         employeeName={employeeName}
         setEmployeeName={setEmployeeName}
         setTotalEmployees={setTotalEmployees}
+        employeeConfirmation={employeeConfirmation}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
       <MaxFreeDaysModal
         openFreeDaysModal={openFreeDaysModal}
         setOpenFreeDaysModal={setOpenFreeDaysModal}
+      />
+      <EmployeeModal
+        openEmployeeModal={openEmployeeModal}
+        setOpenEmployeeModal={setOpenEmployeeModal}
+        employeeConfirmation={employeeConfirmation}
       />
       <AddEmployee
         schedule={schedule}

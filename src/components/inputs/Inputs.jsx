@@ -17,6 +17,7 @@ export const Inputs = ({
   setEmployeeName,
   openFreeDaysModal,
   setOpenFreeDaysModal,
+  employeeConfirmation,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -47,6 +48,9 @@ export const Inputs = ({
       const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1, employeeName);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
+      if (returnedSchedule) {
+        employeeConfirmation();
+      }
     }
     if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {
       setOpen(!open);
