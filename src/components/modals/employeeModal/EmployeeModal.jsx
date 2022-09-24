@@ -30,7 +30,13 @@ export default function EmployeeModal({ openEmployeeModal, setOpenEmployeeModal 
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             <p className='confirmation'>Calculado nuevo empleado</p>
-            <button type='button' onClick={handleClose} className='close-button' id='close'>
+            <button
+              onFocus={() => setOpenEmployeeModal(false)}
+              type='button'
+              onClick={handleClose}
+              className='close-button'
+              id='close'
+            >
               X
             </button>
           </Typography>
