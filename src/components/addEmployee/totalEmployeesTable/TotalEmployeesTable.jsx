@@ -1,6 +1,5 @@
 import React from 'react';
 import { extractOnlyDays } from '../../../helpers/extractOnlyDays';
-import { useControlTotalHours } from '../../../hooks/useControlTotalHours';
 import { useGetAllTotalHours } from '../../../hooks/useGetAllTotalHours';
 import style from './ScheduleTable.module.css';
 
@@ -8,7 +7,6 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
-  useControlTotalHours(totalEmployees, schedule);
 
   return (
     <>

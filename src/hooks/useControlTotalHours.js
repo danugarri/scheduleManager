@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { extractOnlyDays } from '../helpers/extractOnlyDays';
 import { useGetAllTotalHours } from './useGetAllTotalHours';
 
 export const useControlTotalHours = (totalEmployees, schedule) => {
   console.log(totalEmployees);
 
+  let isMoreThanNeeded = useRef(false);
+  let recalculatedSchedule = useRef({});
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
 
@@ -18,6 +20,7 @@ export const useControlTotalHours = (totalEmployees, schedule) => {
       for (let totalPerDay in allDays) {
         console.log(allDays[totalPerDay]);
         if (allDays[totalPerDay] > 11) {
+          isMoreThanNeeded.current = true;
           newSchedule = {
             ...newSchedule,
             [totalPerDay]: schedule[totalPerDay] - (allDays[totalPerDay] - 11),
@@ -28,8 +31,10 @@ export const useControlTotalHours = (totalEmployees, schedule) => {
         // setSchedule(schedule);
       }
       console.log(newSchedule);
+      recalculatedSchedule.current = newSchedule;
     };
 
     recalculateHours();
   }, [allDays, schedule]);
+  return [isMoreThanNeeded, recalculatedSchedule];
 };
