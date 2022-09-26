@@ -7,6 +7,7 @@ import BasicModal from './components/modals/BasicModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
+import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
   const allDays = useGetAllTotalHours(workedHoursPerDays);
 
   // function to recalculate the totalHours
-  const recalculateHours = (recalculatedSchedule, newSchedule) => {
+  const recalculateHours = (recalculatedSchedule, newSchedule, totalHoursPerEmployee) => {
     const totalPerDay = 11;
     if (totalEmployees.length > 0) {
       totalEmployees.forEach((employee) => {
@@ -48,21 +49,26 @@ function App() {
       });
 
       newSchedule.id = id;
+      newSchedule.totalHours = totalHoursPerEmployee;
       recalculatedSchedule.id = id;
+
       setTotalEmployees((prev) => prev.concat(recalculatedSchedule));
     } else {
       newSchedule.id = id;
+      newSchedule.totalHours = totalHoursPerEmployee;
       setTotalEmployees((prev) => prev.concat(newSchedule));
     }
   };
   const add = () => {
+    const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     const newSchedule = { ...schedule };
     let recalculatedSchedule = { ...schedule };
     setId((prev) => prev + 1);
     newSchedule.id = id;
     recalculatedSchedule.id = id;
-
-    recalculateHours(recalculatedSchedule, newSchedule);
+    recalculatedSchedule.totalHours = totalHoursPerEmployee;
+    recalculateHours.totalHours = totalHoursPerEmployee;
+    recalculateHours(recalculatedSchedule, newSchedule, totalHoursPerEmployee);
   };
 
   // Modals

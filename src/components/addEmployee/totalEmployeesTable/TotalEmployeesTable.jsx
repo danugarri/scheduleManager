@@ -35,6 +35,11 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
                       </td>
                     ))}
                     <td>
+                      <span key='hours' className={`${style.scheduleTBodyTd} ${style.tdPadding}`}>
+                        Horas totales
+                      </span>
+                    </td>
+                    <td>
                       <button
                         key='button'
                         className={style.deleteButton}
