@@ -1,39 +1,36 @@
 import { nameFormatter } from '../helpers/nameFormatter';
 
-export const useManegeSchedule = () => {
-  // const [monday, setMonday] = useState(0)
-  // const
-  const scheduleManagement = (ordinaryEmployeeHours, freeDays, workersPerTurn, employeeName) => {
-    // let realWorkedHours = 0;
-    // let employeeHours = 0;
-    // const mockOrdinaryEmployeeHours = 37;
-    // const mockFreeDays = ['thursday', 'sunday'];
-    // const mockWorkersPerTurn = {
-    //   cook: 1,
-    //   local: 1,
-    // };
-    // const mockSchedule = {
-    //   monday: 8,
-    //   tuesday: 7,
-    //   wednesday: 8,
-    //   thursday: 0,
-    //   friday: 7,
-    //   saturday: 7,
-    //   sunday: 0,
-    // };
+export const useManegeSchedule = (totalEmployees, allDays) => {
+  // function to recalculate the totalHours
+  const recalculateHours = (schedule) => {
+    let recalculatedSchedule = { ...schedule };
+    const totalPerDay = 11;
 
-    // const workingHoursPerDay = {
-    //   cook: 11.5,
-    //   local: 10,
-    // };
-    // const totalWorkingHours = {
-    //   cook: 80.5,
-    //   local: 70,
-    // };
-    // Rules
-    /* the min hours will depend on the employee ordinary hours. If it is less than
-        20h it is better to set minHour to 1
-      */
+    totalEmployees.forEach((employee) => {
+      for (let day in employee) {
+        if (schedule[day] + employee[day] > 11) {
+          recalculatedSchedule = {
+            ...recalculatedSchedule,
+            [day]: schedule[day] - (schedule[day] + employee[day] - totalPerDay),
+          };
+        }
+        if (allDays[day] === 11) {
+          recalculatedSchedule = {
+            ...recalculatedSchedule,
+            [day]: 0,
+          };
+        }
+        if (allDays[day] < 11 && allDays[day] + schedule[day] > 11) {
+          recalculatedSchedule = {
+            ...recalculatedSchedule,
+            [day]: totalPerDay - allDays[day],
+          };
+        }
+      }
+    });
+    return recalculatedSchedule;
+  };
+  const scheduleManagement = (ordinaryEmployeeHours, freeDays, workersPerTurn, employeeName) => {
     const minHoursPerDay = 2;
     const maxOrdinaryHoursPerDay = 9;
     let schedule = {
@@ -66,7 +63,12 @@ export const useManegeSchedule = () => {
         }
       }
     };
+    // Generate new schedule
     setSchedule();
+    if (totalEmployees.length > 0) {
+      // Check new schedule
+      schedule = recalculateHours(schedule);
+    }
     // Adding the employeeName to the first position
     const nameFormatted = nameFormatter(employeeName);
     schedule = { Employee: nameFormatted, ...schedule, id: new Date().getMilliseconds() };

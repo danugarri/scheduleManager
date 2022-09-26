@@ -93,7 +93,9 @@ function App() {
         employeeName={employeeName}
         setEmployeeName={setEmployeeName}
         setTotalEmployees={setTotalEmployees}
+        totalEmployees={totalEmployees}
         employeeConfirmation={employeeConfirmation}
+        allDays={allDays}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />

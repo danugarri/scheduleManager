@@ -18,6 +18,8 @@ export const Inputs = ({
   openFreeDaysModal,
   setOpenFreeDaysModal,
   employeeConfirmation,
+  totalEmployees,
+  allDays,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -39,7 +41,7 @@ export const Inputs = ({
     console.log(isChecked);
   };
   console.log(freeDays);
-  const scheduleManagement = useManegeSchedule();
+  const scheduleManagement = useManegeSchedule(totalEmployees, allDays);
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
     // Checking if it is possible have the entered number of freedays
