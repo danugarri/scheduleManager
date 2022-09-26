@@ -20,6 +20,7 @@ export const Inputs = ({
   employeeConfirmation,
   totalEmployees,
   allDays,
+  schedule,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -41,13 +42,18 @@ export const Inputs = ({
     console.log(isChecked);
   };
   console.log(freeDays);
-  const scheduleManagement = useManegeSchedule(totalEmployees, allDays);
+  const scheduleManagement = useManegeSchedule(
+    ordinaryEmployeeHours,
+    totalEmployees,
+    allDays,
+    freeDays,
+  );
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
-      const returnedSchedule = scheduleManagement(ordinaryEmployeeHours, freeDays, 1, employeeName);
+      const returnedSchedule = scheduleManagement(1, employeeName);
       console.log(returnedSchedule);
       setSchedule(returnedSchedule);
       if (returnedSchedule) {
