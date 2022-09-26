@@ -61,6 +61,7 @@ export const useManegeSchedule = (ordinaryEmployeeHours, totalEmployees, allDays
         // console.log(totalHours);
       }
     }
+    return generatedSchedule;
   };
   const scheduleManagement = (workersPerTurn, employeeName) => {
     let totalHoursInRecalculatedSchedule = 0;
@@ -76,8 +77,12 @@ export const useManegeSchedule = (ordinaryEmployeeHours, totalEmployees, allDays
       while (Number(totalHoursInRecalculatedSchedule) !== Number(ordinaryEmployeeHours)) {
         totalHoursInRecalculatedSchedule = 0;
         console.log('loop');
-        setSchedule();
-        generatedSchedule = recalculateHours(generatedSchedule);
+        console.log(totalHoursInRecalculatedSchedule);
+        const recalculatedSchedule = setSchedule();
+        generatedSchedule = recalculateHours(recalculatedSchedule);
+        for (let day in generatedSchedule) {
+          totalHoursInRecalculatedSchedule += generatedSchedule[day];
+        }
       }
       console.log(totalHoursInRecalculatedSchedule);
     }
