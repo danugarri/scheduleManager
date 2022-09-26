@@ -6,6 +6,8 @@ import { Inputs } from './components/inputs/Inputs';
 import BasicModal from './components/modals/BasicModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
+import { extractOnlyDays } from './helpers/extractOnlyDays';
+import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
 
 function App() {
   const [schedule, setSchedule] = useState({});
@@ -14,6 +16,9 @@ function App() {
   const [employeeName, setEmployeeName] = useState('');
   const [totalEmployees, setTotalEmployees] = useState([]);
   const [id, setId] = useState(0);
+  // Array with an object with the worked hours per day
+  const workedHoursPerDays = extractOnlyDays(totalEmployees);
+  const allDays = useGetAllTotalHours(workedHoursPerDays);
 
   // function to recalculate the totalHours
   const recalculateHours = (recalculatedSchedule, newSchedule) => {
@@ -27,8 +32,21 @@ function App() {
               [day]: schedule[day] - (schedule[day] + employee[day] - totalPerDay),
             };
           }
+          if (allDays[day] === 11) {
+            recalculatedSchedule = {
+              ...recalculatedSchedule,
+              [day]: 0,
+            };
+          }
+          if (allDays[day] < 11 && allDays[day] + schedule[day] > 11) {
+            recalculatedSchedule = {
+              ...recalculatedSchedule,
+              [day]: totalPerDay - allDays[day],
+            };
+          }
         }
       });
+
       newSchedule.id = id;
       recalculatedSchedule.id = id;
       setTotalEmployees((prev) => prev.concat(recalculatedSchedule));
