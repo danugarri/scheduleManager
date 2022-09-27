@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { extractOnlyDays } from '../helpers/extractOnlyDays';
 import { useGetAllTotalHours } from './useGetAllTotalHours';
 

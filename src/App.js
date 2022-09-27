@@ -28,53 +28,58 @@ function App() {
   const leftWorkingHours = localWorkingHours - totalSumation;
 
   // function to recalculate the totalHours
-  const recalculateHours = (recalculatedSchedule, newSchedule, totalHoursPerEmployee) => {
-    const totalPerDay = 11;
-    if (totalEmployees.length > 0) {
-      totalEmployees.forEach((employee) => {
-        for (let day in employee) {
-          if (schedule[day] + employee[day] > 11) {
-            recalculatedSchedule = {
-              ...recalculatedSchedule,
-              [day]: schedule[day] - (schedule[day] + employee[day] - totalPerDay),
-            };
-          }
-          if (allDays[day] === 11) {
-            recalculatedSchedule = {
-              ...recalculatedSchedule,
-              [day]: 0,
-            };
-          }
-          if (allDays[day] < 11 && allDays[day] + schedule[day] > 11) {
-            recalculatedSchedule = {
-              ...recalculatedSchedule,
-              [day]: totalPerDay - allDays[day],
-            };
-          }
-        }
-      });
+  // const recalculateHours = (recalculatedSchedule, newSchedule, totalHoursPerEmployee) => {
+  //   const totalPerDay = 11;
+  //   if (totalEmployees.length > 0) {
+  //     totalEmployees.forEach((employee) => {
+  //       for (let day in employee) {
+  //         if (schedule[day] + employee[day] > 11) {
+  //           recalculatedSchedule = {
+  //             ...recalculatedSchedule,
+  //             [day]: schedule[day] - (schedule[day] + employee[day] - totalPerDay),
+  //           };
+  //         }
+  //         if (allDays[day] === 11) {
+  //           recalculatedSchedule = {
+  //             ...recalculatedSchedule,
+  //             [day]: 0,
+  //           };
+  //         }
+  //         if (allDays[day] < 11 && allDays[day] + schedule[day] > 11) {
+  //           recalculatedSchedule = {
+  //             ...recalculatedSchedule,
+  //             [day]: totalPerDay - allDays[day],
+  //           };
+  //         }
+  //       }
+  //     });
 
-      newSchedule.id = id;
-      newSchedule.totalHours = totalHoursPerEmployee;
-      recalculatedSchedule.id = id;
+  //     newSchedule.id = id;
+  //     newSchedule.totalHours = totalHoursPerEmployee;
+  //     recalculatedSchedule.id = id;
 
-      setTotalEmployees((prev) => prev.concat(recalculatedSchedule));
-    } else {
-      newSchedule.id = id;
-      newSchedule.totalHours = totalHoursPerEmployee;
-      setTotalEmployees((prev) => prev.concat(newSchedule));
-    }
-  };
+  //     setTotalEmployees((prev) => prev.concat(recalculatedSchedule));
+  //   } else {
+  //     newSchedule.id = id;
+  //     newSchedule.totalHours = totalHoursPerEmployee;
+  //     setTotalEmployees((prev) => prev.concat(newSchedule));
+  //   }
+  // };
   const add = () => {
     const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     const newSchedule = { ...schedule };
-    let recalculatedSchedule = { ...schedule };
+    // let recalculatedSchedule = { ...schedule };
     setId((prev) => prev + 1);
-    newSchedule.id = id;
-    recalculatedSchedule.id = id;
-    recalculatedSchedule.totalHours = totalHoursPerEmployee;
-    recalculateHours.totalHours = totalHoursPerEmployee;
-    recalculateHours(recalculatedSchedule, newSchedule, totalHoursPerEmployee);
+    newSchedule.orderId = id;
+    newSchedule.totalHours = totalHoursPerEmployee;
+    // recalculatedSchedule.id = id;
+    // recalculatedSchedule.totalHours = totalHoursPerEmployee;
+    // recalculateHours.totalHours = totalHoursPerEmployee;
+    // recalculateHours(recalculatedSchedule, newSchedule, totalHoursPerEmployee);
+    const notCalculatedNewSchedule = totalEmployees.find((employee) => employee.id === schedule.id);
+    if (!notCalculatedNewSchedule) {
+      setTotalEmployees((prev) => prev.concat(newSchedule));
+    }
   };
 
   // Modals
