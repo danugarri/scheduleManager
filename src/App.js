@@ -66,6 +66,10 @@ function App() {
   //     setTotalEmployees((prev) => prev.concat(newSchedule));
   //   }
   // };
+  const emptyTable = () => {
+    setId(0);
+    setTotalEmployees([]);
+  };
   const add = () => {
     const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     const newSchedule = { ...schedule };
@@ -115,6 +119,7 @@ function App() {
         allDays={allDays}
         leftWorkingHours={leftWorkingHours}
         setOpenLeftHoursModal={setOpenLeftHoursModal}
+        emptyTable={emptyTable}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
@@ -142,6 +147,7 @@ function App() {
         setTotalEmployees={setTotalEmployees}
         setId={setId}
         localWorkingHours={localWorkingHours}
+        emptyTable={emptyTable}
       />
     </div>
   );

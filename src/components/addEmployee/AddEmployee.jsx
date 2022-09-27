@@ -12,12 +12,8 @@ export const AddEmployee = ({
   setTotalEmployees,
   setId,
   localWorkingHours,
+  emptyTable,
 }) => {
-  console.log(totalEmployees);
-  const emptyTable = () => {
-    setId(0);
-    setTotalEmployees([]);
-  };
   const deleteEmployee = (typedEmployee) => {
     const newTotal = totalEmployees.filter((employee) => employee.id !== typedEmployee.id);
     setTotalEmployees(newTotal);

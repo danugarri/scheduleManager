@@ -22,6 +22,7 @@ export const Inputs = ({
   allDays,
   leftWorkingHours,
   setOpenLeftHoursModal,
+  emptyTable,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -84,6 +85,7 @@ export const Inputs = ({
     saturdayRef.current.checked = false;
     sundayRef.current.checked = false;
     setSchedule([]);
+    emptyTable();
     //
   };
   return (
