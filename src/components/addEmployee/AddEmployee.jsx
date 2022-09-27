@@ -5,7 +5,14 @@ import './AddEmployee.css';
 
 import { TotalEmployeesTable } from './totalEmployeesTable/TotalEmployeesTable';
 
-export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees, setId }) => {
+export const AddEmployee = ({
+  schedule,
+  add,
+  totalEmployees,
+  setTotalEmployees,
+  setId,
+  localWorkingHours,
+}) => {
   console.log(totalEmployees);
   const emptyTable = () => {
     setId(0);
@@ -33,6 +40,7 @@ export const AddEmployee = ({ schedule, add, totalEmployees, setTotalEmployees, 
         schedule={schedule}
         totalEmployees={totalEmployees}
         deleteEmployee={deleteEmployee}
+        localWorkingHours={localWorkingHours}
       />
     </>
   );

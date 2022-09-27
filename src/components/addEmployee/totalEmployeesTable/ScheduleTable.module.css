@@ -33,8 +33,22 @@
 .idColumn {
   background-color: white;
 }
+.totalHoursHeader {
+  background-color: rgb(143, 236, 114);
+}
 .totalHours {
   border-bottom: 2px solid black;
   text-align: center;
   background-color: rgb(235, 232, 232);
+}
+.leftHoursHeader {
+  background-color: rgb(236, 166, 108);
+}
+.leftHoursTdIncompleted {
+  color: red;
+  text-align: center;
+}
+.leftHoursTcompleted {
+  color: green;
+  text-align: center;
 }

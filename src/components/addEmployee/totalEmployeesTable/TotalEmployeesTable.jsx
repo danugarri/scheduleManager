@@ -4,12 +4,18 @@ import { getTotalSumation } from '../../../helpers/getTotalSumation';
 import { useGetAllTotalHours } from '../../../hooks/useGetAllTotalHours';
 import style from './ScheduleTable.module.css';
 
-export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }) => {
+export const TotalEmployeesTable = ({
+  schedule,
+  totalEmployees,
+  deleteEmployee,
+  localWorkingHours,
+}) => {
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
 
   const totalSumation = getTotalSumation(allDays);
+  const leftWorkingHours = localWorkingHours - totalSumation;
   return (
     <>
       {schedule.hasOwnProperty('monday') && (
@@ -22,10 +28,11 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
                     {day[0]}
                   </td>
                 ))}
-                <td>
-                  <span key='hours' className={`${style.scheduleTBodyTd} ${style.tdPadding}`}>
-                    Horas totales
-                  </span>
+                <td key='hours' className={`${style.totalHoursHeader} ${style.tdPadding}`}>
+                  Horas totales
+                </td>
+                <td key='left-hours' className={`${style.leftHoursHeader} ${style.tdPadding}`}>
+                  Horas por cubrir
                 </td>
               </tr>
             </thead>
@@ -41,7 +48,9 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
                         {day[1]}
                       </td>
                     ))}
-
+                    <td key='left-working-hours' className={style.leftHoursTdIncompleted}>
+                      {leftWorkingHours}
+                    </td>
                     <td>
                       <button
                         key='button'

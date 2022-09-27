@@ -117,6 +117,7 @@ function App() {
         totalEmployees={totalEmployees}
         setTotalEmployees={setTotalEmployees}
         setId={setId}
+        localWorkingHours={localWorkingHours}
       />
     </div>
   );
