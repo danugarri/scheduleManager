@@ -1,5 +1,6 @@
 import React from 'react';
 import { extractOnlyDays } from '../../../helpers/extractOnlyDays';
+import { getTotalSumation } from '../../../helpers/getTotalSumation';
 import { useGetAllTotalHours } from '../../../hooks/useGetAllTotalHours';
 import style from './ScheduleTable.module.css';
 
@@ -8,6 +9,7 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
 
+  const totalSumation = getTotalSumation(allDays);
   return (
     <>
       {schedule.hasOwnProperty('monday') && (
@@ -20,6 +22,11 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
                     {day[0]}
                   </td>
                 ))}
+                <td>
+                  <span key='hours' className={`${style.scheduleTBodyTd} ${style.tdPadding}`}>
+                    Horas totales
+                  </span>
+                </td>
               </tr>
             </thead>
           }
@@ -34,11 +41,7 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
                         {day[1]}
                       </td>
                     ))}
-                    <td>
-                      <span key='hours' className={`${style.scheduleTBodyTd} ${style.tdPadding}`}>
-                        Horas totales
-                      </span>
-                    </td>
+
                     <td>
                       <button
                         key='button'
@@ -64,6 +67,8 @@ export const TotalEmployeesTable = ({ schedule, totalEmployees, deleteEmployee }
               <td className={style.scheduleTBodyTd}>{allDays.friday}</td>
               <td className={style.scheduleTBodyTd}>{allDays.saturday}</td>
               <td className={style.scheduleTBodyTd}>{allDays.sunday}</td>
+              <td className={style.idColumn}>{}</td>
+              <td className={style.totalHours}>{totalSumation}</td>
             </tr>
           </tfoot>
         </table>
