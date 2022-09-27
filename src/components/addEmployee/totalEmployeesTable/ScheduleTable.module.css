@@ -47,8 +47,10 @@
 .leftHoursTdIncompleted {
   color: red;
   text-align: center;
+  font-weight: 700;
 }
-.leftHoursTcompleted {
-  color: green;
+.leftHoursTdcompleted {
+  color: rgb(16, 248, 16);
+  font-weight: 700;
   text-align: center;
 }
