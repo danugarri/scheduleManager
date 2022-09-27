@@ -50,9 +50,7 @@ export const TotalEmployeesTable = ({
                         {day[1]}
                       </td>
                     ))}
-                    <td key='left-working-hours' className={leftHoursStyle}>
-                      {leftWorkingHours}
-                    </td>
+                    <td>{}</td>
                     <td>
                       <button
                         key='button'
@@ -80,6 +78,9 @@ export const TotalEmployeesTable = ({
               <td className={style.scheduleTBodyTd}>{allDays.sunday}</td>
               <td className={style.idColumn}>{}</td>
               <td className={style.totalHours}>{totalSumation}</td>
+              <td key='left-working-hours' className={leftHoursStyle}>
+                {leftWorkingHours}
+              </td>
             </tr>
           </tfoot>
         </table>
