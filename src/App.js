@@ -8,6 +8,7 @@ import BasicModal from './components/modals/BasicModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
+import SameIdModal from './components/modals/sameIdModal/SameIdModal';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { getTotalSumation } from './helpers/getTotalSumation';
@@ -79,6 +80,8 @@ function App() {
     const notCalculatedNewSchedule = totalEmployees.find((employee) => employee.id === schedule.id);
     if (!notCalculatedNewSchedule) {
       setTotalEmployees((prev) => prev.concat(newSchedule));
+    } else {
+      setOpenSameIdModal(true);
     }
   };
 
@@ -90,6 +93,7 @@ function App() {
     setOpenEmployeeModal(true);
   };
   const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
+  const [openSameIdModal, setOpenSameIdModal] = useState(false);
   return (
     <div className='app'>
       <LocalHours localWorkingHours={localWorkingHours} />
@@ -130,6 +134,7 @@ function App() {
         totalSumation={totalSumation}
         localWorkingHours={localWorkingHours}
       />
+      <SameIdModal openSameIdModal={openSameIdModal} setOpenSameIdModal={setOpenSameIdModal} />
       <AddEmployee
         schedule={schedule}
         add={add}
