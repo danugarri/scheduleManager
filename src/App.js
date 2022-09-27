@@ -3,6 +3,7 @@ import './App.css';
 import { AddEmployee } from './components/addEmployee/AddEmployee';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
+import { LocalHours } from './components/localHours/LocalHours';
 import BasicModal from './components/modals/BasicModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
@@ -80,6 +81,7 @@ function App() {
   };
   return (
     <div className='app'>
+      <LocalHours />
       <Inputs
         setSchedule={setSchedule}
         freeDays={freeDays}
