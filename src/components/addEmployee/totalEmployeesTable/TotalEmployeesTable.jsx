@@ -16,6 +16,8 @@ export const TotalEmployeesTable = ({
 
   const totalSumation = getTotalSumation(allDays);
   const leftWorkingHours = localWorkingHours - totalSumation;
+  const leftHoursStyle =
+    leftWorkingHours === 0 ? style.leftHoursTdcompleted : style.leftHoursTdIncompleted;
   return (
     <>
       {schedule.hasOwnProperty('monday') && (
@@ -48,7 +50,7 @@ export const TotalEmployeesTable = ({
                         {day[1]}
                       </td>
                     ))}
-                    <td key='left-working-hours' className={style.leftHoursTdIncompleted}>
+                    <td key='left-working-hours' className={leftHoursStyle}>
                       {leftWorkingHours}
                     </td>
                     <td>
