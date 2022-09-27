@@ -20,7 +20,8 @@ export const Inputs = ({
   employeeConfirmation,
   totalEmployees,
   allDays,
-  schedule,
+  leftWorkingHours,
+  setOpenLeftHoursModal,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -53,11 +54,15 @@ export const Inputs = ({
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
-      const returnedSchedule = scheduleManagement(1, employeeName);
-      console.log(returnedSchedule);
-      setSchedule(returnedSchedule);
-      if (returnedSchedule) {
-        employeeConfirmation();
+      if (leftWorkingHours >= ordinaryEmployeeHours) {
+        const returnedSchedule = scheduleManagement(1, employeeName);
+        console.log(returnedSchedule);
+        setSchedule(returnedSchedule);
+        if (returnedSchedule) {
+          employeeConfirmation();
+        }
+      } else {
+        setOpenLeftHoursModal(true);
       }
     }
     if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {

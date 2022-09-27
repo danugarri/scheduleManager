@@ -13,7 +13,6 @@ export const TotalEmployeesTable = ({
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
-
   const totalSumation = getTotalSumation(allDays);
   const leftWorkingHours = localWorkingHours - totalSumation;
   const leftHoursStyle =

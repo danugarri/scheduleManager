@@ -6,9 +6,11 @@ import { Inputs } from './components/inputs/Inputs';
 import { LocalHours } from './components/localHours/LocalHours';
 import BasicModal from './components/modals/BasicModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
+import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
+import { getTotalSumation } from './helpers/getTotalSumation';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
+  const totalSumation = getTotalSumation(allDays);
+  const leftWorkingHours = localWorkingHours - totalSumation;
 
   // function to recalculate the totalHours
   const recalculateHours = (recalculatedSchedule, newSchedule, totalHoursPerEmployee) => {
@@ -80,6 +84,7 @@ function App() {
   const employeeConfirmation = () => {
     setOpenEmployeeModal(true);
   };
+  const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
   return (
     <div className='app'>
       <LocalHours localWorkingHours={localWorkingHours} />
@@ -99,6 +104,8 @@ function App() {
         totalEmployees={totalEmployees}
         employeeConfirmation={employeeConfirmation}
         allDays={allDays}
+        leftWorkingHours={leftWorkingHours}
+        setOpenLeftHoursModal={setOpenLeftHoursModal}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
@@ -110,6 +117,13 @@ function App() {
         openEmployeeModal={openEmployeeModal}
         setOpenEmployeeModal={setOpenEmployeeModal}
         employeeConfirmation={employeeConfirmation}
+      />
+      <LeftHoursModal
+        openLeftHoursModal={openLeftHoursModal}
+        setOpenLeftHoursModal={setOpenLeftHoursModal}
+        leftWorkingHours={leftWorkingHours}
+        totalSumation={totalSumation}
+        localWorkingHours={localWorkingHours}
       />
       <AddEmployee
         schedule={schedule}
