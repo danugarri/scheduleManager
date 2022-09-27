@@ -26,17 +26,16 @@ export default function EmployeeModal({ openEmployeeModal, setOpenEmployeeModal 
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            setOpenEmployeeModal(false);
+          }
+        }}
       >
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             <p className='confirmation'>Calculado nuevo empleado</p>
-            <button
-              onFocus={() => setOpenEmployeeModal(false)}
-              type='button'
-              onClick={handleClose}
-              className='close-button'
-              id='close'
-            >
+            <button type='button' onClick={handleClose} className='close-button' id='close'>
               X
             </button>
           </Typography>
