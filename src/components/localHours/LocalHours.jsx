@@ -1,9 +1,9 @@
 import React from 'react';
 import './LocalHours.css';
-export const LocalHours = () => {
+export const LocalHours = ({ localWorkingHours }) => {
   return (
     <div className='local-hours-container '>
-      <p>77 Horas</p>
+      <p>{`${localWorkingHours} Horas`}</p>
       <p>11 horas al día</p>
     </div>
   );

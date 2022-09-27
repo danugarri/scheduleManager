@@ -18,6 +18,7 @@ function App() {
   const [employeeName, setEmployeeName] = useState('');
   const [totalEmployees, setTotalEmployees] = useState([]);
   const [id, setId] = useState(0);
+  const localWorkingHours = 77;
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
@@ -81,7 +82,7 @@ function App() {
   };
   return (
     <div className='app'>
-      <LocalHours />
+      <LocalHours localWorkingHours={localWorkingHours} />
       <Inputs
         setSchedule={setSchedule}
         freeDays={freeDays}
