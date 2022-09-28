@@ -77,14 +77,13 @@ export const useManegeSchedule = (ordinaryEmployeeHours, totalEmployees, allDays
       while (Number(totalHoursInRecalculatedSchedule) !== Number(ordinaryEmployeeHours)) {
         totalHoursInRecalculatedSchedule = 0;
         console.log('loop');
-        console.log(totalHoursInRecalculatedSchedule);
         const recalculatedSchedule = setSchedule();
         generatedSchedule = recalculateHours(recalculatedSchedule);
         for (let day in generatedSchedule) {
           totalHoursInRecalculatedSchedule += generatedSchedule[day];
         }
+        console.log(totalHoursInRecalculatedSchedule);
       }
-      console.log(totalHoursInRecalculatedSchedule);
     }
     // Adding the employeeName to the first position
     const nameFormatted = nameFormatter(employeeName);
