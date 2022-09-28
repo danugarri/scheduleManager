@@ -25,7 +25,7 @@ export const TotalEmployeesTable = ({
             <thead className={style.scheduleThead}>
               <tr>
                 {Object.entries(schedule).map((day, index) => (
-                  <td className={style.tdPadding} key={index}>
+                  <td className={style.tdPadding} key={day + index}>
                     {day[0]}
                   </td>
                 ))}
@@ -42,25 +42,19 @@ export const TotalEmployeesTable = ({
             {totalEmployees.map((employee, employeeIndex) => {
               const employeeSchedule = Object.entries(employee);
               return (
-                <>
-                  <tr key={employeeIndex}>
-                    {employeeSchedule.map((day, index) => (
-                      <td className={`${style.scheduleTBodyTd} ${style.tdPadding}`} key={index}>
-                        {day[1]}
-                      </td>
-                    ))}
-                    <td>{}</td>
-                    <td>
-                      <button
-                        key='button'
-                        className={style.deleteButton}
-                        onClick={() => deleteEmployee(employee)}
-                      >
-                        X
-                      </button>
+                <tr key={employeeIndex}>
+                  {employeeSchedule.map((day, index) => (
+                    <td className={`${style.scheduleTBodyTd} ${style.tdPadding}`} key={index}>
+                      {day[1]}
                     </td>
-                  </tr>
-                </>
+                  ))}
+                  <td key='white-space'>{}</td>
+                  <td key='button'>
+                    <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
+                      X
+                    </button>
+                  </td>
+                </tr>
               );
             })}
           </tbody>
