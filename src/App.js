@@ -20,7 +20,6 @@ function App() {
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
   const [employeeName, setEmployeeName] = useState('');
   const [totalEmployees, setTotalEmployees] = useState([]);
-  const [id, setId] = useState(0);
   const localWorkingHours = 77;
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
@@ -67,15 +66,12 @@ function App() {
   //   }
   // };
   const emptyTable = () => {
-    setId(0);
     setTotalEmployees([]);
   };
   const add = () => {
     const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     const newSchedule = { ...schedule };
     // let recalculatedSchedule = { ...schedule };
-    setId((prev) => prev + 1);
-    newSchedule.orderId = id;
     newSchedule.totalHours = totalHoursPerEmployee;
     // recalculatedSchedule.id = id;
     // recalculatedSchedule.totalHours = totalHoursPerEmployee;
@@ -145,7 +141,6 @@ function App() {
         add={add}
         totalEmployees={totalEmployees}
         setTotalEmployees={setTotalEmployees}
-        setId={setId}
         localWorkingHours={localWorkingHours}
         emptyTable={emptyTable}
       />

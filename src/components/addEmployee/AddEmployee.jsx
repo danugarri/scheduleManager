@@ -10,7 +10,6 @@ export const AddEmployee = ({
   add,
   totalEmployees,
   setTotalEmployees,
-  setId,
   localWorkingHours,
   emptyTable,
 }) => {
