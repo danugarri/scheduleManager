@@ -21,6 +21,7 @@ function App() {
   const [employeeName, setEmployeeName] = useState('');
   const [totalEmployees, setTotalEmployees] = useState([]);
   const localWorkingHours = 77;
+  const workingHoursPerDay = 11;
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
@@ -116,6 +117,7 @@ function App() {
         leftWorkingHours={leftWorkingHours}
         setOpenLeftHoursModal={setOpenLeftHoursModal}
         emptyTable={emptyTable}
+        workingHoursPerDay={workingHoursPerDay}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />

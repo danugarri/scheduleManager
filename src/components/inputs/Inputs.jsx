@@ -23,6 +23,7 @@ export const Inputs = ({
   leftWorkingHours,
   setOpenLeftHoursModal,
   emptyTable,
+  workingHoursPerDay,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -55,14 +56,41 @@ export const Inputs = ({
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
-      if (leftWorkingHours >= ordinaryEmployeeHours) {
+      const controlFinalFreeDays = () => {
+        let checkFinal = false;
+        const candidateFreeDays = [];
+        let checkedFinalFreeDays = true;
+
+        for (const day in allDays) {
+          if (allDays[day] === workingHoursPerDay) {
+            checkFinal = true;
+            candidateFreeDays.push(day);
+          }
+        }
+        if (checkFinal) {
+          freeDays.forEach((day1) => {
+            const exists = candidateFreeDays.find((day2) => day2 === day1);
+            if (!exists) {
+              console.log('seleccionado día no candidato');
+              console.log('los días candidatos son' + candidateFreeDays);
+              checkedFinalFreeDays = false;
+              // launch modal
+              alert('los días candidatos son' + candidateFreeDays);
+            }
+          });
+        }
+        return checkedFinalFreeDays;
+      };
+      const checkedFinalFreeDays = controlFinalFreeDays();
+
+      if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
         const returnedSchedule = scheduleManagement(1, employeeName);
         console.log(returnedSchedule);
         setSchedule(returnedSchedule);
         if (returnedSchedule) {
           employeeConfirmation();
         }
-      } else {
+      } else if (leftWorkingHours < ordinaryEmployeeHours && !checkedFinalFreeDays) {
         setOpenLeftHoursModal(true);
       }
     }
