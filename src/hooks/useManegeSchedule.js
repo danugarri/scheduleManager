@@ -38,80 +38,88 @@ export const useManegeSchedule = (
           const accumulatedSumation = allDays[day2];
           const exclude = [];
           const tenMustBeAvoid = checkSumation === 10;
-          // if (accumulatedSumation + recalculatedDay > workingHoursPerDay) {
-          //   for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
-          //     exclude.push(i);
-          //   }
-          //   const newValue = modifiedGetRamdomSpecified(exclude);
-          //   recalculatedSchedule[day2] = newValue;
-          // }
+          let leaveOut = [];
+
           if (tenMustBeAvoid) {
             // possible combinations 3+7, 4+6,2+8, 5+5
-            let leaveOut = [];
             if (recalculatedDay === 2) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 3) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 4) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 5) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 6) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 7) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 8) {
-              leaveOut = [recalculatedDay].concat(exclude);
+              leaveOut = [recalculatedDay];
             }
-            const newValue = modifiedGetRamdomSpecified(leaveOut);
+            let newValue = modifiedGetRamdomSpecified(leaveOut);
+            if (accumulatedSumation + newValue > workingHoursPerDay) {
+              for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
+                exclude.push(i);
+              }
+              newValue = modifiedGetRamdomSpecified(leaveOut.concat(exclude));
+            }
             recalculatedSchedule[day2] = newValue;
           }
         }
       }
-      // }
-      // else {
-      //   totalEmployees.forEach((employee) => {
-      //     // for (const day in employee) {
-      //     for (const day2 in recalculatedSchedule) {
-      //       if (day2 !== 'Employee' && day2 !== 'id' && day2 !== 'totalHours') {
-      //         //
-      //         if (employee[day2] + recalculatedSchedule[day2] === 10) {
-      //           // possible combinations 3+7, 4+6,2+8, 5+5
-      //           let leaveOut = [];
-      //           if (employee[day2] === 2) {
-      //             leaveOut = [8];
-      //           }
-      //           if (employee[day2] === 3) {
-      //             leaveOut = [7];
-      //           }
-      //           if (employee[day2] === 4) {
-      //             leaveOut = [6];
-      //           }
-      //           if (employee[day2] === 5) {
-      //             leaveOut = [5];
-      //           }
-      //           if (employee[day2] === 6) {
-      //             leaveOut = [4];
-      //           }
-      //           if (employee[day2] === 7) {
-      //             leaveOut = [3];
-      //           }
-      //           if (employee[day2] === 8) {
-      //             leaveOut = [2];
-      //           }
-      //           recalculatedSchedule[day2] = modifiedGetRamdomSpecified(leaveOut);
-      //         }
-      //       }
-      //       // }
-      //     }
-      //   });
-      // }
+    };
+    const contolMaxHours = () => {
+      // Having 2 or more employees registered
+      // if (totalEmployees.length >= 2) {
+      const employeeToReview = totalEmployees[totalEmployees.length - 1];
+      for (const day2 in employeeToReview) {
+        if (day2 !== 'Employee' && day2 !== 'id' && day2 !== 'totalHours') {
+          const recalculatedDay = recalculatedSchedule[day2];
+          const checkSumation = allDays[day2] + recalculatedDay;
+          const accumulatedSumation = allDays[day2];
+          const exclude = [];
+          // const tenMustBeAvoid = checkSumation === 10;
+          while (accumulatedSumation + newValue > workingHoursPerDay) {
+            for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
+              exclude.push(i);
+            }
+            const newValue = modifiedGetRamdomSpecified(exclude);
+            recalculatedSchedule[day2] = newValue;
+          }
+          // if (tenMustBeAvoid) {
+          // possible combinations 3+7, 4+6,2+8, 5+5
+          let leaveOut = [];
+          if (recalculatedDay === 2) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          if (recalculatedDay === 3) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          if (recalculatedDay === 4) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          if (recalculatedDay === 5) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          if (recalculatedDay === 6) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          if (recalculatedDay === 7) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          if (recalculatedDay === 8) {
+            leaveOut = [recalculatedDay].concat(exclude);
+          }
+          const newValue = modifiedGetRamdomSpecified(leaveOut);
+        }
+      }
     };
     /////////////
     totalEmployees.forEach((employee) => {
@@ -142,6 +150,7 @@ export const useManegeSchedule = (
       }
     });
     avoidTen();
+    // contolMaxHours();
     console.log(recalculatedSchedule);
     return recalculatedSchedule;
   };
