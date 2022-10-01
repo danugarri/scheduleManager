@@ -1,3 +1,4 @@
+import { modifiedGetRamdomSpecified } from '../helpers/getRamdomNumbersImproved';
 import { nameFormatter } from '../helpers/nameFormatter';
 
 export const useManegeSchedule = (
@@ -18,10 +19,48 @@ export const useManegeSchedule = (
     saturday: 0,
     sunday: 0,
   };
+
   // function to recalculate the totalHours
   const recalculateHours = (generatedSchedule) => {
     let recalculatedSchedule = { ...generatedSchedule };
-
+    ///////////////
+    const avoidTen = () => {
+      totalEmployees.forEach((employee) => {
+        for (const day in employee) {
+          for (const day2 in recalculatedSchedule) {
+            if (day !== 'Employee' && day !== 'id' && day !== 'totalHours') {
+              if (employee[day] + recalculatedSchedule[day2] === 10) {
+                // possible combinations 3+7, 4+6,2+8, 5+5
+                let leaveOut = [];
+                if (employee[day] === 2) {
+                  leaveOut = [8];
+                }
+                if (employee[day] === 3) {
+                  leaveOut = [7];
+                }
+                if (employee[day] === 4) {
+                  leaveOut = [6];
+                }
+                if (employee[day] === 5) {
+                  leaveOut = [5];
+                }
+                if (employee[day] === 6) {
+                  leaveOut = [4];
+                }
+                if (employee[day] === 7) {
+                  leaveOut = [3];
+                }
+                if (employee[day] === 8) {
+                  leaveOut = [2];
+                }
+                recalculatedSchedule[day2] = modifiedGetRamdomSpecified(leaveOut);
+              }
+            }
+          }
+        }
+      });
+    };
+    /////////////
     totalEmployees.forEach((employee) => {
       for (let day in employee) {
         if (generatedSchedule[day] + employee[day] > workingHoursPerDay) {
@@ -49,16 +88,11 @@ export const useManegeSchedule = (
         }
       }
     });
-
+    avoidTen();
     console.log(recalculatedSchedule);
     return recalculatedSchedule;
   };
-  const avoidTen = (allDays) => {
-    for (const day in allDays) {
-      if (allDays[day] === 10) {
-      }
-    }
-  };
+
   const setSchedule = () => {
     let totalHours;
     while (Number(totalHours) !== Number(ordinaryEmployeeHours)) {
@@ -98,7 +132,6 @@ export const useManegeSchedule = (
         for (let day in generatedSchedule) {
           totalHoursInRecalculatedSchedule += generatedSchedule[day];
         }
-        console.log(totalHoursInRecalculatedSchedule);
       }
     }
     // Adding the employeeName to the first position
