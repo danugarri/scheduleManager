@@ -20,12 +20,3 @@ export const modifiedGetRamdomSpecified = (leaveOut) => {
   }
   return random;
 };
-export const modifiedGetRamdomSpecifiedBis = (leaveOut) => {
-  //Values to be left out
-  leaveOut.push(1, 10, 11);
-  let random = getRandomArbitrary(0, 11);
-  while (leaveOut.includes(random)) {
-    random = getRandomArbitrary(0, 11);
-  }
-  return random;
-};

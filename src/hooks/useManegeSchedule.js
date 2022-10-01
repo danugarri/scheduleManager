@@ -1,7 +1,4 @@
-import {
-  modifiedGetRamdomSpecified,
-  modifiedGetRamdomSpecifiedBis,
-} from '../helpers/getRamdomNumbersImproved';
+import { modifiedGetRamdomSpecified } from '../helpers/getRamdomNumbersImproved';
 import { nameFormatter } from '../helpers/nameFormatter';
 
 export const useManegeSchedule = (
@@ -29,7 +26,7 @@ export const useManegeSchedule = (
     ///////////////
     const avoidTen = () => {
       // Having 2 or more employees registered
-      // if (totalEmployees.length >= 2) {
+
       const employeeToReview = totalEmployees[totalEmployees.length - 1];
       for (const day2 in employeeToReview) {
         if (day2 !== 'Employee' && day2 !== 'id' && day2 !== 'totalHours') {
@@ -75,52 +72,6 @@ export const useManegeSchedule = (
         }
       }
     };
-    const contolMaxHours = () => {
-      // Having 2 or more employees registered
-      // if (totalEmployees.length >= 2) {
-      const employeeToReview = totalEmployees[totalEmployees.length - 1];
-      for (const day2 in employeeToReview) {
-        if (day2 !== 'Employee' && day2 !== 'id' && day2 !== 'totalHours') {
-          const recalculatedDay = recalculatedSchedule[day2];
-          const checkSumation = allDays[day2] + recalculatedDay;
-          const accumulatedSumation = allDays[day2];
-          const exclude = [];
-          // const tenMustBeAvoid = checkSumation === 10;
-          while (accumulatedSumation + newValue > workingHoursPerDay) {
-            for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
-              exclude.push(i);
-            }
-            const newValue = modifiedGetRamdomSpecified(exclude);
-            recalculatedSchedule[day2] = newValue;
-          }
-          // if (tenMustBeAvoid) {
-          // possible combinations 3+7, 4+6,2+8, 5+5
-          let leaveOut = [];
-          if (recalculatedDay === 2) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          if (recalculatedDay === 3) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          if (recalculatedDay === 4) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          if (recalculatedDay === 5) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          if (recalculatedDay === 6) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          if (recalculatedDay === 7) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          if (recalculatedDay === 8) {
-            leaveOut = [recalculatedDay].concat(exclude);
-          }
-          const newValue = modifiedGetRamdomSpecified(leaveOut);
-        }
-      }
-    };
     /////////////
     totalEmployees.forEach((employee) => {
       for (let day in employee) {
@@ -150,7 +101,6 @@ export const useManegeSchedule = (
       }
     });
     avoidTen();
-    // contolMaxHours();
     console.log(recalculatedSchedule);
     return recalculatedSchedule;
   };
