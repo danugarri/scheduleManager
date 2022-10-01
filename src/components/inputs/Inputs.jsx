@@ -24,6 +24,7 @@ export const Inputs = ({
   setOpenLeftHoursModal,
   emptyTable,
   workingHoursPerDay,
+  setOpenControlFinalFreeDays,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -75,7 +76,8 @@ export const Inputs = ({
               console.log('los días candidatos son' + candidateFreeDays);
               checkedFinalFreeDays = false;
               // launch modal
-              alert('los días candidatos son' + candidateFreeDays);
+              // alert('los días candidatos son' + candidateFreeDays);
+              setOpenControlFinalFreeDays(true);
             }
           });
         }
@@ -90,7 +92,7 @@ export const Inputs = ({
         if (returnedSchedule) {
           employeeConfirmation();
         }
-      } else if (leftWorkingHours < ordinaryEmployeeHours && !checkedFinalFreeDays) {
+      } else if (leftWorkingHours < ordinaryEmployeeHours && checkedFinalFreeDays) {
         setOpenLeftHoursModal(true);
       }
     }

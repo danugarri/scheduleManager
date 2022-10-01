@@ -5,11 +5,13 @@ import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule
 import { Inputs } from './components/inputs/Inputs';
 import { LocalHours } from './components/localHours/LocalHours';
 import BasicModal from './components/modals/BasicModal';
+import ControlFinalFreeDaysModal from './components/modals/controlFinalFreeDaysModal/ControlFinalFreeDaysModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import SameIdModal from './components/modals/sameIdModal/SameIdModal';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
+import { getCandidateFreeDays } from './helpers/getCandidateFreeDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { getTotalSumation } from './helpers/getTotalSumation';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
@@ -27,45 +29,8 @@ function App() {
   const allDays = useGetAllTotalHours(workedHoursPerDays);
   const totalSumation = getTotalSumation(allDays);
   const leftWorkingHours = localWorkingHours - totalSumation;
+  const candidateFreeDays = getCandidateFreeDays(allDays, workingHoursPerDay);
 
-  // function to recalculate the totalHours
-  // const recalculateHours = (recalculatedSchedule, newSchedule, totalHoursPerEmployee) => {
-  //   const totalPerDay = 11;
-  //   if (totalEmployees.length > 0) {
-  //     totalEmployees.forEach((employee) => {
-  //       for (let day in employee) {
-  //         if (schedule[day] + employee[day] > 11) {
-  //           recalculatedSchedule = {
-  //             ...recalculatedSchedule,
-  //             [day]: schedule[day] - (schedule[day] + employee[day] - totalPerDay),
-  //           };
-  //         }
-  //         if (allDays[day] === 11) {
-  //           recalculatedSchedule = {
-  //             ...recalculatedSchedule,
-  //             [day]: 0,
-  //           };
-  //         }
-  //         if (allDays[day] < 11 && allDays[day] + schedule[day] > 11) {
-  //           recalculatedSchedule = {
-  //             ...recalculatedSchedule,
-  //             [day]: totalPerDay - allDays[day],
-  //           };
-  //         }
-  //       }
-  //     });
-
-  //     newSchedule.id = id;
-  //     newSchedule.totalHours = totalHoursPerEmployee;
-  //     recalculatedSchedule.id = id;
-
-  //     setTotalEmployees((prev) => prev.concat(recalculatedSchedule));
-  //   } else {
-  //     newSchedule.id = id;
-  //     newSchedule.totalHours = totalHoursPerEmployee;
-  //     setTotalEmployees((prev) => prev.concat(newSchedule));
-  //   }
-  // };
   const emptyTable = () => {
     setTotalEmployees([]);
   };
@@ -95,6 +60,7 @@ function App() {
   };
   const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
   const [openSameIdModal, setOpenSameIdModal] = useState(false);
+  const [openControlFinalFreeDays, setOpenControlFinalFreeDays] = useState(false);
   return (
     <div className='app'>
       <LocalHours localWorkingHours={localWorkingHours} />
@@ -118,6 +84,7 @@ function App() {
         setOpenLeftHoursModal={setOpenLeftHoursModal}
         emptyTable={emptyTable}
         workingHoursPerDay={workingHoursPerDay}
+        setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />
@@ -138,6 +105,11 @@ function App() {
         localWorkingHours={localWorkingHours}
       />
       <SameIdModal openSameIdModal={openSameIdModal} setOpenSameIdModal={setOpenSameIdModal} />
+      <ControlFinalFreeDaysModal
+        openControlFinalFreeDays={openControlFinalFreeDays}
+        setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
+        candidateFreeDays={candidateFreeDays}
+      />
       <AddEmployee
         schedule={schedule}
         add={add}
