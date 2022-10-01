@@ -4,6 +4,7 @@ import { numberLimiter } from '../../helpers/numberLimiter';
 import { removeItemFromArr } from '../../helpers/removeDays';
 import { isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
 import './Inputs.css';
+import { useControlFinalFreeDays } from '../../hooks/useControlFinalFreeDays';
 
 export const Inputs = ({
   setSchedule,
@@ -33,7 +34,12 @@ export const Inputs = ({
   const fridayRef = useRef();
   const saturdayRef = useRef();
   const sundayRef = useRef();
-
+  const controlFinalFreeDays = useControlFinalFreeDays(
+    allDays,
+    workingHoursPerDay,
+    freeDays,
+    setOpenControlFinalFreeDays,
+  );
   const checkedDay = (e) => {
     console.log(e);
     const isChecked = e.target.checked;
@@ -57,34 +63,8 @@ export const Inputs = ({
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
-      const controlFinalFreeDays = () => {
-        let checkFinal = false;
-        const candidateFreeDays = [];
-        let checkedFinalFreeDays = true;
-
-        for (const day in allDays) {
-          if (allDays[day] === workingHoursPerDay) {
-            checkFinal = true;
-            candidateFreeDays.push(day);
-          }
-        }
-        if (checkFinal) {
-          freeDays.forEach((day1) => {
-            const exists = candidateFreeDays.find((day2) => day2 === day1);
-            if (!exists) {
-              console.log('seleccionado día no candidato');
-              console.log('los días candidatos son' + candidateFreeDays);
-              checkedFinalFreeDays = false;
-              // launch modal
-              // alert('los días candidatos son' + candidateFreeDays);
-              setOpenControlFinalFreeDays(true);
-            }
-          });
-        }
-        return checkedFinalFreeDays;
-      };
+      // check final
       const checkedFinalFreeDays = controlFinalFreeDays();
-
       if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
         const returnedSchedule = scheduleManagement(1, employeeName);
         console.log(returnedSchedule);
