@@ -8,8 +8,8 @@ export const getRamdomSpecified = (workingHoursPerDay) => {
 
   // return random integer number between min (included) and max (excluded)
 };
-function getRandomArbitrary(min, max) {
-  return parseInt(Math.random() * (max - min) + min);
+function getRandomArbitrary(minHoursPerDay, maxOrdinaryHoursPerDay) {
+  return Math.floor(Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay);
 }
 
 export const modifiedGetRamdomSpecified = (leaveOut) => {
@@ -18,4 +18,14 @@ export const modifiedGetRamdomSpecified = (leaveOut) => {
   while (leaveOut.includes(random)) {
     random = getRandomArbitrary(2, 9);
   }
+  return random;
+};
+export const modifiedGetRamdomSpecifiedBis = (leaveOut) => {
+  //Values to be left out
+  leaveOut.push(1, 10, 11);
+  let random = getRandomArbitrary(0, 11);
+  while (leaveOut.includes(random)) {
+    random = getRandomArbitrary(0, 11);
+  }
+  return random;
 };
