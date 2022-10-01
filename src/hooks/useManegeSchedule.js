@@ -1,6 +1,12 @@
 import { nameFormatter } from '../helpers/nameFormatter';
 
-export const useManegeSchedule = (ordinaryEmployeeHours, totalEmployees, allDays, freeDays) => {
+export const useManegeSchedule = (
+  ordinaryEmployeeHours,
+  totalEmployees,
+  allDays,
+  freeDays,
+  workingHoursPerDay,
+) => {
   const minHoursPerDay = 2;
   const maxOrdinaryHoursPerDay = 9;
   let generatedSchedule = {
@@ -15,26 +21,30 @@ export const useManegeSchedule = (ordinaryEmployeeHours, totalEmployees, allDays
   // function to recalculate the totalHours
   const recalculateHours = (generatedSchedule) => {
     let recalculatedSchedule = { ...generatedSchedule };
-    const totalPerDay = 11;
 
     totalEmployees.forEach((employee) => {
       for (let day in employee) {
-        if (generatedSchedule[day] + employee[day] > 11) {
+        if (generatedSchedule[day] + employee[day] > workingHoursPerDay) {
           recalculatedSchedule = {
             ...recalculatedSchedule,
-            [day]: generatedSchedule[day] - (generatedSchedule[day] + employee[day] - totalPerDay),
+            [day]:
+              generatedSchedule[day] -
+              (generatedSchedule[day] + employee[day] - workingHoursPerDay),
           };
         }
-        if (allDays[day] === 11) {
+        if (allDays[day] === workingHoursPerDay) {
           recalculatedSchedule = {
             ...recalculatedSchedule,
             [day]: 0,
           };
         }
-        if (allDays[day] < 11 && allDays[day] + generatedSchedule[day] > 11) {
+        if (
+          allDays[day] < workingHoursPerDay &&
+          allDays[day] + generatedSchedule[day] > workingHoursPerDay
+        ) {
           recalculatedSchedule = {
             ...recalculatedSchedule,
-            [day]: totalPerDay - allDays[day],
+            [day]: workingHoursPerDay - allDays[day],
           };
         }
       }
@@ -42,6 +52,12 @@ export const useManegeSchedule = (ordinaryEmployeeHours, totalEmployees, allDays
 
     console.log(recalculatedSchedule);
     return recalculatedSchedule;
+  };
+  const avoidTen = (allDays) => {
+    for (const day in allDays) {
+      if (allDays[day] === 10) {
+      }
+    }
   };
   const setSchedule = () => {
     let totalHours;

@@ -57,6 +57,7 @@ export const Inputs = ({
     totalEmployees,
     allDays,
     freeDays,
+    workingHoursPerDay,
   );
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
