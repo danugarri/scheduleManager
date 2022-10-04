@@ -60,7 +60,11 @@ export const useManegeSchedule = (
             if (recalculatedDay === 8) {
               leaveOut = [recalculatedDay];
             }
-            let newValue = modifiedGetRamdomSpecified(leaveOut);
+            let newValue = modifiedGetRamdomSpecified(
+              leaveOut,
+              minHoursPerDay,
+              maxOrdinaryHoursPerDay,
+            );
             if (accumulatedSumation + newValue > workingHoursPerDay) {
               for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
                 exclude.push(i);
@@ -113,12 +117,17 @@ export const useManegeSchedule = (
       for (let day in generatedSchedule) {
         const isFreeDay = freeDays.find((freeDay) => freeDay === day);
         if (!isFreeDay) {
-          generatedSchedule[day] = Math.floor(
-            Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
-          );
+          if (totalEmployees.length === 0) {
+            generatedSchedule[day] = modifiedGetRamdomSpecified([1], 0, maxOrdinaryHoursPerDay);
+          } else {
+            generatedSchedule[day] = Math.floor(
+              Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
+            );
+          }
         }
 
         totalHours += generatedSchedule[day];
+        console.log(generatedSchedule);
 
         // console.log(totalHours);
       }
