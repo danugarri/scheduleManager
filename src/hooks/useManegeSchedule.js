@@ -117,7 +117,8 @@ export const useManegeSchedule = (
       for (let day in generatedSchedule) {
         const isFreeDay = freeDays.find((freeDay) => freeDay === day);
         if (!isFreeDay) {
-          if (totalEmployees.length === 0) {
+          // it avoids problems at the first iteration
+          if (ordinaryEmployeeHours <= 25) {
             generatedSchedule[day] = modifiedGetRamdomSpecified([1], 0, maxOrdinaryHoursPerDay);
           } else {
             generatedSchedule[day] = Math.floor(
