@@ -77,6 +77,7 @@ export const useManegeSchedule = (
                 newValue = modifiedGetRamdomSpecified(leaveOut.concat(exclude));
               }
             }
+
             recalculatedSchedule[day2] = newValue;
           }
         }
@@ -194,8 +195,14 @@ export const useManegeSchedule = (
       ...generatedSchedule,
       id: new Date().getMilliseconds(),
     };
-
-    return generatedSchedule;
+    let sumation = 0;
+    for (const day in generatedSchedule) {
+      sumation += generatedSchedule[day];
+    }
+    if (sumation > 0)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(generatedSchedule), 2000);
+      });
   };
   return scheduleManagement;
 };

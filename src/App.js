@@ -3,6 +3,7 @@ import './App.css';
 import { AddEmployee } from './components/addEmployee/AddEmployee';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
+import Spinner from './components/loaders/spinner/Spinner';
 import { LocalHours } from './components/localHours/LocalHours';
 import BasicModal from './components/modals/BasicModal';
 import ControlFinalFreeDaysModal from './components/modals/controlFinalFreeDaysModal/ControlFinalFreeDaysModal';
@@ -81,6 +82,8 @@ function App() {
   const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
   const [openSameIdModal, setOpenSameIdModal] = useState(false);
   const [openControlFinalFreeDays, setOpenControlFinalFreeDays] = useState(false);
+  // Loader
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <>
       {beginning ? (
@@ -114,8 +117,10 @@ function App() {
             workingHoursPerDay={hours}
             setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
             localWorkingHours={localWorkingHours}
+            setIsLoading={setIsLoading}
           />
-          <EmployeeSchedule schedule={schedule} />
+
+          {!isLoading ? <EmployeeSchedule schedule={schedule} /> : <Spinner />}
           <BasicModal open={open} setOpen={setOpen} />
           <MaxFreeDaysModal
             openFreeDaysModal={openFreeDaysModal}

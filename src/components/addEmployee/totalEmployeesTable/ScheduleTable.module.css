@@ -58,3 +58,30 @@
   border-bottom: 2px solid black;
   background-color: rgb(176, 226, 182);
 }
+
+@media only screen and (max-width: 900px) {
+  .scheduleTable {
+    margin: 8rem auto;
+    font-size: 1em;
+    padding: 3rem;
+  }
+
+  .scheduleThead {
+    font-weight: 900;
+    background-color: rgb(70, 227, 233);
+  }
+  .scheduleTBodyTd {
+    text-align: center;
+  }
+  .tdPadding {
+    padding: 0.225rem;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .scheduleTable {
+    margin: 1rem auto;
+    font-size: 3em;
+    padding: 2rem;
+  }
+}
