@@ -12,3 +12,8 @@
 .checkbox {
   margin-right: 1rem;
 }
+@media only screen and (min-width: 1600px) {
+  .employee-labels {
+    font-size: 2rem;
+  }
+}
