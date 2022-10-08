@@ -1,5 +1,5 @@
 .scheduleTable {
-  margin: 2rem auto;
+  margin: 4rem auto;
   font-size: 1.25rem;
 }
 
@@ -59,9 +59,9 @@
   background-color: rgb(176, 226, 182);
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 880px) {
   .scheduleTable {
-    margin: 8rem auto;
+    margin: 4rem auto;
     font-size: 1em;
     padding: 3rem;
   }
