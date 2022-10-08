@@ -85,6 +85,7 @@ function App() {
         emptyTable={emptyTable}
         workingHoursPerDay={workingHoursPerDay}
         setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
+        localWorkingHours={localWorkingHours}
       />
       <EmployeeSchedule schedule={schedule} />
       <BasicModal open={open} setOpen={setOpen} />

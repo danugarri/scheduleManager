@@ -1,4 +1,5 @@
 import { modifiedGetRamdomSpecified } from '../helpers/getRamdomNumbersImproved';
+import { getTotalSumation } from '../helpers/getTotalSumation';
 import { nameFormatter } from '../helpers/nameFormatter';
 
 export const useManegeSchedule = (
@@ -7,6 +8,7 @@ export const useManegeSchedule = (
   allDays,
   freeDays,
   workingHoursPerDay,
+  localWorkingHours,
 ) => {
   const minHoursPerDay = 2;
   const maxOrdinaryHoursPerDay = 9;
@@ -19,7 +21,9 @@ export const useManegeSchedule = (
     saturday: 0,
     sunday: 0,
   };
-
+  // calculate Total sumation in a week
+  const totalSumation = getTotalSumation(allDays);
+  const leftWorkingHours = localWorkingHours - totalSumation;
   // function to recalculate the totalHours
   const recalculateHours = (generatedSchedule) => {
     let recalculatedSchedule = { ...generatedSchedule };
@@ -65,12 +69,14 @@ export const useManegeSchedule = (
               minHoursPerDay,
               maxOrdinaryHoursPerDay,
             );
+
             if (accumulatedSumation + newValue > workingHoursPerDay) {
               for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
                 exclude.push(i);
               }
               newValue = modifiedGetRamdomSpecified(leaveOut.concat(exclude));
             }
+
             recalculatedSchedule[day2] = newValue;
           }
         }
@@ -133,29 +139,46 @@ export const useManegeSchedule = (
         // console.log(totalHours);
       }
     }
+
     return generatedSchedule;
   };
   const scheduleManagement = (workersPerTurn, employeeName) => {
     let totalHoursInRecalculatedSchedule = 0;
     console.log(freeDays);
+    if (totalEmployees.length === 0) {
+      setSchedule();
+    }
     // Generate new schedule
-    setSchedule();
     if (totalEmployees.length > 0) {
-      // Check new schedule
-      generatedSchedule = recalculateHours(generatedSchedule);
-      for (let day in generatedSchedule) {
-        totalHoursInRecalculatedSchedule += generatedSchedule[day];
-      }
-      while (Number(totalHoursInRecalculatedSchedule) !== Number(ordinaryEmployeeHours)) {
-        totalHoursInRecalculatedSchedule = 0;
-        console.log('loop');
-        const recalculatedSchedule = setSchedule();
-        generatedSchedule = recalculateHours(recalculatedSchedule);
+      const finalResult = leftWorkingHours === Number(ordinaryEmployeeHours);
+      if (finalResult) {
+        for (const day in allDays) {
+          if (workingHoursPerDay - allDays[day] <= 9) {
+            generatedSchedule = {
+              ...generatedSchedule,
+              [day]: workingHoursPerDay - allDays[day],
+            };
+          }
+        }
+      } else {
+        setSchedule();
+        // Check new schedule
+        generatedSchedule = recalculateHours(generatedSchedule);
         for (let day in generatedSchedule) {
           totalHoursInRecalculatedSchedule += generatedSchedule[day];
         }
+        while (Number(totalHoursInRecalculatedSchedule) !== Number(ordinaryEmployeeHours)) {
+          totalHoursInRecalculatedSchedule = 0;
+          console.log('loop');
+          const recalculatedSchedule = setSchedule();
+          generatedSchedule = recalculateHours(recalculatedSchedule);
+          for (let day in generatedSchedule) {
+            totalHoursInRecalculatedSchedule += generatedSchedule[day];
+          }
+        }
       }
     }
+
     // Adding the employeeName to the first position
     const nameFormatted = nameFormatter(employeeName);
     generatedSchedule = {
