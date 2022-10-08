@@ -1,9 +1,9 @@
 .hours-form {
-  margin: 0 auto;
+  margin: 0 15rem;
   /* position: absolute; */
   position: relative;
   top: 4rem;
-  left: 25%;
+  /* left: 5%; */
 }
 .hours {
   width: fit-content;
