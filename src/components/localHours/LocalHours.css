@@ -1,7 +1,9 @@
-.local-hours-container {
-  position: absolute;
-  right: 4rem;
-  top: 4rem;
-  border: 1px dotted grey;
-  padding: 1rem;
+@media only screen and (min-width: 830px) {
+  .local-hours-container {
+    position: absolute;
+    right: 4rem;
+    top: 4rem;
+    border: 1px dotted grey;
+    padding: 1rem;
+  }
 }
