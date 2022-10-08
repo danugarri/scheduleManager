@@ -64,7 +64,6 @@ export const Inputs = ({
   );
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
@@ -72,6 +71,7 @@ export const Inputs = ({
       // check final
       const checkedFinalFreeDays = controlFinalFreeDays();
       if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
+        setIsLoading(true);
         const getSchedule = async () => {
           const response = await scheduleManagement(1, employeeName);
           return response;
