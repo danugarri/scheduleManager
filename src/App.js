@@ -3,6 +3,7 @@ import './App.css';
 import { AddEmployee } from './components/addEmployee/AddEmployee';
 import { EmployeeSchedule } from './components/employeeSchedule/EmployeeSchedule';
 import { Inputs } from './components/inputs/Inputs';
+import LinearLoader from './components/loaders/linearLOader/LinearLoader';
 import { LocalHours } from './components/localHours/LocalHours';
 import BasicModal from './components/modals/BasicModal';
 import ControlFinalFreeDaysModal from './components/modals/controlFinalFreeDaysModal/ControlFinalFreeDaysModal';
@@ -61,6 +62,8 @@ function App() {
   const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
   const [openSameIdModal, setOpenSameIdModal] = useState(false);
   const [openControlFinalFreeDays, setOpenControlFinalFreeDays] = useState(false);
+  // Loader
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div className='app'>
       <LocalHours localWorkingHours={localWorkingHours} />
@@ -86,8 +89,9 @@ function App() {
         workingHoursPerDay={workingHoursPerDay}
         setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
         localWorkingHours={localWorkingHours}
+        setIsLoading={setIsLoading}
       />
-      <EmployeeSchedule schedule={schedule} />
+      {!isLoading ? <EmployeeSchedule schedule={schedule} /> : <LinearLoader />}
       <BasicModal open={open} setOpen={setOpen} />
       <MaxFreeDaysModal
         openFreeDaysModal={openFreeDaysModal}

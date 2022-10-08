@@ -27,6 +27,7 @@ export const Inputs = ({
   workingHoursPerDay,
   setOpenControlFinalFreeDays,
   localWorkingHours,
+  setIsLoading,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -63,18 +64,31 @@ export const Inputs = ({
   );
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
     if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
       // check final
       const checkedFinalFreeDays = controlFinalFreeDays();
       if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
-        const returnedSchedule = scheduleManagement(1, employeeName);
-        console.log(returnedSchedule);
-        setSchedule(returnedSchedule);
-        if (returnedSchedule) {
-          employeeConfirmation();
-        }
+        // const returnedSchedule = async () => await scheduleManagement(1, employeeName);
+        const getSchedule = async () => {
+          const response = await scheduleManagement(1, employeeName);
+          return response;
+        };
+        getSchedule().then((data) => {
+          console.log(data);
+          let sumation = 0;
+          for (const day in data) {
+            sumation += data[day];
+          }
+          if (sumation > 0) {
+            setSchedule(data);
+            setIsLoading(false);
+            employeeConfirmation();
+          }
+        });
       } else if (leftWorkingHours < ordinaryEmployeeHours && checkedFinalFreeDays) {
         setOpenLeftHoursModal(true);
       }
