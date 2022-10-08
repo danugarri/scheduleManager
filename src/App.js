@@ -28,7 +28,7 @@ function App() {
     sunday: 11,
   });
 
-  const [begining, setBegining] = useState(true);
+  const [beginning, setBeginning] = useState(true);
   const [schedule, setSchedule] = useState({});
   const [freeDays, setFreeDays] = useState([]);
   const [ordinaryEmployeeHours, setOrdinaryEmployeeHours] = useState('');
@@ -54,7 +54,7 @@ function App() {
       saturday: Number(e.target[6].value) || 11,
       sunday: Number(e.target[7].value) || 11,
     });
-    setBegining(false);
+    setBeginning(false);
   };
   const emptyTable = () => {
     setTotalEmployees([]);
@@ -83,11 +83,15 @@ function App() {
   const [openControlFinalFreeDays, setOpenControlFinalFreeDays] = useState(false);
   return (
     <>
-      {begining ? (
+      {beginning ? (
         <TypeHours submitHours={submitHours} />
       ) : (
         <div className='app'>
-          <LocalHours localWorkingHours={localWorkingHours} hours={hours} />
+          <LocalHours
+            localWorkingHours={localWorkingHours}
+            hours={hours}
+            setBeginning={setBeginning}
+          />
           <Inputs
             setSchedule={setSchedule}
             freeDays={freeDays}
