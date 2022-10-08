@@ -78,16 +78,9 @@ export const Inputs = ({
           return response;
         };
         getSchedule().then((data) => {
-          console.log(data);
-          let sumation = 0;
-          for (const day in data) {
-            sumation += data[day];
-          }
-          if (sumation > 0) {
-            setSchedule(data);
-            setIsLoading(false);
-            employeeConfirmation();
-          }
+          setSchedule(data);
+          setIsLoading(false);
+          employeeConfirmation();
         });
       } else if (leftWorkingHours < ordinaryEmployeeHours && checkedFinalFreeDays) {
         setOpenLeftHoursModal(true);
