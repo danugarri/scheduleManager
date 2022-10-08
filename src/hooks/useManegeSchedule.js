@@ -155,18 +155,16 @@ export const useManegeSchedule = (
       const finalResult = leftWorkingHours === Number(ordinaryEmployeeHours);
       if (finalResult) {
         for (const day in allDays) {
-          for (const hour in workingHoursPerDay) {
-            if (workingHoursPerDay[hour] - allDays[day] <= 9) {
+          if (workingHoursPerDay[day] - allDays[day] <= 9) {
+            generatedSchedule = {
+              ...generatedSchedule,
+              [day]: workingHoursPerDay[day] - allDays[day],
+            };
+            if (workingHoursPerDay[day] - allDays[day] === 0) {
               generatedSchedule = {
                 ...generatedSchedule,
-                [day]: workingHoursPerDay[hour] - allDays[day],
+                [day]: 0,
               };
-              if (workingHoursPerDay[hour] - allDays[day] === 0) {
-                generatedSchedule = {
-                  ...generatedSchedule,
-                  [day]: 0,
-                };
-              }
             }
           }
         }
