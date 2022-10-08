@@ -1,8 +1,10 @@
 export const getCandidateFreeDays = (allDays, workingHoursPerDay) => {
   const candidateFreeDays = [];
   for (const day in allDays) {
-    if (allDays[day] === workingHoursPerDay) {
-      candidateFreeDays.push(day);
+    for (const hour in workingHoursPerDay) {
+      if (allDays[day] === workingHoursPerDay[hour]) {
+        candidateFreeDays.push(day);
+      }
     }
   }
   return candidateFreeDays;

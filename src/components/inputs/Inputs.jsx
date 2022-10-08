@@ -26,6 +26,7 @@ export const Inputs = ({
   emptyTable,
   workingHoursPerDay,
   setOpenControlFinalFreeDays,
+  localWorkingHours,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -58,6 +59,7 @@ export const Inputs = ({
     allDays,
     freeDays,
     workingHoursPerDay,
+    localWorkingHours,
   );
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();

@@ -47,12 +47,12 @@ function App() {
     e.preventDefault();
     setHours({
       monday: Number(e.target[1].value) || 11,
-      tuesday: Number(e.target[2].value) || 11,
-      wednesday: Number(e.target[3].value) || 11,
-      thursday: Number(e.target[4].value) || 11,
-      friday: Number(e.target[5].value) || 11,
-      saturday: Number(e.target[6].value) || 11,
-      sunday: Number(e.target[7].value) || 11,
+      tuesday: Number(e.target[3].value) || 11,
+      wednesday: Number(e.target[5].value) || 11,
+      thursday: Number(e.target[7].value) || 11,
+      friday: Number(e.target[9].value) || 11,
+      saturday: Number(e.target[11].value) || 11,
+      sunday: Number(e.target[13].value) || 11,
     });
     setBeginning(false);
   };
@@ -111,8 +111,9 @@ function App() {
             leftWorkingHours={leftWorkingHours}
             setOpenLeftHoursModal={setOpenLeftHoursModal}
             emptyTable={emptyTable}
-            workingHoursPerDay={workingHoursPerDay}
+            workingHoursPerDay={hours}
             setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
+            localWorkingHours={localWorkingHours}
           />
           <EmployeeSchedule schedule={schedule} />
           <BasicModal open={open} setOpen={setOpen} />
