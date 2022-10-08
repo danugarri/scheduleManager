@@ -91,7 +91,6 @@ function App() {
             localWorkingHours={localWorkingHours}
             hours={hours}
             setBeginning={setBeginning}
-            emptyTable={emptyTable}
           />
           <Inputs
             setSchedule={setSchedule}
