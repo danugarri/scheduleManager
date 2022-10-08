@@ -72,7 +72,6 @@ export const Inputs = ({
       // check final
       const checkedFinalFreeDays = controlFinalFreeDays();
       if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
-        // const returnedSchedule = async () => await scheduleManagement(1, employeeName);
         const getSchedule = async () => {
           const response = await scheduleManagement(1, employeeName);
           return response;
