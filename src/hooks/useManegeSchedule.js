@@ -114,7 +114,6 @@ export const useManegeSchedule = (
       }
     });
     avoidTen();
-    console.log(recalculatedSchedule);
     return recalculatedSchedule;
   };
 
@@ -137,9 +136,6 @@ export const useManegeSchedule = (
         }
 
         totalHours += generatedSchedule[day];
-        console.log(generatedSchedule);
-
-        // console.log(totalHours);
       }
     }
 
@@ -182,7 +178,9 @@ export const useManegeSchedule = (
           const recalculatedSchedule = setSchedule();
           generatedSchedule = recalculateHours(recalculatedSchedule);
           for (let day in generatedSchedule) {
-            totalHoursInRecalculatedSchedule += generatedSchedule[day];
+            if (day !== 'Employee' && day !== 'id') {
+              totalHoursInRecalculatedSchedule += Number(generatedSchedule[day]);
+            }
           }
         }
       }
@@ -195,9 +193,12 @@ export const useManegeSchedule = (
       ...generatedSchedule,
       id: new Date().getMilliseconds(),
     };
+    console.log(generatedSchedule);
     let sumation = 0;
     for (const day in generatedSchedule) {
-      sumation += generatedSchedule[day];
+      if (day !== 'Employee' && day !== 'id') {
+        sumation += Number(generatedSchedule[day]);
+      }
     }
     if (sumation > 0)
       return new Promise((resolve, reject) => {
