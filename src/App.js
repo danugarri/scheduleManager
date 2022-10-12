@@ -17,6 +17,7 @@ import { getCandidateFreeDays } from './helpers/getCandidateFreeDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { getTotalSumation } from './helpers/getTotalSumation';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
+import { checkMaxHoursAccordingToFreeDays } from './helpers/checkMaxHoursAccordingToFreeDays';
 
 function App() {
   const [schedule, setSchedule] = useState({});
@@ -32,6 +33,7 @@ function App() {
   const totalSumation = getTotalSumation(allDays);
   const leftWorkingHours = localWorkingHours - totalSumation;
   const candidateFreeDays = getCandidateFreeDays(allDays, workingHoursPerDay);
+  const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
 
   const emptyTable = () => {
     setTotalEmployees([]);
@@ -117,6 +119,7 @@ function App() {
       <MaxHoursAccordingToFreeDaysModal
         openMaxHoursAccordingToFreeDays={openMaxHoursAccordingToFreeDays}
         setOpenMaxHoursAccordingToFreeDays={setOpenMaxHoursAccordingToFreeDays}
+        maxHoursToDo={maxHoursToDo}
       />
       <AddEmployee
         schedule={schedule}
