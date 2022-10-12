@@ -5,6 +5,7 @@ import { removeItemFromArr } from '../../helpers/removeDays';
 import { isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
 import './Inputs.css';
 import { useControlFinalFreeDays } from '../../hooks/useControlFinalFreeDays';
+import { checkMaxHoursAccordingToFreeDays } from '../../helpers/checkMaxHoursAccordingToFreeDays';
 
 export const Inputs = ({
   setSchedule,
@@ -28,6 +29,8 @@ export const Inputs = ({
   setOpenControlFinalFreeDays,
   localWorkingHours,
   setIsLoading,
+  openMaxHoursAccordingToFreeDays,
+  setOpenMaxHoursAccordingToFreeDays,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -68,10 +71,22 @@ export const Inputs = ({
 
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
-    if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
+    const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
+    const isInCorrectedMaxHours = maxHoursToDo < Number(ordinaryEmployeeHours);
+
+    if (
+      ordinaryEmployeeHours !== 0 &&
+      ordinaryEmployeeHours >= 10 &&
+      correctFreedays &&
+      !isInCorrectedMaxHours
+    ) {
       // check final
       const checkedFinalFreeDays = controlFinalFreeDays();
-      if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
+      if (
+        leftWorkingHours >= ordinaryEmployeeHours &&
+        checkedFinalFreeDays &&
+        !openMaxHoursAccordingToFreeDays
+      ) {
         const getSchedule = async () => {
           const response = await scheduleManagement(1, employeeName);
           return response;
@@ -90,6 +105,9 @@ export const Inputs = ({
     }
     if (!correctFreedays) {
       setOpenFreeDaysModal(!openFreeDaysModal);
+    }
+    if (isInCorrectedMaxHours) {
+      setOpenMaxHoursAccordingToFreeDays(true);
     }
   };
   const clearSearch = () => {

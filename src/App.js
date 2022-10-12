@@ -11,6 +11,7 @@ import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
 import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import SameIdModal from './components/modals/sameIdModal/SameIdModal';
+import MaxHoursAccordingToFreeDaysModal from './components/modals/maxHoursAccordingToFreeDaysModal/MaxHoursAccordingToFreeDaysModal';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
 import { getCandidateFreeDays } from './helpers/getCandidateFreeDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
@@ -38,12 +39,7 @@ function App() {
   const add = () => {
     const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     const newSchedule = { ...schedule };
-    // let recalculatedSchedule = { ...schedule };
     newSchedule.totalHours = totalHoursPerEmployee;
-    // recalculatedSchedule.id = id;
-    // recalculatedSchedule.totalHours = totalHoursPerEmployee;
-    // recalculateHours.totalHours = totalHoursPerEmployee;
-    // recalculateHours(recalculatedSchedule, newSchedule, totalHoursPerEmployee);
     const notCalculatedNewSchedule = totalEmployees.find((employee) => employee.id === schedule.id);
     if (!notCalculatedNewSchedule) {
       setTotalEmployees((prev) => prev.concat(newSchedule));
@@ -62,6 +58,7 @@ function App() {
   const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
   const [openSameIdModal, setOpenSameIdModal] = useState(false);
   const [openControlFinalFreeDays, setOpenControlFinalFreeDays] = useState(false);
+  const [openMaxHoursAccordingToFreeDays, setOpenMaxHoursAccordingToFreeDays] = useState(false);
   // Loader
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -90,6 +87,8 @@ function App() {
         setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
         localWorkingHours={localWorkingHours}
         setIsLoading={setIsLoading}
+        openMaxHoursAccordingToFreeDays={openMaxHoursAccordingToFreeDays}
+        setOpenMaxHoursAccordingToFreeDays={setOpenMaxHoursAccordingToFreeDays}
       />
       {!isLoading ? <EmployeeSchedule schedule={schedule} /> : <Spinner />}
       <BasicModal open={open} setOpen={setOpen} />
@@ -114,6 +113,10 @@ function App() {
         openControlFinalFreeDays={openControlFinalFreeDays}
         setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
         candidateFreeDays={candidateFreeDays}
+      />
+      <MaxHoursAccordingToFreeDaysModal
+        openMaxHoursAccordingToFreeDays={openMaxHoursAccordingToFreeDays}
+        setOpenMaxHoursAccordingToFreeDays={setOpenMaxHoursAccordingToFreeDays}
       />
       <AddEmployee
         schedule={schedule}
