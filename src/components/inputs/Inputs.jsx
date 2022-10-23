@@ -4,7 +4,7 @@ import { numberLimiter } from '../../helpers/numberLimiter';
 import { removeItemFromArr } from '../../helpers/removeDays';
 import { isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
 import './Inputs.css';
-import { useControlFinalFreeDays } from '../../hooks/useControlFinalFreeDays';
+// import { useControlFinalFreeDays } from '../../hooks/useControlFinalFreeDays';
 import { checkMaxHoursAccordingToFreeDays } from '../../helpers/checkMaxHoursAccordingToFreeDays';
 
 export const Inputs = ({
@@ -39,12 +39,12 @@ export const Inputs = ({
   const fridayRef = useRef();
   const saturdayRef = useRef();
   const sundayRef = useRef();
-  const controlFinalFreeDays = useControlFinalFreeDays(
-    allDays,
-    workingHoursPerDay,
-    freeDays,
-    setOpenControlFinalFreeDays,
-  );
+  // const controlFinalFreeDays = useControlFinalFreeDays(
+  //   allDays,
+  //   workingHoursPerDay,
+  //   freeDays,
+  //   setOpenControlFinalFreeDays,
+  // );
   const checkedDay = (e) => {
     console.log(e);
     const isChecked = e.target.checked;
@@ -75,7 +75,7 @@ export const Inputs = ({
       freeDays.length > 0 && maxHoursToDo < Number(ordinaryEmployeeHours);
     const isCorrectedLeftHours = leftWorkingHours < ordinaryEmployeeHours;
     // check final
-    const checkedFinalFreeDays = controlFinalFreeDays();
+    // const checkedFinalFreeDays = controlFinalFreeDays();
 
     if (
       ordinaryEmployeeHours !== 0 &&
@@ -83,11 +83,7 @@ export const Inputs = ({
       correctFreedays &&
       !isInCorrectedMaxHours
     ) {
-      if (
-        leftWorkingHours >= ordinaryEmployeeHours &&
-        checkedFinalFreeDays &&
-        !openMaxHoursAccordingToFreeDays
-      ) {
+      if (leftWorkingHours >= ordinaryEmployeeHours && !openMaxHoursAccordingToFreeDays) {
         setIsLoading(true);
         const getSchedule = async () => {
           const response = await scheduleManagement(1, employeeName);
@@ -100,7 +96,7 @@ export const Inputs = ({
         });
       }
     }
-    if (isCorrectedLeftHours && checkedFinalFreeDays) {
+    if (isCorrectedLeftHours) {
       setOpenLeftHoursModal(true);
     }
     if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {
