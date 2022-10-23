@@ -34,7 +34,9 @@ export default function BasicModal({ setOpen, open }) {
       >
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
-            <p>Las horas ordinarias del trabajador deben ser como mínimo 10</p>
+            <p className='conclusion'>
+              Las horas ordinarias del trabajador deben ser como mínimo 10
+            </p>
             <p>Puede que hayas olvidado introducir un número de horas</p>
             <button onClick={handleClose} className='close-button '>
               X
