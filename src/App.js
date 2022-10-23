@@ -17,7 +17,7 @@ import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { getTotalSumation } from './helpers/getTotalSumation';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
 import { checkMaxHoursAccordingToFreeDays } from './helpers/checkMaxHoursAccordingToFreeDays';
-import MaxHoursAccordingToFreeDaysModal from './components/modals/maxHoursAccordingToFreeDaysModal/MaxHoursAccordingToFreeDaysModal';
+import MaxHoursAccordingToFreeDaysModal from './components/modals/maxHoursModal/MaxHoursModal';
 
 function App() {
   const [schedule, setSchedule] = useState({});
