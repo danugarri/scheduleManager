@@ -9,7 +9,7 @@ import BasicModal from './components/modals/BasicModal';
 import ControlFinalFreeDaysModal from './components/modals/controlFinalFreeDaysModal/ControlFinalFreeDaysModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
-import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
+// import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import SameIdModal from './components/modals/sameIdModal/SameIdModal';
 import MaxHoursAccordingToFreeDaysModal from './components/modals/maxHoursAccordingToFreeDaysModal/MaxHoursAccordingToFreeDaysModal';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
@@ -94,10 +94,10 @@ function App() {
       />
       {!isLoading ? <EmployeeSchedule schedule={schedule} /> : <Spinner />}
       <BasicModal open={open} setOpen={setOpen} />
-      <MaxFreeDaysModal
+      {/* <MaxFreeDaysModal
         openFreeDaysModal={openFreeDaysModal}
         setOpenFreeDaysModal={setOpenFreeDaysModal}
-      />
+      /> */}
       <EmployeeModal
         openEmployeeModal={openEmployeeModal}
         setOpenEmployeeModal={setOpenEmployeeModal}

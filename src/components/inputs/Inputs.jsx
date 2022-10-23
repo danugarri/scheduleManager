@@ -67,7 +67,6 @@ export const Inputs = ({
   );
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
-    // setIsLoading(true);
 
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
@@ -105,9 +104,9 @@ export const Inputs = ({
     if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {
       setOpen(!open);
     }
-    if (!correctFreedays) {
-      setOpenFreeDaysModal(!openFreeDaysModal);
-    }
+    // if (!correctFreedays) {
+    //   setOpenFreeDaysModal(!openFreeDaysModal);
+    // }
     if (isInCorrectedMaxHours) {
       setOpenMaxHoursAccordingToFreeDays(true);
     }
