@@ -73,6 +73,9 @@ export const Inputs = ({
     const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
     const isInCorrectedMaxHours =
       freeDays.length > 0 && maxHoursToDo < Number(ordinaryEmployeeHours);
+    const isCorrectedLeftHours = leftWorkingHours < ordinaryEmployeeHours;
+    // check final
+    const checkedFinalFreeDays = controlFinalFreeDays();
 
     if (
       ordinaryEmployeeHours !== 0 &&
@@ -80,8 +83,6 @@ export const Inputs = ({
       correctFreedays &&
       !isInCorrectedMaxHours
     ) {
-      // check final
-      const checkedFinalFreeDays = controlFinalFreeDays();
       if (
         leftWorkingHours >= ordinaryEmployeeHours &&
         checkedFinalFreeDays &&
@@ -97,9 +98,10 @@ export const Inputs = ({
           setIsLoading(false);
           employeeConfirmation();
         });
-      } else if (leftWorkingHours < ordinaryEmployeeHours && checkedFinalFreeDays) {
-        setOpenLeftHoursModal(true);
       }
+    }
+    if (isCorrectedLeftHours && checkedFinalFreeDays) {
+      setOpenLeftHoursModal(true);
     }
     if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {
       setOpen(!open);
@@ -107,7 +109,7 @@ export const Inputs = ({
     // if (!correctFreedays) {
     //   setOpenFreeDaysModal(!openFreeDaysModal);
     // }
-    if (isInCorrectedMaxHours) {
+    if (isInCorrectedMaxHours && !isCorrectedLeftHours) {
       setOpenMaxHoursAccordingToFreeDays(true);
     }
   };
