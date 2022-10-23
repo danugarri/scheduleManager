@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-export default function maxHoursAccordingToFreeDaysModal({
+export default function MaxHoursAccordingToFreeDaysModal({
   openMaxHoursAccordingToFreeDays,
   setOpenMaxHoursAccordingToFreeDays,
   maxHoursToDo,
