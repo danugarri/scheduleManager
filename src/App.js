@@ -11,13 +11,13 @@ import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
 // import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import SameIdModal from './components/modals/sameIdModal/SameIdModal';
-import MaxHoursAccordingToFreeDaysModal from './components/modals/maxHoursAccordingToFreeDaysModal/MaxHoursAccordingToFreeDaysModal';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
 import { getCandidateFreeDays } from './helpers/getCandidateFreeDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { getTotalSumation } from './helpers/getTotalSumation';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
 import { checkMaxHoursAccordingToFreeDays } from './helpers/checkMaxHoursAccordingToFreeDays';
+import MaxHoursAccordingToFreeDaysModal from './components/modals/maxHoursAccordingToFreeDaysModal/MaxHoursAccordingToFreeDaysModal';
 
 function App() {
   const [schedule, setSchedule] = useState({});
