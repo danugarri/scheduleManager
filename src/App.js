@@ -20,6 +20,7 @@ import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
 import { checkMaxHoursAccordingToFreeDays } from './helpers/checkMaxHoursAccordingToFreeDays';
 import MaxHoursModal from './components/modals/maxHoursModal/MaxHoursModal';
 import MaxFourtyHoursModal from './components/modals/maxFourtyHoursModal/MaxFourtyHoursModal';
+import { Schedule } from '@mui/icons-material';
 
 function App() {
   const [hours, setHours] = useState({
@@ -67,10 +68,13 @@ function App() {
   };
   const add = () => {
     console.log(totalEmployees);
-    const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
+    console.log(Schedule);
+    // const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     // const newSchedule = { ...schedule };
     // newSchedule.totalHours = totalHoursPerEmployee;
-    const notCalculatedNewSchedule = totalEmployees.find((employee) => employee.id === schedule.id);
+    const notCalculatedNewSchedule = totalEmployees.find(
+      (employee) => employee.Employee === schedule.Employee,
+    );
     if (!notCalculatedNewSchedule) {
       setTotalEmployees((prev) => prev.concat(schedule));
     } else {
