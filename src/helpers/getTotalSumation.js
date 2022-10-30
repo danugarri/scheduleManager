@@ -3,6 +3,6 @@ export const getTotalSumation = (allDays) => {
   for (let day in allDays) {
     totalSumation += allDays[day];
   }
-  console.log(totalSumation);
+  // console.log(totalSumation);
   return totalSumation;
 };

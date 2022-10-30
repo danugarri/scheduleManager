@@ -8,27 +8,27 @@ export const TotalEmployeesTable = ({
   schedule,
   totalEmployees,
   deleteEmployee,
-  localWorkingHours,
+  leftWorkingHours,
 }) => {
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
   const totalSumation = getTotalSumation(allDays);
-  const leftWorkingHours = localWorkingHours - totalSumation;
   const leftHoursStyle =
     leftWorkingHours === 0 ? style.leftHoursTdcompleted : style.leftHoursTdIncompleted;
+  const headerColumns = Object.entries(schedule).map((day, index) => (
+    <td className={style.tdPadding} key={day + index}>
+      {day[0]}
+    </td>
+  ));
   return (
     <>
-      {schedule.hasOwnProperty('monday') && (
+      {schedule && (
         <table className={style.scheduleTable}>
           {
             <thead className={style.scheduleThead}>
               <tr>
-                {Object.entries(schedule).map((day, index) => (
-                  <td className={style.tdPadding} key={day + index}>
-                    {day[0]}
-                  </td>
-                ))}
+                {headerColumns}
                 <td key='hours' className={`${style.totalHoursHeader} ${style.tdPadding}`}>
                   Horas totales
                 </td>

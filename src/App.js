@@ -9,7 +9,7 @@ import BasicModal from './components/modals/BasicModal';
 import ControlFinalFreeDaysModal from './components/modals/controlFinalFreeDaysModal/ControlFinalFreeDaysModal';
 import EmployeeModal from './components/modals/employeeModal/EmployeeModal';
 import LeftHoursModal from './components/modals/leftHoursModal/LeftHoursModal';
-import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
+// import MaxFreeDaysModal from './components/modals/maxFreeDays/MaxFreeDays';
 import SameIdModal from './components/modals/sameIdModal/SameIdModal';
 import { TypeHours } from './components/typeHours/TypeHours';
 import { extractOnlyDays } from './helpers/extractOnlyDays';
@@ -17,6 +17,9 @@ import { getCandidateFreeDays } from './helpers/getCandidateFreeDays';
 import { getTotalHoursPerEmployee } from './helpers/getTotalEmployeeHours';
 import { getTotalSumation } from './helpers/getTotalSumation';
 import { useGetAllTotalHours } from './hooks/useGetAllTotalHours';
+import { checkMaxHoursAccordingToFreeDays } from './helpers/checkMaxHoursAccordingToFreeDays';
+import MaxHoursModal from './components/modals/maxHoursModal/MaxHoursModal';
+import MaxFourtyHoursModal from './components/modals/maxFourtyHoursModal/MaxFourtyHoursModal';
 
 function App() {
   const [hours, setHours] = useState({
@@ -37,13 +40,13 @@ function App() {
   const [totalEmployees, setTotalEmployees] = useState([]);
   // const localWorkingHours = 77;
   const localWorkingHours = getTotalSumation(hours);
-  const workingHoursPerDay = 11;
+  const workingHoursPerDay = hours;
   // Array with an object with the worked hours per day
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
   const allDays = useGetAllTotalHours(workedHoursPerDays);
   const totalSumation = getTotalSumation(allDays);
   const leftWorkingHours = localWorkingHours - totalSumation;
-  const candidateFreeDays = getCandidateFreeDays(allDays, workingHoursPerDay);
+  const candidateFreeDays = getCandidateFreeDays(allDays, hours);
   const submitHours = (e) => {
     e.preventDefault();
     setHours({
@@ -57,10 +60,13 @@ function App() {
     });
     setBeginning(false);
   };
+  const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
+
   const emptyTable = () => {
     setTotalEmployees([]);
   };
   const add = () => {
+    console.log(totalEmployees);
     const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
     const newSchedule = { ...schedule };
     newSchedule.totalHours = totalHoursPerEmployee;
@@ -82,6 +88,8 @@ function App() {
   const [openLeftHoursModal, setOpenLeftHoursModal] = useState(false);
   const [openSameIdModal, setOpenSameIdModal] = useState(false);
   const [openControlFinalFreeDays, setOpenControlFinalFreeDays] = useState(false);
+  const [openMaxHoursAccordingToFreeDays, setOpenMaxHoursAccordingToFreeDays] = useState(false);
+  const [openMaxFourtyHoursModal, setOpenMaxFourtyHoursModal] = useState(false);
   // Loader
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -118,14 +126,17 @@ function App() {
             setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
             localWorkingHours={localWorkingHours}
             setIsLoading={setIsLoading}
+            openMaxHoursAccordingToFreeDays={openMaxHoursAccordingToFreeDays}
+            setOpenMaxHoursAccordingToFreeDays={setOpenMaxHoursAccordingToFreeDays}
+            setOpenMaxFourtyHoursModal={setOpenMaxFourtyHoursModal}
           />
 
           {!isLoading ? <EmployeeSchedule schedule={schedule} /> : <Spinner />}
           <BasicModal open={open} setOpen={setOpen} />
-          <MaxFreeDaysModal
+          {/* <MaxFreeDaysModal
             openFreeDaysModal={openFreeDaysModal}
             setOpenFreeDaysModal={setOpenFreeDaysModal}
-          />
+          /> */}
           <EmployeeModal
             openEmployeeModal={openEmployeeModal}
             setOpenEmployeeModal={setOpenEmployeeModal}
@@ -144,13 +155,22 @@ function App() {
             setOpenControlFinalFreeDays={setOpenControlFinalFreeDays}
             candidateFreeDays={candidateFreeDays}
           />
+          <MaxHoursModal
+            openMaxHoursAccordingToFreeDays={openMaxHoursAccordingToFreeDays}
+            setOpenMaxHoursAccordingToFreeDays={setOpenMaxHoursAccordingToFreeDays}
+            maxHoursToDo={maxHoursToDo}
+          />
+          <MaxFourtyHoursModal
+            openMaxFourtyHoursModal={openMaxFourtyHoursModal}
+            setOpenMaxFourtyHoursModal={setOpenMaxFourtyHoursModal}
+          />
           <AddEmployee
             schedule={schedule}
             add={add}
             totalEmployees={totalEmployees}
             setTotalEmployees={setTotalEmployees}
-            localWorkingHours={localWorkingHours}
             emptyTable={emptyTable}
+            leftWorkingHours={leftWorkingHours}
           />
         </div>
       )}

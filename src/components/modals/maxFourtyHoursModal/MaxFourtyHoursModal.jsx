@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import './BasicModal.css';
+import '../BasicModal.css';
 
 const style = {
   position: 'absolute',
@@ -16,28 +16,29 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ setOpen, open }) {
-  const handleClose = () => setOpen(false);
+export default function MaxFourtyHoursModal({
+  openMaxFourtyHoursModal,
+  setOpenMaxFourtyHoursModal,
+}) {
+  const handleClose = () => setOpenMaxFourtyHoursModal(false);
 
   return (
     <div>
       <Modal
-        open={open}
+        open={openMaxFourtyHoursModal}
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
-            setOpen(false);
+            setOpenMaxFourtyHoursModal(false);
           }
         }}
       >
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
-            <p className='conclusion'>
-              Las horas ordinarias del trabajador deben ser como mínimo 10
-            </p>
-            <p>Puede que hayas olvidado introducir un número de horas</p>
+            <p className='conclusion'>El máximo de horas semanales por trabajador son 40h</p>
+            <p>Introduce un número de horas igual o menor que 40h</p>
             <button onClick={handleClose} className='close-button '>
               X
             </button>

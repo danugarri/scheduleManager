@@ -11,14 +11,14 @@ export const useControlTotalHours = (totalEmployees, schedule) => {
   const workedHoursPerDays = extractOnlyDays(totalEmployees);
 
   const allDays = useGetAllTotalHours(workedHoursPerDays);
-  for (let totalPerDay in allDays) {
-    console.log(allDays[totalPerDay]);
-  }
+  // for (let totalPerDay in allDays) {
+  //   // console.log(allDays[totalPerDay]);
+  // }
   useEffect(() => {
     let newSchedule = { ...schedule };
     const recalculateHours = () => {
       for (let totalPerDay in allDays) {
-        console.log(allDays[totalPerDay]);
+        // console.log(allDays[totalPerDay]);
         if (allDays[totalPerDay] > 11) {
           isMoreThanNeeded.current = true;
           newSchedule = {
@@ -26,9 +26,6 @@ export const useControlTotalHours = (totalEmployees, schedule) => {
             [totalPerDay]: schedule[totalPerDay] - (allDays[totalPerDay] - 11),
           };
         }
-
-        console.log('entraaaaaaaaaaaaaa');
-        // setSchedule(schedule);
       }
       console.log(newSchedule);
       recalculatedSchedule.current = newSchedule;

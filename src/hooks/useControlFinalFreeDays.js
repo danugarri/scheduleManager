@@ -10,7 +10,7 @@ export const useControlFinalFreeDays = (
     let checkedFinalFreeDays = true;
 
     for (const day in allDays) {
-      if (allDays[day] === workingHoursPerDay) {
+      if (allDays[day] === workingHoursPerDay[day]) {
         checkFinal = true;
         candidateFreeDays.push(day);
       }

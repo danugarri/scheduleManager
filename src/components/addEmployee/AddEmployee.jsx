@@ -10,8 +10,8 @@ export const AddEmployee = ({
   add,
   totalEmployees,
   setTotalEmployees,
-  localWorkingHours,
   emptyTable,
+  leftWorkingHours,
 }) => {
   const deleteEmployee = (typedEmployee) => {
     const newTotal = totalEmployees.filter((employee) => employee.id !== typedEmployee.id);
@@ -35,7 +35,7 @@ export const AddEmployee = ({
         schedule={schedule}
         totalEmployees={totalEmployees}
         deleteEmployee={deleteEmployee}
-        localWorkingHours={localWorkingHours}
+        leftWorkingHours={leftWorkingHours}
       />
     </>
   );

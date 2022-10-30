@@ -5,6 +5,8 @@ import { removeItemFromArr } from '../../helpers/removeDays';
 import { isCorrectNumberOfFreeDays } from '../../helpers/getWorkingDays';
 import './Inputs.css';
 import { useControlFinalFreeDays } from '../../hooks/useControlFinalFreeDays';
+import { checkMaxHoursAccordingToFreeDays } from '../../helpers/checkMaxHoursAccordingToFreeDays';
+import { useMaxFourtyHours } from '../../hooks/useMaxFourtyHours';
 
 export const Inputs = ({
   setSchedule,
@@ -28,6 +30,9 @@ export const Inputs = ({
   setOpenControlFinalFreeDays,
   localWorkingHours,
   setIsLoading,
+  openMaxHoursAccordingToFreeDays,
+  setOpenMaxHoursAccordingToFreeDays,
+  setOpenMaxFourtyHoursModal,
 }) => {
   const mondayRef = useRef();
   const tuesdayRef = useRef();
@@ -43,7 +48,7 @@ export const Inputs = ({
     setOpenControlFinalFreeDays,
   );
   const checkedDay = (e) => {
-    console.log(e);
+    // console.log(e);
     const isChecked = e.target.checked;
     const value = e.target.name;
     if (isChecked) {
@@ -51,7 +56,6 @@ export const Inputs = ({
     } else {
       removeItemFromArr(freeDays, value);
     }
-    console.log(isChecked);
   };
   console.log(freeDays);
   const scheduleManagement = useManegeSchedule(
@@ -62,15 +66,32 @@ export const Inputs = ({
     workingHoursPerDay,
     localWorkingHours,
   );
+  const isMaxFourtyHours = useMaxFourtyHours(setOpenMaxFourtyHoursModal);
   const submitEmployeeSchedule = (e) => {
     e.preventDefault();
 
     // Checking if it is possible have the entered number of freedays
     const correctFreedays = isCorrectNumberOfFreeDays(freeDays, ordinaryEmployeeHours);
-    if (ordinaryEmployeeHours !== 0 && ordinaryEmployeeHours >= 10 && correctFreedays) {
-      // check final
-      const checkedFinalFreeDays = controlFinalFreeDays();
-      if (leftWorkingHours >= ordinaryEmployeeHours && checkedFinalFreeDays) {
+    const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
+    const isInCorrectedMaxHours =
+      freeDays.length > 0 && maxHoursToDo < Number(ordinaryEmployeeHours);
+    const isCorrectedLeftHours = leftWorkingHours < ordinaryEmployeeHours;
+    // check final
+    const checkedFinalFreeDays = controlFinalFreeDays();
+    //  Check max 40h
+    const isMax = isMaxFourtyHours(ordinaryEmployeeHours);
+    if (
+      ordinaryEmployeeHours !== 0 &&
+      ordinaryEmployeeHours >= 10 &&
+      correctFreedays &&
+      !isInCorrectedMaxHours &&
+      !isMax
+    ) {
+      if (
+        leftWorkingHours >= ordinaryEmployeeHours &&
+        !openMaxHoursAccordingToFreeDays &&
+        checkedFinalFreeDays
+      ) {
         setIsLoading(true);
         const getSchedule = async () => {
           const response = await scheduleManagement(1, employeeName);
@@ -81,15 +102,19 @@ export const Inputs = ({
           setIsLoading(false);
           employeeConfirmation();
         });
-      } else if (leftWorkingHours < ordinaryEmployeeHours && checkedFinalFreeDays) {
-        setOpenLeftHoursModal(true);
       }
+    }
+    if (isCorrectedLeftHours && !isMax) {
+      setOpenLeftHoursModal(true);
     }
     if (ordinaryEmployeeHours === 0 || ordinaryEmployeeHours < 10) {
       setOpen(!open);
     }
-    if (!correctFreedays) {
-      setOpenFreeDaysModal(!openFreeDaysModal);
+    // if (!correctFreedays) {
+    //   setOpenFreeDaysModal(!openFreeDaysModal);
+    // }
+    if (isInCorrectedMaxHours && !isCorrectedLeftHours) {
+      setOpenMaxHoursAccordingToFreeDays(true);
     }
   };
   const clearSearch = () => {
@@ -119,7 +144,7 @@ export const Inputs = ({
           onChange={(e) => {
             const limittedNumber = numberLimiter(e.target.value);
             setOrdinaryEmployeeHours(limittedNumber);
-            console.log(e.target.value);
+            // console.log(e.target.value);
           }}
           value={ordinaryEmployeeHours}
           autoFocus
