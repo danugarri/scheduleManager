@@ -16,14 +16,26 @@ export const TotalEmployeesTable = ({
   const totalSumation = getTotalSumation(allDays);
   const leftHoursStyle =
     leftWorkingHours === 0 ? style.leftHoursTdcompleted : style.leftHoursTdIncompleted;
-  const headerColumns = Object.entries(schedule).map((day, index) => (
-    <td className={style.tdPadding} key={day + index}>
-      {day[0]}
-    </td>
-  ));
+  // const headerColumns = Object.entries(schedule).map((day, index) => (
+  //   <td className={style.tdPadding} key={day + index}>
+  //     {day[0]}
+  //   </td>
+  // ));
+  const headerColumns = (
+    <>
+      <td className={style.tdPadding}>Empleado</td>
+      <td className={style.tdPadding}>Lunes</td>
+      <td className={style.tdPadding}>Martes</td>
+      <td className={style.tdPadding}>Miércoles</td>
+      <td className={style.tdPadding}>Jueves</td>
+      <td className={style.tdPadding}>Viernes</td>
+      <td className={style.tdPadding}>Sábado</td>
+      <td className={style.tdPadding}>Domingo</td>
+    </>
+  );
   return (
     <>
-      {totalEmployees.length > 0 && (
+      {schedule.hasOwnProperty('monday') && (
         <table className={style.scheduleTable}>
           {
             <thead className={style.scheduleThead}>
@@ -49,6 +61,7 @@ export const TotalEmployeesTable = ({
                     </td>
                   ))}
                   <td key='white-space'>{}</td>
+                  <td key='white-space2'>{}</td>
                   <td key='button'>
                     <button className={style.deleteButton} onClick={() => deleteEmployee(employee)}>
                       X
@@ -69,7 +82,7 @@ export const TotalEmployeesTable = ({
               <td className={style.scheduleTBodyTd}>{allDays.friday}</td>
               <td className={style.scheduleTBodyTd}>{allDays.saturday}</td>
               <td className={style.scheduleTBodyTd}>{allDays.sunday}</td>
-              <td className={style.idColumn}>{}</td>
+              {/* <td className={style.idColumn}>{}</td> */}
               <td className={style.totalHours}>{totalSumation}</td>
               <td key='left-working-hours' className={leftHoursStyle}>
                 {leftWorkingHours}

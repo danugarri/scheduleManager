@@ -68,11 +68,11 @@ function App() {
   const add = () => {
     console.log(totalEmployees);
     const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
-    const newSchedule = { ...schedule };
-    newSchedule.totalHours = totalHoursPerEmployee;
+    // const newSchedule = { ...schedule };
+    // newSchedule.totalHours = totalHoursPerEmployee;
     const notCalculatedNewSchedule = totalEmployees.find((employee) => employee.id === schedule.id);
     if (!notCalculatedNewSchedule) {
-      setTotalEmployees((prev) => prev.concat(newSchedule));
+      setTotalEmployees((prev) => prev.concat(schedule));
     } else {
       setOpenSameIdModal(true);
     }
