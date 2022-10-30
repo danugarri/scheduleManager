@@ -23,7 +23,7 @@ export const TotalEmployeesTable = ({
   ));
   return (
     <>
-      {schedule && (
+      {totalEmployees.length > 0 && (
         <table className={style.scheduleTable}>
           {
             <thead className={style.scheduleThead}>
