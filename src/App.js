@@ -69,14 +69,15 @@ function App() {
   const add = () => {
     console.log(totalEmployees);
     console.log(Schedule);
-    // const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
-    // const newSchedule = { ...schedule };
-    // newSchedule.totalHours = totalHoursPerEmployee;
+    const totalHoursPerEmployee = getTotalHoursPerEmployee(schedule);
+    schedule.totalHours = totalHoursPerEmployee;
+    const newSchedule = { ...schedule };
+    newSchedule.totalHours = totalHoursPerEmployee;
     const notCalculatedNewSchedule = totalEmployees.find(
       (employee) => employee.Employee === schedule.Employee,
     );
     if (!notCalculatedNewSchedule) {
-      setTotalEmployees((prev) => prev.concat(schedule));
+      setTotalEmployees((prev) => prev.concat(newSchedule));
     } else {
       setOpenSameIdModal(true);
     }
