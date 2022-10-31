@@ -60,6 +60,8 @@ function App() {
       sunday: Number(e.target[13].value) || 11,
     });
     setBeginning(false);
+    setTotalEmployees([]);
+    setSchedule({});
   };
   const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
 
