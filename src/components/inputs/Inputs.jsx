@@ -46,6 +46,7 @@ export const Inputs = ({
     workingHoursPerDay,
     freeDays,
     setOpenControlFinalFreeDays,
+    ordinaryEmployeeHours,
   );
   const checkedDay = (e) => {
     // console.log(e);
