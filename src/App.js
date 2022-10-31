@@ -153,6 +153,7 @@ function App() {
             leftWorkingHours={leftWorkingHours}
             totalSumation={totalSumation}
             localWorkingHours={localWorkingHours}
+            workingHoursPerDay={workingHoursPerDay}
           />
           <SameIdModal openSameIdModal={openSameIdModal} setOpenSameIdModal={setOpenSameIdModal} />
           <ControlFinalFreeDaysModal
