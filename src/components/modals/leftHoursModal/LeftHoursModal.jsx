@@ -26,7 +26,7 @@ export default function LeftHoursModal({
 }) {
   const handleClose = () => setOpenLeftHoursModal(false);
   const workingHoursPerDayList = (
-    <ul>
+    <ul className='hours-bag'>
       {Object.entries(workingHoursPerDay).map((day, index) => (
         <li key={index}>{`${day[0]}: ${day[1]}`}</li>
       ))}
@@ -50,7 +50,7 @@ export default function LeftHoursModal({
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             <p className='conclusion'>Revisa el horario</p>
             <p>{`Este local abre ${localWorkingHours}h a la semana`}</p>
-            <p>{`La bolsa de horas por día es:`}</p>
+            <p className='hours-bag'>{`La bolsa de horas por día es:`}</p>
             {workingHoursPerDayList}
             <p>{`Actualmente se han registrado ${totalSumation} horas`}</p>
             <p>{`Faltan por registrar ${leftWorkingHours}`}</p>
