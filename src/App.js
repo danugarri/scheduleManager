@@ -62,6 +62,9 @@ function App() {
     setBeginning(false);
     setTotalEmployees([]);
     setSchedule({});
+    setFreeDays([]);
+    setOrdinaryEmployeeHours('');
+    setEmployeeName('');
   };
   const maxHoursToDo = checkMaxHoursAccordingToFreeDays(allDays, workingHoursPerDay, freeDays);
 
