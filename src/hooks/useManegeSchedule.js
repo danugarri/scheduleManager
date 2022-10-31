@@ -69,12 +69,13 @@ export const useManegeSchedule = (
               minHoursPerDay,
               maxOrdinaryHoursPerDay,
             );
-
-            if (accumulatedSumation + newValue > workingHoursPerDay) {
-              for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
-                exclude.push(i);
+            for (const hour in workingHoursPerDay) {
+              if (accumulatedSumation + newValue > workingHoursPerDay[hour]) {
+                for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
+                  exclude.push(i);
+                }
+                newValue = modifiedGetRamdomSpecified(leaveOut.concat(exclude));
               }
-              newValue = modifiedGetRamdomSpecified(leaveOut.concat(exclude));
             }
 
             recalculatedSchedule[day2] = newValue;
@@ -85,33 +86,34 @@ export const useManegeSchedule = (
     /////////////
     totalEmployees.forEach((employee) => {
       for (let day in employee) {
-        if (generatedSchedule[day] + employee[day] > workingHoursPerDay) {
-          recalculatedSchedule = {
-            ...recalculatedSchedule,
-            [day]:
-              generatedSchedule[day] -
-              (generatedSchedule[day] + employee[day] - workingHoursPerDay),
-          };
-        }
-        if (allDays[day] === workingHoursPerDay) {
-          recalculatedSchedule = {
-            ...recalculatedSchedule,
-            [day]: 0,
-          };
-        }
-        if (
-          allDays[day] < workingHoursPerDay &&
-          allDays[day] + generatedSchedule[day] > workingHoursPerDay
-        ) {
-          recalculatedSchedule = {
-            ...recalculatedSchedule,
-            [day]: workingHoursPerDay - allDays[day],
-          };
+        for (const hour in workingHoursPerDay) {
+          if (generatedSchedule[day] + employee[day] > workingHoursPerDay[hour]) {
+            recalculatedSchedule = {
+              ...recalculatedSchedule,
+              [day]:
+                generatedSchedule[day] -
+                (generatedSchedule[day] + employee[day] - workingHoursPerDay[hour]),
+            };
+          }
+          if (allDays[day] === workingHoursPerDay[hour]) {
+            recalculatedSchedule = {
+              ...recalculatedSchedule,
+              [day]: 0,
+            };
+          }
+          if (
+            allDays[day] < workingHoursPerDay[hour] &&
+            allDays[day] + generatedSchedule[day] > workingHoursPerDay[hour]
+          ) {
+            recalculatedSchedule = {
+              ...recalculatedSchedule,
+              [day]: workingHoursPerDay[hour] - allDays[day],
+            };
+          }
         }
       }
     });
     avoidTen();
-    console.log(recalculatedSchedule);
     return recalculatedSchedule;
   };
 
@@ -134,9 +136,6 @@ export const useManegeSchedule = (
         }
 
         totalHours += generatedSchedule[day];
-        console.log(generatedSchedule);
-
-        // console.log(totalHours);
       }
     }
 
@@ -153,11 +152,17 @@ export const useManegeSchedule = (
       const finalResult = leftWorkingHours === Number(ordinaryEmployeeHours);
       if (finalResult) {
         for (const day in allDays) {
-          if (workingHoursPerDay - allDays[day] <= 9) {
+          if (workingHoursPerDay[day] - allDays[day] <= 9) {
             generatedSchedule = {
               ...generatedSchedule,
-              [day]: workingHoursPerDay - allDays[day],
+              [day]: workingHoursPerDay[day] - allDays[day],
             };
+            if (workingHoursPerDay[day] - allDays[day] === 0) {
+              generatedSchedule = {
+                ...generatedSchedule,
+                [day]: 0,
+              };
+            }
           }
         }
       } else {
@@ -188,6 +193,7 @@ export const useManegeSchedule = (
       ...generatedSchedule,
       id: new Date().getMilliseconds(),
     };
+    console.log(generatedSchedule);
     let sumation = 0;
     for (const day in generatedSchedule) {
       if (day !== 'Employee' && day !== 'id') {

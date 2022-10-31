@@ -12,6 +12,5 @@ export const extractOnlyDays = (totalEmployees) => {
     }
     array.push(final);
   });
-  console.log(array);
   return array;
 };

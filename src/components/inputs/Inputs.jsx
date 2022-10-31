@@ -48,7 +48,7 @@ export const Inputs = ({
     setOpenControlFinalFreeDays,
   );
   const checkedDay = (e) => {
-    console.log(e);
+    // console.log(e);
     const isChecked = e.target.checked;
     const value = e.target.name;
     if (isChecked) {
@@ -56,7 +56,6 @@ export const Inputs = ({
     } else {
       removeItemFromArr(freeDays, value);
     }
-    console.log(isChecked);
   };
   console.log(freeDays);
   const scheduleManagement = useManegeSchedule(
@@ -145,7 +144,7 @@ export const Inputs = ({
           onChange={(e) => {
             const limittedNumber = numberLimiter(e.target.value);
             setOrdinaryEmployeeHours(limittedNumber);
-            console.log(e.target.value);
+            // console.log(e.target.value);
           }}
           value={ordinaryEmployeeHours}
           autoFocus

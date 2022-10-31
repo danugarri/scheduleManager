@@ -6,11 +6,11 @@ export const checkMaxHoursAccordingToFreeDays = (allDays, workingHoursPerDay, fr
     freeDays.forEach((freeDay) => {
       for (const day in allDays) {
         // If the subtraction is less tahn or equals 9 (the max hours per day)
-        if (workingHoursPerDay - allDays[day] >= 9) {
+        if (workingHoursPerDay[day] - allDays[day] >= 9) {
           maxHours = { ...maxHours, [day]: 9 };
         }
-        if (workingHoursPerDay - allDays[day] < 9) {
-          maxHours = { ...maxHours, [day]: workingHoursPerDay - allDays[day] };
+        if (workingHoursPerDay[day] - allDays[day] < 9) {
+          maxHours = { ...maxHours, [day]: workingHoursPerDay[day] - allDays[day] };
         }
 
         if (day === freeDay) {
@@ -20,11 +20,9 @@ export const checkMaxHoursAccordingToFreeDays = (allDays, workingHoursPerDay, fr
     });
   }
   Object.assign(maxHours, freeDaysObject);
-  console.log(maxHours);
   //   Return total sumation according to the previous
   for (const day in maxHours) {
     maxHoursToDo += maxHours[day];
   }
-  console.log(maxHoursToDo);
   return maxHoursToDo;
 };
