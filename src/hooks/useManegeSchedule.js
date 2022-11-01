@@ -38,10 +38,14 @@ export const useManegeSchedule = (
           const checkSumation = allDays[day2] + recalculatedDay;
           const accumulatedSumation = allDays[day2];
           const exclude = [];
-          const tenMustBeAvoid = checkSumation === 10;
           let leaveOut = [];
+          let hourMustBeAvoided = false;
+          for (const hour in workingHoursPerDay) {
+            // get the hour to be avoided
+            hourMustBeAvoided = checkSumation === workingHoursPerDay[hour] - 1;
+          }
 
-          if (tenMustBeAvoid) {
+          if (hourMustBeAvoided) {
             // possible combinations 3+7, 4+6,2+8, 5+5
             if (recalculatedDay === 2) {
               leaveOut = [recalculatedDay];
