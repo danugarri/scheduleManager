@@ -1,4 +1,4 @@
-import { modifiedGetRamdomSpecified } from '../helpers/getRamdomNumbersImproved';
+import { getNew, getRandomSpecifiedWIthHalf } from '../helpers/getRamdomNumbersImproved';
 import { getTotalSumation } from '../helpers/getTotalSumation';
 import { nameFormatter } from '../helpers/nameFormatter';
 
@@ -37,38 +37,49 @@ export const useManegeSchedule = (
           const recalculatedDay = recalculatedSchedule[day2];
           const checkSumation = allDays[day2] + recalculatedDay;
           const accumulatedSumation = allDays[day2];
-          const exclude = [];
+          const exclude = [0.5, 1, 1.5];
           let leaveOut = [];
           let hourMustBeAvoided = false;
-          for (const hour in workingHoursPerDay) {
-            // get the hour to be avoided
-            hourMustBeAvoided = checkSumation === workingHoursPerDay[hour] - 1;
-          }
+
+          // get the hour to be avoided
+          hourMustBeAvoided =
+            checkSumation === workingHoursPerDay[day2] - 1 ||
+            checkSumation === workingHoursPerDay[day2] - 1.5 ||
+            checkSumation === workingHoursPerDay[day2] - 0.5;
 
           if (hourMustBeAvoided) {
             // possible combinations 3+7, 4+6,2+8, 5+5
-            if (recalculatedDay === 2) {
+            if (recalculatedDay === 0 || recalculatedDay === 0.5) {
               leaveOut = [recalculatedDay];
             }
-            if (recalculatedDay === 3) {
+            if (recalculatedDay === 1 || recalculatedDay === 1.5) {
               leaveOut = [recalculatedDay];
             }
-            if (recalculatedDay === 4) {
+            if (recalculatedDay === 2 || recalculatedDay === 2.5) {
               leaveOut = [recalculatedDay];
             }
-            if (recalculatedDay === 5) {
+            if (recalculatedDay === 3 || recalculatedDay === 3.5) {
               leaveOut = [recalculatedDay];
             }
-            if (recalculatedDay === 6) {
+            if (recalculatedDay === 4 || recalculatedDay === 4.5) {
               leaveOut = [recalculatedDay];
             }
-            if (recalculatedDay === 7) {
+            if (recalculatedDay === 5 || recalculatedDay === 5.5) {
               leaveOut = [recalculatedDay];
             }
-            if (recalculatedDay === 8) {
+            if (recalculatedDay === 6 || recalculatedDay === 6.5) {
               leaveOut = [recalculatedDay];
             }
-            let newValue = modifiedGetRamdomSpecified(
+            if (recalculatedDay === 7 || recalculatedDay === 7.5) {
+              leaveOut = [recalculatedDay];
+            }
+            if (recalculatedDay === 8 || recalculatedDay === 8.5) {
+              leaveOut = [recalculatedDay];
+            }
+            if (recalculatedDay === 9) {
+              leaveOut = [recalculatedDay];
+            }
+            let newValue = getRandomSpecifiedWIthHalf(
               leaveOut,
               minHoursPerDay,
               maxOrdinaryHoursPerDay,
@@ -78,7 +89,7 @@ export const useManegeSchedule = (
                 for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
                   exclude.push(i);
                 }
-                newValue = modifiedGetRamdomSpecified(leaveOut.concat(exclude));
+                newValue = getRandomSpecifiedWIthHalf(leaveOut.concat(exclude));
               }
             }
 
@@ -131,11 +142,13 @@ export const useManegeSchedule = (
         if (!isFreeDay) {
           // it avoids problems at the first iteration
           if (ordinaryEmployeeHours <= 25) {
-            generatedSchedule[day] = modifiedGetRamdomSpecified([1], 0, maxOrdinaryHoursPerDay);
-          } else {
-            generatedSchedule[day] = Math.floor(
-              Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
+            generatedSchedule[day] = getRandomSpecifiedWIthHalf(
+              [0.5, 1, 1.5],
+              0,
+              maxOrdinaryHoursPerDay,
             );
+          } else {
+            generatedSchedule[day] = getNew(minHoursPerDay, maxOrdinaryHoursPerDay);
           }
         }
 

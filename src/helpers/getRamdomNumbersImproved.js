@@ -12,9 +12,33 @@ function getRandomArbitrary(minHoursPerDay, maxOrdinaryHoursPerDay) {
   return Math.floor(Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay);
 }
 
-export const modifiedGetRamdomSpecified = (leaveOut, minHoursPerDay, maxOrdinaryHoursPerDay) => {
+export const modifiedGetRandomSpecified = (leaveOut, minHoursPerDay, maxOrdinaryHoursPerDay) => {
   //Values to be left out
   let random = getRandomArbitrary(minHoursPerDay, maxOrdinaryHoursPerDay);
+  while (leaveOut.includes(random)) {
+    random = getRandomArbitrary(2, 9);
+  }
+  return random;
+};
+//  Ramdom numbers sometimes integer sometimes double
+// ej 6, 7, 9, 4.5, 3, 2.5
+export const getNew = (minHoursPerDay, maxOrdinaryHoursPerDay) => {
+  const addHalf = Math.floor(Math.random() * 2);
+  const result1 = Math.floor(
+    Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
+  );
+  if (addHalf === 1) {
+    if (result1 !== 9) {
+      console.log(result1 + 0.5);
+      return result1 + 0.5;
+    }
+  }
+  return result1;
+};
+// ramdom with leaving out
+export const getRandomSpecifiedWIthHalf = (leaveOut, minHoursPerDay, maxOrdinaryHoursPerDay) => {
+  //Values to be left out
+  let random = getNew(minHoursPerDay, maxOrdinaryHoursPerDay);
   while (leaveOut.includes(random)) {
     random = getRandomArbitrary(2, 9);
   }
