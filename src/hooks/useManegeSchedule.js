@@ -40,13 +40,12 @@ export const useManegeSchedule = (
           const exclude = [0.5, 1, 1.5];
           let leaveOut = [];
           let hourMustBeAvoided = false;
-          for (const hour in workingHoursPerDay) {
-            // get the hour to be avoided
-            hourMustBeAvoided =
-              checkSumation === workingHoursPerDay[hour] - 1 ||
-              checkSumation === workingHoursPerDay[hour] - 1.5 ||
-              checkSumation === workingHoursPerDay[hour] - 0.5;
-          }
+
+          // get the hour to be avoided
+          hourMustBeAvoided =
+            checkSumation === workingHoursPerDay[day2] - 1 ||
+            checkSumation === workingHoursPerDay[day2] - 1.5 ||
+            checkSumation === workingHoursPerDay[day2] - 0.5;
 
           if (hourMustBeAvoided) {
             // possible combinations 3+7, 4+6,2+8, 5+5
@@ -75,6 +74,9 @@ export const useManegeSchedule = (
               leaveOut = [recalculatedDay];
             }
             if (recalculatedDay === 8 || recalculatedDay === 8.5) {
+              leaveOut = [recalculatedDay];
+            }
+            if (recalculatedDay === 9) {
               leaveOut = [recalculatedDay];
             }
             let newValue = getRandomSpecifiedWIthHalf(
