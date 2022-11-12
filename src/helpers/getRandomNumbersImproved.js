@@ -31,11 +31,11 @@ export const getNew = (minHoursPerDay, maxOrdinaryHoursPerDay) => {
     console.log(result1 + 0.5);
     return result1 + 0.5;
   }
-  while (result1 === 0 || result1 === 1) {
-    result1 = Math.floor(
-      Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
-    );
-  }
+  // while (result1 === 0 || result1 === 1) {
+  //   result1 = Math.floor(
+  //     Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
+  //   );
+  // }
 
   return result1;
 };
