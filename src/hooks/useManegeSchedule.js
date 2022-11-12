@@ -73,7 +73,6 @@ export const useManegeSchedule = (
             if (accumulatedSumation + newValue > workingHoursPerDay[day2]) {
               for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
                 exclude.push(i);
-                exclude.push(i + 0.5);
               }
               newValue = getRandomSpecifiedWIthHalf(leaveOut.concat(exclude));
             }
