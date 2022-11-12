@@ -1,4 +1,4 @@
-export const getRamdomSpecified = (workingHoursPerDay) => {
+export const getRandomSpecified = (workingHoursPerDay) => {
   let leaveOut = [1, 10]; //Values to be left out
   let random = getRandomArbitrary(0, workingHoursPerDay);
   while (leaveOut.includes(random)) {
@@ -24,15 +24,19 @@ export const modifiedGetRandomSpecified = (leaveOut, minHoursPerDay, maxOrdinary
 // ej 6, 7, 9, 4.5, 3, 2.5
 export const getNew = (minHoursPerDay, maxOrdinaryHoursPerDay) => {
   const addHalf = Math.floor(Math.random() * 2);
-  const result1 = Math.floor(
+  let result1 = Math.floor(
     Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
   );
-  if (addHalf === 1) {
-    if (result1 !== 9) {
-      console.log(result1 + 0.5);
-      return result1 + 0.5;
-    }
+  if (addHalf === 1 && result1 !== 9) {
+    console.log(result1 + 0.5);
+    return result1 + 0.5;
   }
+  while (result1 === 0 || result1 === 1) {
+    result1 = Math.floor(
+      Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
+    );
+  }
+
   return result1;
 };
 // ramdom with leaving out

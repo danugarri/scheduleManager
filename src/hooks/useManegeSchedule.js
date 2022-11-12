@@ -1,4 +1,4 @@
-import { getNew, getRandomSpecifiedWIthHalf } from '../helpers/getRamdomNumbersImproved';
+import { getRandomSpecifiedWIthHalf } from '../helpers/getRandomNumbersImproved';
 import { getTotalSumation } from '../helpers/getTotalSumation';
 import { nameFormatter } from '../helpers/nameFormatter';
 
@@ -79,18 +79,28 @@ export const useManegeSchedule = (
             if (recalculatedDay === 9) {
               leaveOut = [recalculatedDay];
             }
+            // Leaving out
+            if (checkSumation === workingHoursPerDay[day2] - 1) {
+              leaveOut.concat([recalculatedDay + 0.5, recalculatedDay - 0.5]);
+            }
+            if (checkSumation === workingHoursPerDay[day2] - 1.5) {
+              leaveOut.concat([recalculatedDay + 1, recalculatedDay + 0.5]);
+            }
+            if (checkSumation === workingHoursPerDay[day2] - 0.5) {
+              leaveOut.concat([recalculatedDay - 0.5, recalculatedDay - 1]);
+            }
             let newValue = getRandomSpecifiedWIthHalf(
               leaveOut,
               minHoursPerDay,
               maxOrdinaryHoursPerDay,
             );
-            for (const hour in workingHoursPerDay) {
-              if (accumulatedSumation + newValue > workingHoursPerDay[hour]) {
-                for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
-                  exclude.push(i);
-                }
-                newValue = getRandomSpecifiedWIthHalf(leaveOut.concat(exclude));
+
+            if (accumulatedSumation + newValue > workingHoursPerDay[day2]) {
+              for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
+                exclude.push(i);
+                // exclude.push(i + 0.5);
               }
+              newValue = getRandomSpecifiedWIthHalf(leaveOut.concat(exclude));
             }
 
             recalculatedSchedule[day2] = newValue;
@@ -148,7 +158,11 @@ export const useManegeSchedule = (
               maxOrdinaryHoursPerDay,
             );
           } else {
-            generatedSchedule[day] = getNew(minHoursPerDay, maxOrdinaryHoursPerDay);
+            generatedSchedule[day] = getRandomSpecifiedWIthHalf(
+              [0.5, 1, 1.5],
+              minHoursPerDay,
+              maxOrdinaryHoursPerDay,
+            );
           }
         }
 
