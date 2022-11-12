@@ -49,45 +49,20 @@ export const useManegeSchedule = (
 
           if (hourMustBeAvoided) {
             // possible combinations 3+7, 4+6,2+8, 5+5
-            if (recalculatedDay === 0 || recalculatedDay === 0.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 1 || recalculatedDay === 1.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 2 || recalculatedDay === 2.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 3 || recalculatedDay === 3.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 4 || recalculatedDay === 4.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 5 || recalculatedDay === 5.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 6 || recalculatedDay === 6.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 7 || recalculatedDay === 7.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 8 || recalculatedDay === 8.5) {
-              leaveOut = [recalculatedDay];
-            }
-            if (recalculatedDay === 9) {
-              leaveOut = [recalculatedDay];
+            for (let i = 0; i <= 9; i++) {
+              if (recalculatedDay === i || recalculatedDay === i + 0.5) {
+                leaveOut = [recalculatedDay];
+              }
             }
             // Leaving out
             if (checkSumation === workingHoursPerDay[day2] - 1) {
-              leaveOut.concat([recalculatedDay + 0.5, recalculatedDay - 0.5]);
+              leaveOut.push(recalculatedDay + 0.5, recalculatedDay - 0.5);
             }
             if (checkSumation === workingHoursPerDay[day2] - 1.5) {
-              leaveOut.concat([recalculatedDay + 1, recalculatedDay + 0.5]);
+              leaveOut.push(recalculatedDay + 1, recalculatedDay + 0.5);
             }
             if (checkSumation === workingHoursPerDay[day2] - 0.5) {
-              leaveOut.concat([recalculatedDay - 0.5, recalculatedDay - 1]);
+              leaveOut.push(recalculatedDay - 0.5, recalculatedDay - 1);
             }
             let newValue = getRandomSpecifiedWIthHalf(
               leaveOut,
@@ -98,7 +73,7 @@ export const useManegeSchedule = (
             if (accumulatedSumation + newValue > workingHoursPerDay[day2]) {
               for (let i = recalculatedDay + 2; i <= maxOrdinaryHoursPerDay; i++) {
                 exclude.push(i);
-                // exclude.push(i + 0.5);
+                exclude.push(i + 0.5);
               }
               newValue = getRandomSpecifiedWIthHalf(leaveOut.concat(exclude));
             }
