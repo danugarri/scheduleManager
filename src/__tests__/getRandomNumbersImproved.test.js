@@ -31,4 +31,12 @@ describe('the getRandomSpecifiedWIthHalf function', () => {
       //   if the test does not pass it is because i got a 9
     }
   });
+  test('get 0', () => {
+    for (let x = 0; x < 1000; x++) {
+      const value = getRandomSpecifiedWIthHalf(excludedNumbers, 0, 9);
+      //   console.log(value);
+      expect(value).not.toBe(0);
+      //   if the test does not pass it is because i got a 0
+    }
+  });
 });
