@@ -27,7 +27,7 @@ export const getNew = (minHoursPerDay, maxOrdinaryHoursPerDay) => {
   let result1 = Math.floor(
     Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay,
   );
-  if (addHalf === 1 && result1 !== 9) {
+  if (addHalf === 1 && result1 !== 9 && result1 !== 0 && result1 !== 1) {
     console.log(result1 + 0.5);
     return result1 + 0.5;
   }
