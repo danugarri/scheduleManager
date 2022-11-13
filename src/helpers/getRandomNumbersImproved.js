@@ -8,7 +8,7 @@ export const getRandomSpecified = (workingHoursPerDay) => {
 
   // return random integer number between min (included) and max (excluded)
 };
-function getRandomArbitrary(minHoursPerDay, maxOrdinaryHoursPerDay) {
+export function getRandomArbitrary(minHoursPerDay, maxOrdinaryHoursPerDay) {
   return Math.floor(Math.random() * (maxOrdinaryHoursPerDay - minHoursPerDay + 1) + minHoursPerDay);
 }
 
@@ -31,6 +31,7 @@ export const getNew = (minHoursPerDay, maxOrdinaryHoursPerDay) => {
     console.log(result1 + 0.5);
     return result1 + 0.5;
   }
+
   return result1;
 };
 // ramdom with leaving out
