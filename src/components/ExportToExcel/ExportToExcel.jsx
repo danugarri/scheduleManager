@@ -17,7 +17,7 @@ export const ExportToExcel = ({ csvData }) => {
   const downloadFile = () => {
     if (formattedCsv.length > 0) {
       postData(formattedCsv).then((response) => {
-        window.open(response.data, '_self');
+        window.open(response.data);
       });
     }
   };
