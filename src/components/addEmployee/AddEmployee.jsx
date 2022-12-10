@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExportCsv } from '../exportCsv/ExportCsv';
+import { CustomExportCsv } from '../customExportCsv.jsx/CustomExportCsv';
 
 import './AddEmployee.css';
 
@@ -32,7 +32,8 @@ export const AddEmployee = ({
           <button onClick={emptyTable} className='space'>
             Vaciar Tabla
           </button>
-          <ExportCsv csvData={totalEmployees} />
+          {/* <ExportCsv csvData={totalEmployees} /> */}
+          <CustomExportCsv csvData={totalEmployees} />
         </div>
       )}
       <TotalEmployeesTable
