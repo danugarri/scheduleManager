@@ -1,7 +1,7 @@
 // import { dataExample } from './consts';
 
 export const postData = async (csvData) => {
-  // const initialUrl = 'https://excel-file-writer-improved.onrender.com';
+  // const initialUrl = 'http://localhost:5000';
   const deployedUrl = 'https://excel-file-writer-improved.onrender.com';
   const response = await fetch(deployedUrl, {
     body: JSON.stringify(csvData),
