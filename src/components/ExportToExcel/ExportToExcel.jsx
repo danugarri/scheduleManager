@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { postData } from '../../service/postData';
 import DownloadIcon from '@mui/icons-material/Download';
-import './CustomExportCsv.css';
+import './ExportToExcel.css';
 
-export const CustomExportCsv = ({ csvData }) => {
+export const ExportToExcel = ({ csvData }) => {
   let formattedCsv = useMemo(() => [], []);
   if (csvData.length > 0) {
     // Deleted id column
