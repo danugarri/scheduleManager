@@ -39,7 +39,6 @@ export const SelectColors = ({ accordion }) => {
             <input
               type='color'
               name='employee'
-              defaultValue={defaultColor}
               className='color-input input-style'
               onChange={(e) => setFormData({ ...formData, color: e.target.value })}
               value={formData.color}
