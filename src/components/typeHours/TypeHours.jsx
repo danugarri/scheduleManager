@@ -102,7 +102,7 @@ export const TypeHours = ({ submitHours }) => {
         <input type='submit' value='Empezar' className='begin' />
         <input type='button' value={buttonText} onClick={handleConfigButton} className='begin' />
       </form>
-      <SelectColors accordion={accordion} handleConfigButton={handleConfigButton} />
+      <SelectColors accordion={accordion} />
     </React.Fragment>
   );
 };
