@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { postEmployee } from '../../services/postEmployee';
+import GeneralModal from '../modals/generalModal/GeneralModal';
 import './SelectColors.css';
 
 export const SelectColors = ({ accordion }) => {
@@ -9,12 +10,22 @@ export const SelectColors = ({ accordion }) => {
     color: defaultColor,
     employeeName: '',
   };
-
+  const [text, setText] = useState('');
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState(initialData);
   // here i want to send a post request to an API which send a request to MongoDB
   const fillEmployee = (e) => {
     e.preventDefault();
-    postEmployee(formData);
+    postEmployee(formData)
+      .then((data) => {
+        console.log(data);
+        setText({ name: data.employeeName, color: data.color });
+        setOpen(true);
+      })
+      .catch((error) => {
+        setText(error.message);
+        setOpen(true);
+      });
     // reset
     setFormData({ color: defaultColor, employeeName: '' });
   };
@@ -47,6 +58,7 @@ export const SelectColors = ({ accordion }) => {
           <input type='submit' value='Crear empleado' className='color-submit input-style' />
         </form>
       )}
+      <GeneralModal text={text} open={open} setOpen={setOpen} />
     </>
   );
 };
