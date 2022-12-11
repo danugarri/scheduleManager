@@ -113,6 +113,7 @@ function App() {
             hours={hours}
             setBeginning={setBeginning}
           />
+
           <Inputs
             setSchedule={setSchedule}
             freeDays={freeDays}

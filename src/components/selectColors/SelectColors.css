@@ -1,0 +1,21 @@
+.select-color-form {
+  margin: 0 15rem;
+  /* position: absolute; */
+  position: relative;
+  top: 4rem;
+  /* left: 5%; */
+}
+.color-input {
+  border: none;
+
+  top: 0.1875rem;
+}
+.color-submit {
+  display: block;
+  position: relative;
+  top: 10px;
+}
+.input-style {
+  left: 0.8rem;
+  position: relative;
+}
