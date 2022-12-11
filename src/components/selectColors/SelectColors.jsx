@@ -31,6 +31,7 @@ export const SelectColors = ({ accordion }) => {
               className='input-style'
               onChange={(e) => setFormData({ ...formData, employeeName: e.target.value })}
               value={formData.employeeName}
+              required
             />
           </section>
           <section className='section-container'>
