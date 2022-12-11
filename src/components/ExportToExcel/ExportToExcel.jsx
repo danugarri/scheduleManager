@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { postData } from '../../service/postData';
+import { postData } from '../../services/postData';
 import DownloadIcon from '@mui/icons-material/Download';
 import './ExportToExcel.css';
 
