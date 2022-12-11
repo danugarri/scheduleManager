@@ -36,6 +36,14 @@ export default function GeneralModal({ setOpen, open, text }) {
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             <p>Has añadido a {text.name}</p>
             <p>Con el color: {text.color}</p>
+            <div
+              style={{
+                backgroundColor: text.color,
+                width: '5rem',
+                height: '5rem',
+                margin: '0 auto',
+              }}
+            ></div>
             <button onClick={handleClose} className='close-button '>
               X
             </button>
