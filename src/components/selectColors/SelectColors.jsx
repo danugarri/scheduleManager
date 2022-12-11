@@ -21,7 +21,7 @@ export const SelectColors = ({ accordion }) => {
               className='color-input input-style'
             />
           </section>
-          <input type='submit' value='Crear empleado' className='color-submit' />
+          <input type='submit' value='Crear empleado' className='color-submit input-style' />
         </form>
       )}
     </>

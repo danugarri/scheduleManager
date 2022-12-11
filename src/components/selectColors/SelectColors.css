@@ -7,7 +7,6 @@
 }
 .color-input {
   border: none;
-
   top: 0.1875rem;
 }
 .color-submit {
@@ -18,4 +17,5 @@
 .input-style {
   left: 0.8rem;
   position: relative;
+  cursor: pointer;
 }
