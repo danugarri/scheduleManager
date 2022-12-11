@@ -4,15 +4,19 @@ import { postEmployee } from '../../services/postEmployee';
 import './SelectColors.css';
 
 export const SelectColors = ({ accordion }) => {
+  const defaultColor = '#FF007F';
   const initialData = {
-    color: '',
+    color: defaultColor,
     employeeName: '',
   };
+
   const [formData, setFormData] = useState(initialData);
   // here i want to send a post request to an API which send a request to MongoDB
   const fillEmployee = (e) => {
     e.preventDefault();
     postEmployee(formData);
+    // reset
+    setFormData({ color: defaultColor, employeeName: '' });
   };
 
   return (
@@ -25,7 +29,8 @@ export const SelectColors = ({ accordion }) => {
               type='text'
               name='employee-name'
               className='input-style'
-              onChange={(e) => setFormData({ employeeName: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, employeeName: e.target.value })}
+              value={formData.employeeName}
             />
           </section>
           <section className='section-container'>
@@ -33,9 +38,10 @@ export const SelectColors = ({ accordion }) => {
             <input
               type='color'
               name='employee'
-              defaultValue={'#FF007F'}
+              defaultValue={defaultColor}
               className='color-input input-style'
-              onChange={(e) => setFormData({ color: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, color: e.target.value })}
+              value={formData.color}
             />
           </section>
           <input type='submit' value='Crear empleado' className='color-submit input-style' />
