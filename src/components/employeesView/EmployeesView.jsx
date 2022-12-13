@@ -1,13 +1,14 @@
 import React from 'react';
+import './EmployeesView.css';
 
 export const EmployeesView = ({ data, openEmployees }) => {
   const employee = data.map((employee) => (
-    <section>
-      <p>{`Empleado: ${employee.employeeName}`}</p>
-      <p>Color: </p>
-      <div
-        style={{ backgroundColor: employee.color, width: '5rem', height: '5rem', margin: '0 auto' }}
-      ></div>
+    <section className='employee-container'>
+      <p className='bold-text'>{` ${employee.employeeName}`}</p>
+      <section className='color-container'>
+        <p className='bold-text'>Color: </p>
+        <div style={{ backgroundColor: employee.color }} className='employee-color-view'></div>
+      </section>
     </section>
   ));
   return <>{openEmployees && employee}</>;
