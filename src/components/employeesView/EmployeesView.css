@@ -7,6 +7,9 @@
   border-radius: 1.5625rem;
   border: 2px solid grey;
   margin-bottom: 1.25rem;
+  box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.75);
 }
 .bold-text {
   font-weight: bold;
@@ -21,4 +24,5 @@
   position: relative;
   left: 3.125rem;
   bottom: 0.3125rem;
+  box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.75);
 }
