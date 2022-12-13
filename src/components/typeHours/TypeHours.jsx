@@ -9,12 +9,16 @@ export const TypeHours = ({ submitHours }) => {
   const [openEmployees, setOpenEmployees] = useState(false);
   const [data, setData] = useState([{ color: '', employeeName: '' }]);
   const displayEmployees = () => {
+    setAccordion(false);
     setOpenEmployees(!openEmployees);
     if (!openEmployees) {
       getEmployee().then((data) => setData(data));
     }
   };
-  const handleConfigButton = () => setAccordion(!accordion);
+  const handleConfigButton = () => {
+    setAccordion(!accordion);
+    setOpenEmployees(false);
+  };
   const configButtonText = accordion ? 'Cerrar configuración' : 'Abrir configuración';
   const employeeButtonText = openEmployees ? 'Ocultar empleados' : 'Mostrar empleados';
 
