@@ -1,9 +1,9 @@
 .employee-container {
   position: relative;
   top: 3.125rem;
-  left: 10%;
+  left: 20%;
   padding: 5px 5px 40px 40px;
-  width: 80vw;
+  width: 50vw;
   border-radius: 1.5625rem;
   border: 2px solid grey;
   margin-bottom: 1.25rem;
@@ -13,6 +13,9 @@
 }
 .bold-text {
   font-weight: bold;
+}
+.employee-name {
+  font-size: 30px;
 }
 .color-container {
   display: flex;
