@@ -11,6 +11,18 @@
   -webkit-box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.75);
 }
+.employee-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.employee-deletion {
+  position: relative;
+  top: 30px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: bolder;
+}
 .bold-text {
   font-weight: bold;
 }
