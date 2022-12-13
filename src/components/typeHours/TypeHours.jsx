@@ -23,7 +23,7 @@ export const TypeHours = ({ submitHours }) => {
   const employeeButtonText = openEmployees ? 'Ocultar empleados' : 'Mostrar empleados';
 
   return (
-    <React.Fragment>
+    <div className='config-container'>
       <form className='hours-form' autoComplete='true' onSubmit={submitHours}>
         <h3>Selecciona la bolsa de Horas</h3>
         <label>Por defecto las horas por día son 11</label>
@@ -130,6 +130,6 @@ export const TypeHours = ({ submitHours }) => {
       </form>
       <SelectColors accordion={accordion} />
       <EmployeesView data={data} openEmployees={openEmployees} />
-    </React.Fragment>
+    </div>
   );
 };
