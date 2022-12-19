@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { deleteEmployee } from '../../services/deleteEmployee';
-import { getEmployee } from '../../services/getEmployees';
+
 import GeneralModal from '../modals/generalModal/GeneralModal';
 import './EmployeesView.css';
 
@@ -19,9 +19,9 @@ export const EmployeesView = ({ data, openEmployees, setText }) => {
     });
   };
 
-  const employee = data.map((employee, index) => (
-    <main
-      key={index}
+  const employee = data.map((employee) => (
+    <div
+      key={employee._id}
       className='employee-container'
       id='employee-container'
       aria-valuetext={employee._id}
@@ -38,7 +38,7 @@ export const EmployeesView = ({ data, openEmployees, setText }) => {
           <div style={{ backgroundColor: employee.color }} className='employee-color-view'></div>
         </section>
       </section>
-    </main>
+    </div>
   ));
 
   return (

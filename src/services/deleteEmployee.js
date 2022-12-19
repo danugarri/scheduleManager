@@ -1,8 +1,8 @@
 export const deleteEmployee = async (id) => {
-  const initialUrl = 'http://localhost:5000/employee';
+  // const initialUrl = 'http://localhost:5000/employee';
   const deployedUrl = 'https://excel-file-writer-improved.onrender.com/employee';
   const employeeId = { id };
-  const response = await fetch(initialUrl, {
+  const response = await fetch(deployedUrl, {
     body: JSON.stringify(employeeId),
     method: 'DELETE',
     headers: {
