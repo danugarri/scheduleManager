@@ -7,6 +7,8 @@ import './EmployeesView.css';
 export const EmployeesView = ({ data, openEmployees, setEmployeeRequest }) => {
   const [employeeDeleted, setEmployeeDeleted] = useState({});
   const [openDeletedModal, setOpenDeletedModal] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [employeeHovered, setEmployeeHovered] = useState({});
 
   const sendDelete = (e) => {
     const id = e.currentTarget.ariaValueText;
@@ -18,34 +20,38 @@ export const EmployeesView = ({ data, openEmployees, setEmployeeRequest }) => {
       setEmployeeRequest({ name: employeeDeleted.employeeName, color: '', message: 'deleted' });
     });
   };
-  const [hover, setHover] = useState(false);
+  const employeeHover = (e) => {
+    const id = e.currentTarget.ariaValueText;
+    const employeeHovered = data.find((employee) => employee._id === id);
+    setEmployeeHovered(employeeHovered);
+    setHover(true);
+  };
 
-  const myStyle = hover ? 'red' : '';
-
-  const employee = data.map((employee, index) => (
-    <div key={employee._id} className='employee-container' style={{ backgroundColor: myStyle }}>
-      <section className='employee-content-container'>
-        <section className='employee-header'>
-          <p className='bold-text employee-name'>{` ${employee.employeeName}`}</p>
-          <div
-            onMouseOver={(e) => {
-              setHover(true);
-            }}
-            onMouseOut={() => setHover(false)}
-            onClick={(e) => sendDelete(e)}
-            className='employee-deletion'
-            aria-valuetext={employee._id}
-          >
-            X
-          </div>
+  const employee = data.map((employee) => {
+    const myStyle = hover && employeeHovered._id === employee._id ? 'red' : '';
+    return (
+      <div key={employee._id} className='employee-container' style={{ backgroundColor: myStyle }}>
+        <section className='employee-content-container'>
+          <section className='employee-header'>
+            <p className='bold-text employee-name'>{` ${employee.employeeName}`}</p>
+            <div
+              onMouseOver={(e) => employeeHover(e)}
+              onMouseOut={() => setHover(false)}
+              onClick={(e) => sendDelete(e)}
+              className='employee-deletion'
+              aria-valuetext={employee._id}
+            >
+              X
+            </div>
+          </section>
+          <section className='color-container'>
+            <p className='bold-text'>Color: </p>
+            <div style={{ backgroundColor: employee.color }} className='employee-color-view'></div>
+          </section>
         </section>
-        <section className='color-container'>
-          <p className='bold-text'>Color: </p>
-          <div style={{ backgroundColor: employee.color }} className='employee-color-view'></div>
-        </section>
-      </section>
-    </div>
-  ));
+      </div>
+    );
+  });
 
   return (
     <>
