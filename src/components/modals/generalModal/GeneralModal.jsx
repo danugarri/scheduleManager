@@ -16,16 +16,16 @@ const style = {
   p: 4,
 };
 
-export default function GeneralModal({ setOpen, open, text }) {
+export default function GeneralModal({ setOpen, open, employeeRequest }) {
   const handleClose = () => setOpen(false);
   const message =
-    text.message === 'created' ? (
+    employeeRequest.message === 'created' ? (
       <>
-        <p>Has añadido a {text.name}</p>
-        <p>Con el color: {text.color}</p>
+        <p>Has añadido a {employeeRequest.name}</p>
+        <p>Con el color: {employeeRequest.color}</p>
       </>
     ) : (
-      <p>Has eliminado a {text.name}</p>
+      <p>Has eliminado a {employeeRequest.name}</p>
     );
 
   return (
@@ -46,7 +46,7 @@ export default function GeneralModal({ setOpen, open, text }) {
             {message}
             <div
               style={{
-                backgroundColor: text.color,
+                backgroundColor: employeeRequest.color,
                 width: '5rem',
                 height: '5rem',
                 margin: '0 auto',

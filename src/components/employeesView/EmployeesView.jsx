@@ -4,7 +4,7 @@ import { deleteEmployee } from '../../services/deleteEmployee';
 import GeneralModal from '../modals/generalModal/GeneralModal';
 import './EmployeesView.css';
 
-export const EmployeesView = ({ data, openEmployees, setText }) => {
+export const EmployeesView = ({ data, openEmployees, setEmployeeRequest }) => {
   const [employeeDeleted, setEmployeeDeleted] = useState({});
   const [openDeletedModal, setOpenDeletedModal] = useState(false);
 
@@ -15,7 +15,7 @@ export const EmployeesView = ({ data, openEmployees, setText }) => {
       console.log(employeeDeleted.employeeName);
       setEmployeeDeleted({ name: employeeDeleted.employeeName, message: 'deleted' });
       setOpenDeletedModal(true);
-      setText({ name: employeeDeleted.employeeName, color: '', message: 'deleted' });
+      setEmployeeRequest({ name: employeeDeleted.employeeName, color: '', message: 'deleted' });
     });
   };
 
@@ -45,7 +45,7 @@ export const EmployeesView = ({ data, openEmployees, setText }) => {
     <>
       {openEmployees && employee}
       <GeneralModal
-        text={employeeDeleted}
+        employeeRequest={employeeDeleted}
         open={openDeletedModal}
         setOpen={setOpenDeletedModal}
       ></GeneralModal>

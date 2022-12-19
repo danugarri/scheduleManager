@@ -4,7 +4,7 @@ import { postEmployee } from '../../services/postEmployee';
 import GeneralModal from '../modals/generalModal/GeneralModal';
 import './SelectColors.css';
 
-export const SelectColors = ({ accordion, text, setText }) => {
+export const SelectColors = ({ accordion, employeeRequest, setEmployeeRequest }) => {
   const defaultColor = '#FF007F';
   const initialData = {
     color: defaultColor,
@@ -19,11 +19,11 @@ export const SelectColors = ({ accordion, text, setText }) => {
     postEmployee(formData)
       .then((data) => {
         console.log(data);
-        setText({ name: data.employeeName, color: data.color, message: 'created' });
+        setEmployeeRequest({ name: data.employeeName, color: data.color, message: 'created' });
         setOpen(true);
       })
       .catch((error) => {
-        setText(error.message);
+        setEmployeeRequest(error.message);
         setOpen(true);
       });
     // reset
@@ -58,7 +58,7 @@ export const SelectColors = ({ accordion, text, setText }) => {
           <input type='submit' value='Crear empleado' className='color-submit input-style' />
         </form>
       )}
-      <GeneralModal text={text} open={open} setOpen={setOpen} />
+      <GeneralModal employeeRequest={employeeRequest} open={open} setOpen={setOpen} />
     </>
   );
 };
