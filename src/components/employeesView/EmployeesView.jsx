@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { deleteEmployee } from '../../services/deleteEmployee';
+import { getEmployee } from '../../services/getEmployees';
+import GeneralModal from '../modals/generalModal/GeneralModal';
 import './EmployeesView.css';
 
-export const EmployeesView = ({ data, openEmployees }) => {
+export const EmployeesView = ({ data, openEmployees, setText }) => {
+  const [employeeDeleted, setEmployeeDeleted] = useState({});
+  const [openDeletedModal, setOpenDeletedModal] = useState(false);
+
   const sendDelete = () => {
     const id = document.getElementById('employee-container').ariaValueText;
-    deleteEmployee(id);
+    deleteEmployee(id).then((response) => {
+      const employeeDeleted = data.find((employee) => employee._id === response._id);
+      console.log(employeeDeleted.employeeName);
+      setEmployeeDeleted({ name: employeeDeleted.employeeName, message: 'deleted' });
+      setOpenDeletedModal(true);
+      setText({ name: employeeDeleted.employeeName, color: '', message: 'deleted' });
+    });
   };
+
   const employee = data.map((employee, index) => (
     <main
       key={index}
@@ -29,5 +41,14 @@ export const EmployeesView = ({ data, openEmployees }) => {
     </main>
   ));
 
-  return <>{openEmployees && employee}</>;
+  return (
+    <>
+      {openEmployees && employee}
+      <GeneralModal
+        text={employeeDeleted}
+        open={openDeletedModal}
+        setOpen={setOpenDeletedModal}
+      ></GeneralModal>
+    </>
+  );
 };

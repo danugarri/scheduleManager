@@ -4,13 +4,13 @@ import { postEmployee } from '../../services/postEmployee';
 import GeneralModal from '../modals/generalModal/GeneralModal';
 import './SelectColors.css';
 
-export const SelectColors = ({ accordion }) => {
+export const SelectColors = ({ accordion, text, setText }) => {
   const defaultColor = '#FF007F';
   const initialData = {
     color: defaultColor,
     employeeName: '',
   };
-  const [text, setText] = useState('');
+
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState(initialData);
   // here i want to send a post request to an API which send a request to MongoDB
@@ -19,7 +19,7 @@ export const SelectColors = ({ accordion }) => {
     postEmployee(formData)
       .then((data) => {
         console.log(data);
-        setText({ name: data.employeeName, color: data.color });
+        setText({ name: data.employeeName, color: data.color, message: 'created' });
         setOpen(true);
       })
       .catch((error) => {

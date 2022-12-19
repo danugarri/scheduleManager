@@ -18,6 +18,15 @@ const style = {
 
 export default function GeneralModal({ setOpen, open, text }) {
   const handleClose = () => setOpen(false);
+  const message =
+    text.message === 'created' ? (
+      <>
+        <p>Has añadido a {text.name}</p>
+        <p>Con el color: {text.color}</p>
+      </>
+    ) : (
+      <p>Has eliminado a {text.name}</p>
+    );
 
   return (
     <div>
@@ -34,8 +43,7 @@ export default function GeneralModal({ setOpen, open, text }) {
       >
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
-            <p>Has añadido a {text.name}</p>
-            <p>Con el color: {text.color}</p>
+            {message}
             <div
               style={{
                 backgroundColor: text.color,

@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getEmployee } from '../../services/getEmployees';
 import { EmployeesView } from '../employeesView/EmployeesView';
 import { SelectColors } from '../selectColors/SelectColors';
 import './TypeHours.css';
 
 export const TypeHours = ({ submitHours }) => {
+  const [text, setText] = useState({});
   const [accordion, setAccordion] = useState(false);
   const [openEmployees, setOpenEmployees] = useState(false);
   const [data, setData] = useState([{ color: '', employeeName: '' }]);
+
+  useEffect(() => {
+    getEmployee().then((data) => setData(data));
+  }, [text]);
+
   const displayEmployees = () => {
     setAccordion(false);
     setOpenEmployees(!openEmployees);
-    if (!openEmployees) {
-      getEmployee().then((data) => setData(data));
-    }
   };
   const handleConfigButton = () => {
     setAccordion(!accordion);
@@ -128,8 +131,8 @@ export const TypeHours = ({ submitHours }) => {
           className='begin'
         />
       </form>
-      <SelectColors accordion={accordion} />
-      <EmployeesView data={data} openEmployees={openEmployees} />
+      <SelectColors accordion={accordion} text={text} setText={setText} />
+      <EmployeesView data={data} openEmployees={openEmployees} setText={setText} />
     </div>
   );
 };
