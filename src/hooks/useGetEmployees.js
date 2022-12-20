@@ -5,7 +5,9 @@ export const useGetEmployees = (employeeRequest) => {
   const [data, setData] = useState([{ color: '', employeeName: '' }]);
 
   useEffect(() => {
-    getEmployee().then((data) => setData(data));
+    getEmployee()
+      .then((data) => setData(data))
+      .catch((error) => console.log(error));
   }, [employeeRequest]);
   return data;
 };

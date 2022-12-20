@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { nameFormatter } from '../../helpers/nameFormatter';
 import { postEmployee } from '../../services/postEmployee';
 import GeneralModal from '../modals/generalModal/GeneralModal';
 import './SelectColors.css';
@@ -40,8 +41,10 @@ export const SelectColors = ({ accordion, employeeRequest, setEmployeeRequest })
               type='text'
               name='employee-name'
               className='input-style'
-              onChange={(e) => setFormData({ ...formData, employeeName: e.target.value })}
-              value={formData.employeeName}
+              onChange={(e) =>
+                setFormData({ ...formData, employeeName: nameFormatter(e.target.value) })
+              }
+              value={nameFormatter(formData.employeeName)}
               required
             />
           </section>
