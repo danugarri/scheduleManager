@@ -26,6 +26,19 @@ export const EmployeesView = ({ data, openEmployees, setEmployeeRequest }) => {
     setEmployeeHovered(employeeHovered);
     setHover(true);
   };
+  const emptyList = (
+    <div className='employee-container'>
+      <section className='employee-content-container'>
+        <section className='employee-header'>
+          <p className='bold-text employee-name'>{``}</p>
+        </section>
+        <section className='color-container'>
+          <p className='bold-text'>Color: </p>
+          <div style={{ backgroundColor: '#FFFFFF' }} className='employee-color-view'></div>
+        </section>
+      </section>
+    </div>
+  );
 
   const employee = data.map((employee) => {
     const myStyle = hover && employeeHovered._id === employee._id ? 'red' : '';
@@ -55,7 +68,7 @@ export const EmployeesView = ({ data, openEmployees, setEmployeeRequest }) => {
 
   return (
     <>
-      {openEmployees && employee}
+      {openEmployees && (employee.length > 0 ? employee : emptyList)}
       <GeneralModal
         employeeRequest={employeeDeleted}
         open={openDeletedModal}
