@@ -30,7 +30,7 @@ export const EmployeesView = ({ data, openEmployees, setEmployeeRequest }) => {
     <div className='employee-container'>
       <section className='employee-content-container'>
         <section className='employee-header'>
-          <p className='bold-text employee-name'>{``}</p>
+          <p className='bold-text employee-name'>{`NO hay empleados`}</p>
         </section>
         <section className='color-container'>
           <p className='bold-text'>Color: </p>
